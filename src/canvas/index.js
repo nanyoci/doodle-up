@@ -22,32 +22,6 @@ function Canvas(props) {
     const background = new Image();
     background.src = outline;
 
-    let ratio = 1
-    background.onload = function(){
-      //fit background
-      const widthRatio = background.width / canvasWidth
-      const heightRatio =  ratio = background.height / canvasHeight
-      if(widthRatio > heightRatio){
-        ratio = widthRatio
-      }
-      else{
-        ratio = heightRatio
-      }
-      const widthDraw = background.width / ratio
-      const heightDraw = background.height / ratio
-
-      //postion center
-      // if(widthRatio > heightRatio){
-      //   const yPos = canvasHeight/2 - heightDraw/2
-      //   context.drawImage(background, 0, yPos, widthDraw, heightDraw) 
-      // }
-      // else{
-      //   const xPos = canvasWidth/2 - widthDraw/2
-      //   context.drawImage(background, xPos, 0, widthDraw, heightDraw) 
-      // }
-      
-    }   
-
     context.scale(2,2)
     context.lineCap = "round"
     context.strokeStyle = "black"
@@ -55,6 +29,7 @@ function Canvas(props) {
     contextRef.current = context
   }, [])
 
+  //for click and draw
   const mousePress = ({nativeEvent}) => {
     console.log(nativeEvent)
     if(!isDrawing){
@@ -84,6 +59,7 @@ function Canvas(props) {
   }
 
 
+  //for press and draw
   // const startDrawing = ({nativeEvent}) => {
   //   console.log(nativeEvent)
   //   const {offsetX, offsetY} = nativeEvent
