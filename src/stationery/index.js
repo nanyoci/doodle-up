@@ -23,7 +23,7 @@ function Stationery(props) {
   return (
       <div id="tools">
             <img className="tool" src={LightBluePencil} alt="Black Pencil" onClick={() => selectColor(props.color.LIGHTBLUE)}/>
-            <img className="tool" src={RedPencil} alt="Red Pencil" onClick={() => selectColor(props.color.LIGHTBLUE)}/>
+            <img className="tool" src={RedPencil} alt="Red Pencil" onClick={() => selectColor(props.color.RED)}/>
             <img className="tool" src={OrangePencil} alt="Orange Pencil" onClick={() => selectColor(props.color.ORANGE)}/>
             <img className="tool" src={GreenPencil} alt="GReen Pencil" onClick={() => selectColor(props.color.GREEN)}/>
             <img className="tool" src={BluePencil} alt="Blue Pencil" onClick={() => selectColor(props.color.BLUE)}/>
