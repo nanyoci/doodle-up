@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-import outline from './../assets/outlineSample.jpg';
+import outline from './../assets/outlineSample3.jpg';
 
 function Canvas(props) {
 
@@ -10,20 +10,45 @@ function Canvas(props) {
 
   useEffect(() => {
     const canvas = canvasRef.current
-    canvas.width = window.innerWidth * 0.5 * 2
-    canvas.height = window.innerHeight * 0.7 * 2
-    canvas.style.width = `${window.innerWidth * 0.5}px`
-    canvas.style.height = `${window.innerHeight * 0.7}px`
-    canvas.style.border = "2px solid black"
 
+    const canvasWidth = window.innerWidth * 0.5
+    const canvasHeight = window.innerHeight * 0.7
+    canvas.width = canvasWidth* 2
+    canvas.height = canvasHeight * 2
+    canvas.style.width = `${canvasWidth}px`
+    canvas.style.height = `${canvasHeight}px`
+    canvas.style.border = "2px solid black"
     const context = canvas.getContext("2d")
     const background = new Image();
     background.src = outline;
 
-    context.scale(2,2)
+    let ratio = 1
     background.onload = function(){
-      context.drawImage(background,0,0);   
+      //fit background
+      const widthRatio = background.width / canvasWidth
+      const heightRatio =  ratio = background.height / canvasHeight
+      if(widthRatio > heightRatio){
+        ratio = widthRatio
+      }
+      else{
+        ratio = heightRatio
+      }
+      const widthDraw = background.width / ratio
+      const heightDraw = background.height / ratio
+
+      //postion center
+      if(widthRatio > heightRatio){
+        const yPos = canvasHeight/2 - heightDraw/2
+        context.drawImage(background, 0, yPos, widthDraw, heightDraw) 
+      }
+      else{
+        const xPos = canvasWidth/2 - widthDraw/2
+        context.drawImage(background, xPos, 0, widthDraw, heightDraw) 
+      }
+      
     }   
+
+    context.scale(2,2)
     context.lineCap = "round"
     context.strokeStyle = "black"
     context.lineWidth = 5
