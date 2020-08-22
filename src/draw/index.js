@@ -1,7 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 
+import './index.css'
+
 import Canvas from './../canvas'
 import Stationery from './../stationery'
+import Outline from './../outline'
 
 function Draw() {
 
@@ -19,11 +22,19 @@ function Draw() {
     BLACK:'#000000',
   } 
 
-    const [currentColor, setCurrentColor] = useState(color.BLACK);
+  const [currentColor, setCurrentColor] = useState(color.BLACK);
+
+
+  const displayImage = (image) =>{
+    const img = document.createElement("img")
+    img.src = image
+    document.body.appendChild(img)
+  }
 
   return (
     <div id="draw">
-        <Canvas currentColor={currentColor} lines={lines} setLines={setLines}/>
+        <Outline/>
+        <Canvas currentColor={currentColor} lines={lines} setLines={setLines} displayImage={displayImage}/>
         <Stationery color={color} selectColor = {setCurrentColor}/>
    </div>
   );

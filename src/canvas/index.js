@@ -37,14 +37,14 @@ function Canvas(props) {
       const heightDraw = background.height / ratio
 
       //postion center
-      if(widthRatio > heightRatio){
-        const yPos = canvasHeight/2 - heightDraw/2
-        context.drawImage(background, 0, yPos, widthDraw, heightDraw) 
-      }
-      else{
-        const xPos = canvasWidth/2 - widthDraw/2
-        context.drawImage(background, xPos, 0, widthDraw, heightDraw) 
-      }
+      // if(widthRatio > heightRatio){
+      //   const yPos = canvasHeight/2 - heightDraw/2
+      //   context.drawImage(background, 0, yPos, widthDraw, heightDraw) 
+      // }
+      // else{
+      //   const xPos = canvasWidth/2 - widthDraw/2
+      //   context.drawImage(background, xPos, 0, widthDraw, heightDraw) 
+      // }
       
     }   
 
@@ -107,12 +107,21 @@ function Canvas(props) {
   //   console.log(nativeEvent)
   // }
 
+  const handleClick = () =>{
+    const canvas = canvasRef.current
+    const image = canvas.toDataURL("image/svg")
+    props.displayImage(image)
+  }
+
   return (
-    <canvas 
-    onMouseDown={mousePress}
-    // onMouseUp={mouseRelease}
-    onMouseMove={draw}
-    ref={canvasRef}></canvas>
+    <div>
+      <canvas 
+      onMouseDown={mousePress}
+      // onMouseUp={mouseRelease}
+      onMouseMove={draw}
+      ref={canvasRef}/>
+      <button onClick={handleClick}>Download</button>
+    </div>
   );
 }
 
