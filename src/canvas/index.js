@@ -83,10 +83,13 @@ function Canvas(props) {
   //   console.log(nativeEvent)
   // }
 
-  const handleClick = () =>{
-    const canvas = canvasRef.current
-    const image = canvas.toDataURL("image/svg")
-    props.displayImage(image)
+  const handleDownload = () => {
+    const canvas = canvasRef.current;
+    const image = canvas.toDataURL("image/png");
+    const link = document.createElement('a');
+    link.download = "drawing.png";
+    link.href = image;
+    link.click();
   }
 
   return (
@@ -96,7 +99,7 @@ function Canvas(props) {
       // onMouseUp={mouseRelease}
       onMouseMove={draw}
       ref={canvasRef}/>
-      <button onClick={handleClick}>Download</button>
+      <button onClick={handleDownload}>Download</button>
     </div>
   );
 }
