@@ -1,3 +1,3 @@
-Education drawing website for kids
+# Educational interactive storyboard website for kids
 
-npm start
+### To run: npm start
