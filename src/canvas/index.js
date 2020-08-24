@@ -9,24 +9,27 @@ function Canvas(props) {
   const [isDrawing, setIsDrawing] = useState(false)
 
   useEffect(() => {
-    const canvas = canvasRef.current
 
-    const canvasWidth = window.innerWidth * 0.5
-    const canvasHeight = window.innerHeight * 0.7
-    canvas.width = canvasWidth* 2
-    canvas.height = canvasHeight * 2
-    canvas.style.width = `${canvasWidth}px`
-    canvas.style.height = `${canvasHeight}px`
-    canvas.style.border = "2px solid black"
-    const context = canvas.getContext("2d")
-    const background = new Image();
-    background.src = outline;
+    function handleResize(){
+      const canvas = canvasRef.current
 
-    context.scale(2,2)
-    context.lineCap = "round"
-    context.strokeStyle = "black"
-    context.lineWidth = 5
-    contextRef.current = context
+      const canvasWidth = window.innerWidth * 0.5
+      const canvasHeight = window.innerHeight * 0.7
+      canvas.width = canvasWidth* 2
+      canvas.height = canvasHeight * 2
+      canvas.style.width = `${canvasWidth}px`
+      canvas.style.height = `${canvasHeight}px`
+      canvas.style.border = "2px solid black"
+      const context = canvas.getContext("2d")
+
+      context.scale(2,2)
+      context.lineCap = "round"
+      context.strokeStyle = "black"
+      context.lineWidth = 5
+      contextRef.current = context
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
   }, [])
 
   //for click and draw
