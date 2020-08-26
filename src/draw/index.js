@@ -20,6 +20,7 @@ function Draw() {
     PINK: '#FF1192',
     YELLOW: '#FFF511',
     BLACK:'#000000',
+    ERASER: '#FFFFFF'
   } 
 
   const [currentColor, setCurrentColor] = useState(color.BLACK);
@@ -31,11 +32,12 @@ function Draw() {
     document.body.appendChild(img)
   }
 
+
   return (
     <div id="draw">
         <Outline/>
         <Canvas currentColor={currentColor} lines={lines} setLines={setLines} displayImage={displayImage}/>
-        <Stationery color={color} selectColor = {setCurrentColor}/>
+        <Stationery color={color} selectColor = {setCurrentColor} />
    </div>
   );
 }

@@ -11,6 +11,7 @@ import PurplePencil from './../assets/pencilpurple.svg'
 import PinkPencil from './../assets/pencilpink.svg'
 import YellowPencil from './../assets/pencilyellow.svg'
 import BlackPencil from './../assets/pencilblack.svg'
+import Eraser from './../assets/eraser.png'
 
 function Stationery(props) {
    
@@ -31,6 +32,7 @@ function Stationery(props) {
             <img className="tool" src={PinkPencil} alt="Pink Pencil" onClick={() => selectColor(props.color.PINK)}/>
             <img className="tool" src={YellowPencil} alt="Yellow Pencil" onClick={() => selectColor(props.color.YELLOW)}/>
             <img className="tool" src={BlackPencil} alt="Black Pencil" onClick={() => selectColor(props.color.BLACK)}/>
+            <img className="tool" src={Eraser} alt="Eraser" onClick={() => selectColor(props.color.ERASER)}/>
         </div>
    
   );
