@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 import outline from './../assets/outlineSample4.jpg';
+// import cursorLightBlue from './../assets/cursorlightblue.png';
 
 function Canvas(props) {
 
@@ -116,7 +117,7 @@ function Canvas(props) {
 
   return (
     <div>
-      <canvas
+      <canvas id="canvas"
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseUp={endDrawing}
