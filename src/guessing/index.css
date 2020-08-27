@@ -1,0 +1,38 @@
+#guessing{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#guessingImgDiv {
+    width: 60vh;
+    height: 60vh;
+}
+  
+#guessingImg{
+    display: block;
+   width: 100%;
+}
+
+#options{
+    width: 80vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.options-row{
+    display: flex;
+    justify-content: space-around;
+}
+
+.option{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: bold;
+    font-size: 2vw;
+    width: 30vw;
+}
