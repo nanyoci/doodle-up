@@ -1,11 +1,12 @@
 #outlineDiv{
-    width: calc(0.5* 100vw);
-    height: calc(0.7* 100vh);
-    background-image: url('./../assets/outlineSample1.jpg');
+    background-image: url('./../assets/outlineSample4.jpg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     position: absolute;
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%,0);
     z-index: -1;
 }
