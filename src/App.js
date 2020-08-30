@@ -9,8 +9,8 @@ function App() {
 
 
   return (
-    //  <Draw/>
-    <Guessing />
+    <Draw />
+    // <Guessing />
   );
 }
 
