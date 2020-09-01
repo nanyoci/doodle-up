@@ -32,6 +32,9 @@ class SignUpForm extends Component {
     event.preventDefault();
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(() => {
+        alert("Account successfully created.");
+      })
       // .then(authUser => {
       //   this.setState({ ...INITIAL_STATE });
       // })
