@@ -37,8 +37,10 @@ class Firebase {
   //     // ...
   //   })};
 
-  // doSignInWithEmailAndPassword = (email, password) =>
-  //   this.auth.signInWithEmailAndPassword(email, password);
+  doSignInWithEmailAndPassword = (email, password) => {
+    console.log('account logged in if no errors...');
+    return this.auth.signInWithEmailAndPassword(email, password);
+  }
  
   // doSignOut = () => this.auth.signOut();
  
