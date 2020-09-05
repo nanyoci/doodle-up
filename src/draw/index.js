@@ -2,9 +2,10 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import './index.css'
 
-import Canvas from './../canvas'
-import Stationery from './../stationery'
-import Outline from './../outline'
+import Canvas from '../Canvas'
+import Stationery from '../Stationery'
+import Outline from '../Outline'
+import Page from '../Page';
 
 function Draw() {
 
@@ -34,11 +35,13 @@ function Draw() {
 
 
   return (
-    <div id="draw">
-      <Outline />
-      <Canvas currentColor={currentColor} lines={lines} setLines={setLines} displayImage={displayImage} />
-      <Stationery color={color} selectColor={setCurrentColor} />
-    </div>
+    <Page>
+      <div id="draw">
+        <Outline />
+        <Canvas currentColor={currentColor} lines={lines} setLines={setLines} displayImage={displayImage} />
+        <Stationery color={color} selectColor={setCurrentColor} />
+      </div>
+    </Page>
   );
 }
 

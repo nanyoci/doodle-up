@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // import './App.css';
 
-import Draw from './draw';
-import Guessing from './guessing';
+import Draw from './Draw';
+import Guessing from './Guessing';
 import StorySelection from './StorySelection';
 import MenuPage from './MenuPage';
 import MyStoryBooksPage from './MyStoryBooksPage';
