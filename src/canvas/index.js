@@ -39,7 +39,7 @@ function Canvas(props) {
     context.scale(5, 5)
     context.lineCap = "round"
     context.strokeStyle = "black"
-    context.lineWidth = canvasSize * canvasSize * 0.00001
+    context.lineWidth = canvasSize * canvasSize * 0.001
     contextRef.current = context
     image.src = savedDrawing
     image.onload = function () {

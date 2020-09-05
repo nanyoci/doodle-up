@@ -13,7 +13,7 @@ function Guessing() {
     const optionState = {
         initial: "btn btn-outline-dark ",
         wrong: "btn btn-danger ",
-        correct: "btn btn-info "
+        correct: "btn btn-primary "
     }
 
     const [currentState, setCurrentState] = useState(
