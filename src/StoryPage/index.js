@@ -2,14 +2,16 @@ import React from 'react';
 
 import bg from '../assets/sample-bg.png';
 import './index.css';
+import drawing from '../assets/drawing-sample.png';
+import Page from '../Page';
 
 export default function StoryPage(props) {
-	const {
-		drawing,
-	} = props;
+	// const {
+	// 	drawing,
+	// } = props;
 
 	return (
-		<div>
+		<Page>
 			<div className="story-scene-container">
 				<div className="story-scene">
 					<img src={bg} className="story-bg" alt="Story background" />
@@ -17,6 +19,6 @@ export default function StoryPage(props) {
 				</div>
 			</div>
 			<p className="story-text">Once upon a time, there was a rabbit named Henry.</p>
-		</div>
+		</Page>
 	)
 }

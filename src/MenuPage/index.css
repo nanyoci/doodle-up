@@ -1,0 +1,18 @@
+.menu-buttons {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	margin: auto;
+}
+
+.menu-buttons .btn {
+	font-family: 'Architects Daughter', cursive;
+	font-size: 20px;
+	border-radius: 1000px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.menu-buttons .btn:not(:last-of-type) {
+	margin-bottom: 20px;
+}
