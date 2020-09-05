@@ -52,9 +52,10 @@ function Canvas(props) {
 
     let offsetX, offsetY;
     if (type === "touchstart") {
+      var rect = nativeEvent.target.getBoundingClientRect();
       var touch = nativeEvent.touches[0] || nativeEvent.changedTouches[0];
-      offsetX = touch.pageX;
-      offsetY = touch.pageY;
+      offsetX = touch.pageX - rect.left;
+      offsetY = touch.pageY - rect.top;
     } else {
       offsetX = nativeEvent.offsetX;
       offsetY = nativeEvent.offsetY;
@@ -81,9 +82,10 @@ function Canvas(props) {
 
     let offsetX, offsetY;
     if (type === "touchmove") {
+      var rect = nativeEvent.target.getBoundingClientRect();
       var touch = nativeEvent.touches[0] || nativeEvent.changedTouches[0];
-      offsetX = touch.pageX;
-      offsetY = touch.pageY;
+      offsetX = touch.pageX - rect.left;
+      offsetY = touch.pageY - rect.top;
     } else {
       offsetX = nativeEvent.offsetX;
       offsetY = nativeEvent.offsetY;
