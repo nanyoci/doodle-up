@@ -17,10 +17,10 @@ function Outline(props) {
   const handleResize = () => {
     var canvasSize = 0
     if (window.innerHeight < window.innerWidth) {
-      canvasSize = window.innerHeight * 0.7
+      canvasSize = window.innerHeight * 0.68
     }
     else {
-      canvasSize = window.innerWidth * 0.7
+      canvasSize = window.innerWidth * 0.68
     }
     outlineRef.current.style.width = `${canvasSize}px`
     outlineRef.current.style.height = `${canvasSize}px`

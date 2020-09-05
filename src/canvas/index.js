@@ -26,10 +26,10 @@ function Canvas(props) {
     savedDrawing = canvasRef.current.toDataURL('img/svg')
     var canvasSize = 0
     if (window.innerHeight < window.innerWidth) {
-      canvasSize = window.innerHeight * 0.7
+      canvasSize = window.innerHeight * 0.68
     }
     else {
-      canvasSize = window.innerWidth * 0.7
+      canvasSize = window.innerWidth * 0.68
     }
     canvas.style.width = `${canvasSize}px`
     canvas.style.height = `${canvasSize}px`
