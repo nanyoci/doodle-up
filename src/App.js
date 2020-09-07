@@ -5,6 +5,8 @@ import './App.css';
 import Draw from './draw';
 import SignUpPage, { SignUpForm } from './components/SignUp';
 import SignInPage, { SignInForm } from './components/SignIn';
+import SignOutButton from './components/SignOut';
+import { FirebaseContext } from './components/Firebase';
 
 import {
   BrowserRouter as Router,
@@ -32,6 +34,11 @@ function App() {
           </li>
           <li>
             <Link to="/components/signin">Sign in</Link>
+          </li>
+          <li>
+          <FirebaseContext.Consumer>
+            {firebase => <SignOutButton firebase={firebase} />}
+          </FirebaseContext.Consumer>
           </li>
         </ul>
       </nav>
