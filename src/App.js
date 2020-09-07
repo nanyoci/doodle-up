@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignUpPage, { SignUpForm } from './components/SignUp';
 import SignInPage, { SignInForm } from './components/SignIn';
+import SignOutButton from './components/SignOut';
+import { FirebaseContext } from './components/Firebase';
 
 // import './App.css';
 
