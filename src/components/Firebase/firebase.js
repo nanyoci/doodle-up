@@ -2,14 +2,14 @@ import app from 'firebase/app';
 import 'firebase/auth';
  
 const config = {
-  apiKey: "AIzaSyAAjQHpT4ykVr2km5EdKleMKwUxMyaBJrI",
-  authDomain: "doodle-up-cz3002.firebaseapp.com",
-  databaseURL: "https://doodle-up-cz3002.firebaseio.com",
-  projectId: "doodle-up-cz3002",
-  storageBucket: "doodle-up-cz3002.appspot.com",
-  messagingSenderId: "1491395153",
-  appId: "1:1491395153:web:18b8fc993d8e0222060e70",
-  measurementId: "G-16T5Y1NZR2"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
  
 class Firebase {
@@ -47,10 +47,15 @@ class Firebase {
     return this.auth.signOut();
   }
  
-  // doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+  doResetPassword = email => {
+    console.log('account resetted if no errors...');
+    return this.auth.sendPasswordResetEmail(email);
+  }
  
-  // doPasswordUpdate = password =>
-  //   this.auth.currentUser.updatePassword(password);
+  doChangePassword = password => {
+    console.log('account changing password');
+    return this.auth.currentUser.updatePassword(password);
+  }
 }
  
 export default Firebase;
