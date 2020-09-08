@@ -32,7 +32,7 @@ function App() {
 				<Route path="/components/signin" component={SignInPage} />
 				<Route path="/components/signup" component={SignUpPage} />
 				<Route path="/components/forgetpassword" component={ForgetPasswordPage} />
-				<Route path="/components/changepassword" component={ChangePasswordPage} />
+				{/* <Route path="/components/changepassword" component={ChangePasswordPage} /> */}
 			</Switch>
 		</Router>
 	);

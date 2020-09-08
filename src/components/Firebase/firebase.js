@@ -52,10 +52,10 @@ class Firebase {
     return this.auth.sendPasswordResetEmail(email);
   }
  
-  doChangePassword = password => {
-    console.log('account changing password');
-    return this.auth.currentUser.updatePassword(password);
-  }
+  // doChangePassword = password => {
+  //   console.log('account changing password');
+  //   return this.auth.currentUser.updatePassword(password);
+  // }
 }
  
 export default Firebase;
