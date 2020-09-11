@@ -1,6 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import SignUpPage, { SignUpForm } from './components/SignUp';
+import SignInPage, { SignInForm } from './components/SignIn';
+import ForgetPasswordPage, { ForgetPasswordForm } from './components/ForgetPassword';
+import ChangePasswordPage, { ChangePasswordForm } from './components/ChangePassword';
+import SignOutButton from './components/SignOut';
+import { FirebaseContext } from './components/Firebase';
 
 // import './App.css';
 
@@ -24,6 +29,10 @@ function App() {
 				<Route path="/drawing" component={Draw} />
 				<Route path="/guessing" component={Guessing} />
 				<Route path="/story-page" component={StoryPage} />
+				<Route path="/components/signin" component={SignInPage} />
+				<Route path="/components/signup" component={SignUpPage} />
+				<Route path="/components/forgetpassword" component={ForgetPasswordPage} />
+				{/* <Route path="/components/changepassword" component={ChangePasswordPage} /> */}
 			</Switch>
 		</Router>
 	);
