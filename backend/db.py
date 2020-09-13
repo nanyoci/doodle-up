@@ -1,13 +1,26 @@
 import pyrebase
 from temp import stories
+import uuid
+
 
 progress = {
-    "story": {
+    "stories": {
         "story_id": 1,
         "stages": {
             "image_url": "www.bestdog.com",
             "stage_id": 1.1,
             "status": "incomplete"
+        }
+    }
+}
+
+progress = {
+    "stories": {
+        "1": {
+            "asd": 1
+        },
+        "2": {
+            "asd": 2
         }
     }
 }
@@ -27,39 +40,61 @@ class FirebaseHelper:
     def get_all_users(self):
         return self.db.child('Users').get()
 
-    def create_new_user(self, username, userid):
-        user = {"name": username}
-        self.db.child('Users').child(userid).set(user)
+    def create_new_user(self, username, password):
+        user = {"username": username, "password": password}
+        story = {"username": username, "story": []}
+        self.db.child('Users').push(user)
+        self.db.child('progress').push(story)
 
-    def get_story_progress(self, userid, storyid):
-        progress = self.db.child('progress').child(userid).get()
-        if progress.val() is None:
-            print("asd")
-            self.start_new_story(userid, storyid)
-        else:
-            return progress.val()
+    def get_user(self, username):
+        data = self.db.child('Users').order_by_child(
+            "username").equal_to(username).get()
+        try:
+            for v in data.val().values():
+                return v
+        except:
+            return None
 
-    def start_new_story(self, userid, storyid):
+    def get_story_progress(self, username, storyid):
+        progress = self.db.child('progress').order_by_child(
+            'username').equal_to(username).get()
+        try:
+            for v in progress.val().values():
+                print(v)
+                return v["stories"]
+        except:
+            return None
+
+    def start_new_story(self, username, storyid):
         # Start story
         new_stage = {
-            "story": {
-                "story_id": storyid,
-                "stages": [
+            "stages": [
                     {
                         "image_url": "",
                         "stage_id": 1.1,
                         "status": "incomplete"
-                    }
-                ]
-            }
+                    }]
         }
-        print(userid, storyid)
-        self.db.child('progress').child(
-            userid).set(new_stage)
+        log = self.db.child('progress').order_by_child(
+            'username').equal_to(username).get().val()
+        # log["stories"] = new_stage
+        for k, v in log.items():
+            if "stories" not in v:
+                v["stories"] = {storyid: new_stage}
+            else:
+                stories = v["stories"]
+                stories[storyid] = new_stage
+        self.db.child('progress').update(log)
+        return v
 
-
-fb = FirebaseHelper()
-p = fb.get_story_progress(3, 1)
-print(p)
 # print(fb.get_user_progress(1).val())
 # print(users.val())
+
+# pyrebase has some compatability issues with url, this is a workaround
+
+
+def noquote(s):
+    return s
+
+
+pyrebase.pyrebase.quote = noquote
