@@ -1,13 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import SignUpPage, { SignUpForm } from './components/SignUp';
-import SignInPage, { SignInForm } from './components/SignIn';
-import ForgetPasswordPage, { ForgetPasswordForm } from './components/ForgetPassword';
-import ChangePasswordPage, { ChangePasswordForm } from './components/ChangePassword';
-import SignOutButton from './components/SignOut';
-import { FirebaseContext } from './components/Firebase';
-
-// import './App.css';
 
 import Draw from './Draw';
 import Guessing from './Guessing';
@@ -16,6 +8,11 @@ import MenuPage from './MenuPage';
 import MyStoryBooksPage from './MyStoryBooksPage';
 import StoryPage from './StoryPage';
 import GuestMenuPage from './GuestMenuPage';
+import SignUpPage from './components/SignUp';
+import SignInPage from './components/SignIn';
+import ForgetPasswordPage from './components/ForgetPassword';
+import ChangePasswordPage from './components/ChangePassword';
+import SignOutButton from './components/SignOut';
 
 function App() {
 	// The links below are for testing
