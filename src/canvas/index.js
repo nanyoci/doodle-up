@@ -26,10 +26,10 @@ function Canvas(props) {
     savedDrawing = canvasRef.current.toDataURL('img/svg')
     var canvasSize = 0
     if (window.innerHeight < window.innerWidth) {
-      canvasSize = window.innerHeight * 0.7
+      canvasSize = window.innerHeight * 0.68
     }
     else {
-      canvasSize = window.innerWidth * 0.7
+      canvasSize = window.innerWidth * 0.68
     }
     canvas.style.width = `${canvasSize}px`
     canvas.style.height = `${canvasSize}px`
@@ -39,7 +39,7 @@ function Canvas(props) {
     context.scale(5, 5)
     context.lineCap = "round"
     context.strokeStyle = "black"
-    context.lineWidth = canvasSize * canvasSize * 0.00001
+    context.lineWidth = 3
     contextRef.current = context
     image.src = savedDrawing
     image.onload = function () {
