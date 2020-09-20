@@ -4,9 +4,9 @@ import Page from '../Page';
 import './index.css'
 
 
-import dino from './../assets/dino.jpg'
-import audio from './../assets/audio.svg'
-import next from './../assets/nextArrow.svg'
+import dino from './../../assets/dino.jpg'
+import audio from './../../assets/audio.svg'
+import next from './../../assets/nextArrow.svg'
 
 
 function Guessing() {

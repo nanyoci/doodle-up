@@ -2,19 +2,19 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import './index.css';
 
-import LightBluePencil from './../assets/pencillightblue.svg'
-import RedPencil from './../assets/pencilred.svg'
-import OrangePencil from './../assets/pencilorange.svg'
-import GreenPencil from './../assets/pencilgreen.svg'
-import BluePencil from './../assets/pencilblue.svg'
-import PurplePencil from './../assets/pencilpurple.svg'
-import PinkPencil from './../assets/pencilpink.svg'
-import YellowPencil from './../assets/pencilyellow.svg'
-import BlackPencil from './../assets/pencilblack.svg'
-import BrownPencil from './../assets/pencilbrown.svg'
-import GrayPencil from './../assets/pencilgray.svg'
-import DarkGreenPencil from './../assets/pencildarkgreen.svg'
-import Eraser from './../assets/eraser.png'
+import LightBluePencil from './../../assets/pencillightblue.svg'
+import RedPencil from './../../assets/pencilred.svg'
+import OrangePencil from './../../assets/pencilorange.svg'
+import GreenPencil from './../../assets/pencilgreen.svg'
+import BluePencil from './../../assets/pencilblue.svg'
+import PurplePencil from './../../assets/pencilpurple.svg'
+import PinkPencil from './../../assets/pencilpink.svg'
+import YellowPencil from './../../assets/pencilyellow.svg'
+import BlackPencil from './../../assets/pencilblack.svg'
+import BrownPencil from './../../assets/pencilbrown.svg'
+import GrayPencil from './../../assets/pencilgray.svg'
+import DarkGreenPencil from './../../assets/pencildarkgreen.svg'
+import Eraser from './../../assets/eraser.png'
 
 function Stationery(props) {
 

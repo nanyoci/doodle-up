@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-import outline from './../assets/outlineSample4.jpg';
+import outline from './../../assets/outlineSample4.jpg';
 // import cursorLightBlue from './../assets/cursorlightblue.png';
 
 function Canvas(props) {

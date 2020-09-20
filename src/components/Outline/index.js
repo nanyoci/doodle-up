@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import './index.css'
 
-import outlineImg from './../assets/outlineSample4.jpg';
+import outlineImg from './../../assets/outlineSample4.jpg';
 
 function Outline(props) {
 
