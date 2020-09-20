@@ -1,8 +1,8 @@
 import React from 'react';
 
-import bg from '../assets/sample-bg.png';
+import bg from '../../assets/sample-bg.png';
 import './index.css';
-import drawing from '../assets/drawing-sample.png';
+import drawing from '../../assets/drawing-sample.png';
 import Page from '../Page';
 
 export default function StoryPage(props) {

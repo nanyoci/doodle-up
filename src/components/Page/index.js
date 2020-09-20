@@ -1,10 +1,10 @@
 import React from 'react';
 
-import doodleUp from '../assets/doodle-up.svg';
-import book from '../assets/book.svg';
-import paint from '../assets/paint.svg';
-import splatPink from '../assets/splat-pink.png';
-import splatBlue from '../assets/splat-blue.png';
+import doodleUp from '../../assets/doodle-up.svg';
+import book from '../../assets/book.svg';
+import paint from '../../assets/paint.svg';
+import splatPink from '../../assets/splat-pink.png';
+import splatBlue from '../../assets/splat-blue.png';
 import './index.css';
 
 export default function Page(props) {

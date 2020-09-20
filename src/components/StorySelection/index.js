@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import rabbit from '../assets/rabbit.png';
-import dinosaur from '../assets/dinosaur.png';
-import car from '../assets/car.png';
+import rabbit from '../../assets/rabbit.png';
+import dinosaur from '../../assets/dinosaur.png';
+import car from '../../assets/car.png';
 import './index.css';
 import Page from '../Page';
 
