@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
+import './index.css'
 import outline from './../../assets/outlineSample4.jpg';
 // import cursorLightBlue from './../assets/cursorlightblue.png';
 
@@ -131,6 +132,7 @@ function Canvas(props) {
           touchAction: "none",
         }} />
       {/* <button onClick={handleClick}>Download</button> */}
+
     </div>
   );
 }

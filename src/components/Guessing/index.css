@@ -2,8 +2,8 @@
     width: 100vw;
     height: 100vh;
     overflow-y: hidden !important;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
+    /* -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden; */
 }
 
 #guessing{

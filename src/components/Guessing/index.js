@@ -92,7 +92,7 @@ function Guessing() {
                 {correctAnswer ? <img src={next} alt="next" id="next" /> : null}
             </div >
             <div id='rewardContainer'>
-                <div class='rewards'>
+                <div className='rewards'>
                     <Reward
                         ref={(ref) => { rewardLeft = ref }}
                         type='confetti'
@@ -101,7 +101,7 @@ function Guessing() {
                         }
                     ></Reward>
                 </div>
-                <div class='rewards'>
+                <div className='rewards'>
                     <Reward
                         ref={(ref) => { rewardRight = ref }}
                         type='confetti'
