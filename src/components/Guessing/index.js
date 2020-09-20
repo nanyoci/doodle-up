@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import Reward from 'react-rewards';
 
 import Page from '../Page';
 import './index.css'
-
-
 import dino from './../../assets/dino.jpg'
 import audio from './../../assets/audio.svg'
 import next from './../../assets/nextArrow.svg'
@@ -11,14 +10,15 @@ import next from './../../assets/nextArrow.svg'
 
 function Guessing() {
 
+    var rewardLeft, rewardRight
 
     const optionState = {
         initial: "btn btn-outline-dark ",
         wrong: "btn btn-danger ",
         correct: "btn btn-primary "
     }
-
-    const [currentState, setCurrentState] = useState(
+    const [correctAnswer, toggleCorrectAnswer] = useState(false)
+    const [currentOptionState, setCurrentOptionState] = useState(
         [
             {
                 state: optionState.initial
@@ -37,21 +37,28 @@ function Guessing() {
 
 
     const submit = (answer) => {
-        let allOptions = [...currentState];
+        let allOptions = [...currentOptionState];
         let selectedOption = { ...allOptions[answer] };
         if (answer != 3) {
             selectedOption.state = optionState.wrong;
         }
         else {
             selectedOption.state = optionState.correct;
+            toggleCorrectAnswer(!correctAnswer)
+            handleReward()
         }
         allOptions[answer] = selectedOption;
-        setCurrentState(allOptions);
+        setCurrentOptionState(allOptions);
         console.log(allOptions)
     }
 
+    const handleReward = () => {
+        rewardLeft.rewardMe()
+        rewardRight.rewardMe()
+    }
+
     return (
-        <Page>
+        <Page id="guessingContainer">
             <div id="guessing">
                 <h1 id="guessTheName">Guess the Name!</h1>
                 <div id="guessingImgDiv" >
@@ -61,29 +68,50 @@ function Guessing() {
                     <div className="options-row">
                         <div className="optionUnit">
                             <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentState[0].state} option`} disabled={currentState[0].state == optionState.wrong} onClick={() => submit(0)}>Lady Bug</button>
+                            <button type="button" className={`${currentOptionState[0].state} option`} disabled={currentOptionState[0].state == optionState.wrong | correctAnswer} onClick={() => submit(0)}>Lady Bug</button>
 
                         </div>
                         <div className="optionUnit">
                             <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentState[1].state} option`} disabled={currentState[1].state == optionState.wrong} onClick={() => submit(1)}>Scary Cat</button></div>
+                            <button type="button" className={`${currentOptionState[1].state} option`} disabled={currentOptionState[1].state == optionState.wrong | correctAnswer} onClick={() => submit(1)}>Scary Cat</button></div>
 
                     </div>
                     <div className="options-row">
                         <div className="optionUnit">
                             <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentState[2].state} option`} disabled={currentState[2].state == optionState.wrong} onClick={() => submit(2)}>Angry Bird</button>
+                            <button type="button" className={`${currentOptionState[2].state} option`} disabled={currentOptionState[2].state == optionState.wrong | correctAnswer} onClick={() => submit(2)}>Angry Bird</button>
 
                         </div>
                         <div className="optionUnit">
                             <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentState[3].state} option`} disabled={currentState[3].state == optionState.correct} onClick={() => submit(3)}>Dinosaur</button>
+                            <button type="button" className={`${currentOptionState[3].state} option`} disabled={currentOptionState[3].state == optionState.correct | correctAnswer} onClick={() => submit(3)}>Dinosaur</button>
 
                         </div>
                     </div>
                 </div>
-                <img src={next} alt="next" id="next" />
+                {correctAnswer ? <img src={next} alt="next" id="next" /> : null}
             </div >
+            <div id='rewardContainer'>
+                <div class='rewards'>
+                    <Reward
+                        ref={(ref) => { rewardLeft = ref }}
+                        type='confetti'
+                        config={
+                            { angle: 50, spread: 100, elementCount: 100, elementSize: 15 }
+                        }
+                    ></Reward>
+                </div>
+                <div class='rewards'>
+                    <Reward
+                        ref={(ref) => { rewardRight = ref }}
+                        type='confetti'
+                        config={
+                            { angle: 130, spread: 100, elementCount: 100, elementSize: 15 }
+                        }
+                    ></Reward>
+                </div>
+            </div>
+
         </Page>
     );
 }
