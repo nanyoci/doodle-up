@@ -1,11 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Reward from 'react-rewards';
+import useSound from 'use-sound';
+
+import './index.css'
 
 import Page from '../Page';
-import './index.css'
 import dino from './../../assets/dino.jpg'
 import audio from './../../assets/audio.svg'
 import next from './../../assets/nextArrow.svg'
+import confettiSound from '../../assets/soundFX/confetti.mp3';
+import tryAgainSound from '../../assets/soundFX/tryAgain.mp3';
+
 
 
 function Guessing() {
@@ -35,17 +40,28 @@ function Guessing() {
         ]
     )
 
+    const [playConfettiSound] = useSound(
+        confettiSound,
+        { volume: 0.25 }
+    )
+    const [playTryAgainSound] = useSound(
+        tryAgainSound,
+        { volume: 0.5 }
+    )
 
     const submit = (answer) => {
         let allOptions = [...currentOptionState];
         let selectedOption = { ...allOptions[answer] };
         if (answer != 3) {
             selectedOption.state = optionState.wrong;
+            playTryAgainSound()
         }
         else {
             selectedOption.state = optionState.correct;
             toggleCorrectAnswer(!correctAnswer)
             handleReward()
+            playConfettiSound()
+
         }
         allOptions[answer] = selectedOption;
         setCurrentOptionState(allOptions);
