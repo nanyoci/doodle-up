@@ -2,6 +2,10 @@ import pyrebase
 from temp import stories
 import uuid
 
+try:
+    from urllib.parse import urlencode, quote
+except:
+    from urllib import urlencode, quote
 
 progress = {
     "stories": {
@@ -37,6 +41,7 @@ class FirebaseHelper:
         }
         self.db = pyrebase.initialize_app(config).database()
         self.auth = pyrebase.initialize_app(config).auth()
+        self.storage = pyrebase.initialize_app(config).storage()
 
     def get_all_users(self):
         return self.db.child('Users').get()
@@ -95,6 +100,12 @@ class FirebaseHelper:
                 stories[storyid] = new_stage
         self.db.child('progress').update(log)
         return v
+
+    def get_asset_url(self, file_location, token=None):
+        # return self.storage.child(file_location).get_url(token)
+        
+        # extracted from pyrebase. urllib quote version issue I believe
+        return "{0}/o/{1}?alt=media".format(self.storage.storage_bucket, quote(file_location, safe='')) 
 
 # print(fb.get_user_progress(1).val())
 # print(users.val())
