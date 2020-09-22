@@ -1,0 +1,25 @@
+.fill-in{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.auth-form{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.fill-in-form{
+    width: 100%
+}
+.fill-in{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.input{
+    width: 50%
+}

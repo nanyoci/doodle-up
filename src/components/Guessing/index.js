@@ -12,7 +12,6 @@ import confettiSound from '../../assets/soundFX/confetti.mp3';
 import tryAgainSound from '../../assets/soundFX/tryAgain.mp3';
 
 
-
 function Guessing() {
 
     var rewardLeft, rewardRight
