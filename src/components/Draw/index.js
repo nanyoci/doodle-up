@@ -44,29 +44,27 @@ function Draw() {
 
   return (
 
-    <div id="draw">
-      <Page id="drawPage" >
+    <div>
+      <Page className="draw-page" >
         <div id='outlineToggleButton'>
           <input
             checked={showOutline}
             onChange={handleToggle}
             className="react-switch-checkbox"
-            id={`react-switch-new`}
+            id="react-switch-new"
             type="checkbox"
           />
           <label
             style={{ background: showOutline && '#ff8300' }}
             className="react-switch-label"
-            htmlFor={`react-switch-new`}
+            htmlFor="react-switch-new"
           >
-            <span className={`react-switch-button`} />
+            <span className="react-switch-button" />
           </label>
         </div>
-
-        <div id="outline">
+        <div className="drawing-box">
+          <div className="drawing-box-ratio"></div>
           {showOutline && <Outline />}
-        </div>
-        <div id="canvas">
           <Canvas currentColor={currentColor} lines={lines} setLines={setLines} displayImage={displayImage} />
         </div>
         <div id="stationery">

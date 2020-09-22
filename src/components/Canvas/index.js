@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 import './index.css'
-import outline from './../../assets/outlineSample4.jpg';
-// import cursorLightBlue from './../assets/cursorlightblue.png';
 
 function Canvas(props) {
 
@@ -15,9 +13,7 @@ function Canvas(props) {
 
   useEffect(() => {
     handleResize()
-    window.addEventListener('resize', () => {
-      handleResize()
-    })
+    window.addEventListener('resize', () => handleResize());
   }, [])
 
 
@@ -25,26 +21,16 @@ function Canvas(props) {
     const canvas = canvasRef.current
     const context = canvas.getContext("2d")
     savedDrawing = canvasRef.current.toDataURL('img/svg')
-    var canvasSize = 0
-    if (window.innerHeight < window.innerWidth) {
-      canvasSize = window.innerHeight * 0.68
-    }
-    else {
-      canvasSize = window.innerWidth * 0.68
-    }
-    canvas.style.width = `${canvasSize}px`
-    canvas.style.height = `${canvasSize}px`
-    canvas.style.border = "2px solid black"
-    canvas.width = canvasSize * 5
-    canvas.height = canvasSize * 5
-    context.scale(5, 5)
+    canvas.width = canvas.offsetHeight * 5;
+    canvas.height = canvas.offsetHeight * 5;
+    context.scale(5, 5);
     context.lineCap = "round"
     context.strokeStyle = "black"
     context.lineWidth = 3
     contextRef.current = context
     image.src = savedDrawing
     image.onload = function () {
-      canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvasSize, canvasSize)
+      canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvas.offsetWidth, canvas.offsetHeight)
     }
   }
 
@@ -55,8 +41,8 @@ function Canvas(props) {
     if (type === "touchstart") {
       var rect = nativeEvent.target.getBoundingClientRect();
       var touch = nativeEvent.touches[0] || nativeEvent.changedTouches[0];
-      offsetX = touch.pageX - rect.left;
-      offsetY = touch.pageY - rect.top;
+      offsetX = touch.pageX - (rect.left + window.scrollX);
+      offsetY = touch.pageY - (rect.top + window.scrollY);
     } else {
       offsetX = nativeEvent.offsetX;
       offsetY = nativeEvent.offsetY;
@@ -85,8 +71,8 @@ function Canvas(props) {
     if (type === "touchmove") {
       var rect = nativeEvent.target.getBoundingClientRect();
       var touch = nativeEvent.touches[0] || nativeEvent.changedTouches[0];
-      offsetX = touch.pageX - rect.left;
-      offsetY = touch.pageY - rect.top;
+      offsetX = touch.pageX - (rect.left + window.scrollX);
+      offsetY = touch.pageY - (rect.top + window.scrollY);
     } else {
       offsetX = nativeEvent.offsetX;
       offsetY = nativeEvent.offsetY;
@@ -119,21 +105,16 @@ function Canvas(props) {
   }
 
   return (
-    <div>
-      <canvas id="canvas"
-        ref={canvasRef}
-        onMouseDown={startDrawing}
-        onMouseUp={endDrawing}
-        onMouseMove={draw}
-        onTouchStart={startDrawing}
-        onTouchEnd={endDrawing}
-        onTouchMove={draw}
-        style={{
-          touchAction: "none",
-        }} />
-      {/* <button onClick={handleClick}>Download</button> */}
-
-    </div>
+    <canvas
+      className="drawing-canvas"
+      ref={canvasRef}
+      onMouseDown={startDrawing}
+      onMouseUp={endDrawing}
+      onMouseMove={draw}
+      onTouchStart={startDrawing}
+      onTouchEnd={endDrawing}
+      onTouchMove={draw}
+    />
   );
 }
 

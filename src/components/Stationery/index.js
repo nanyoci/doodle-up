@@ -14,7 +14,7 @@ import BlackPencil from './../../assets/pencilblack.svg'
 import BrownPencil from './../../assets/pencilbrown.svg'
 import GrayPencil from './../../assets/pencilgray.svg'
 import DarkGreenPencil from './../../assets/pencildarkgreen.svg'
-import Eraser from './../../assets/eraser.png'
+import Eraser from './../../assets/eraser.svg'
 
 function Stationery(props) {
 
