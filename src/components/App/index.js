@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Draw from './components/Draw';
-import Guessing from './components/Guessing';
-import StorySelection from './components/StorySelection';
-import MenuPage from './components/MenuPage';
-import MyStoryBooksPage from './components/MyStoryBooksPage';
-import StoryPage from './components/StoryPage';
-import GuestMenuPage from './components/GuestMenuPage';
-import SignUpPage from './components/SignUp';
-import SignInPage from './components/SignIn';
-import ForgetPasswordPage from './components/ForgetPassword';
-// import ChangePasswordPage from './components/ChangePassword';
-// import SignOutButton from './components/SignOut';
+import Draw from '../Draw';
+import Guessing from '../Guessing';
+import StorySelection from '../StorySelection';
+import MenuPage from '../MenuPage';
+import MyStoryBooksPage from '../MyStoryBooksPage';
+import StoryPage from '../StoryPage';
+import GuestMenuPage from '../GuestMenuPage';
+import SignUpPage from '../SignUp';
+import SignInPage from '../SignIn';
+import ForgetPasswordPage from '../ForgetPassword';
+// import ChangePasswordPage from '../ChangePassword';
+// import SignOutButton from '../SignOut';
 
 function App() {
 	// The links below are for testing
