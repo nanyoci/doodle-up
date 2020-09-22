@@ -11,15 +11,32 @@
 }
 
 .fill-in-form{
-    width: 100%
+    width: 80%
 }
 .fill-in{
-    display: flex;
+    position: relative;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    /* display: flex;
     justify-content: space-evenly;
+    */
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 20px; 
 }
 
 .input{
-    width: 50%
+    height: 100%;
+    width: 80%
+}
+
+.fill-name-container{
+    display: flex;
+    justify-content: start;
+}
+.input-container{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
 }

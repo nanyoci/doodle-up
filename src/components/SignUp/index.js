@@ -1,40 +1,44 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { FirebaseContext } from '../Firebase';
+import useSound from 'use-sound';
+
+import './index.css';
+
+import Page from '../Page';
+import mouseClickSound from '../../assets/soundFX/mouseClick.mp3';
+import splatBlue from '../../assets/splat-blue.png';
+import paint from '../../assets/paint.svg';
 
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
-    <FirebaseContext.Consumer>
-      {firebase => <SignUpForm firebase={firebase} />}
-    </FirebaseContext.Consumer>
-  </div>
+  <FirebaseContext.Consumer>
+    {firebase => <SignUpForm firebase={firebase} />}
+  </FirebaseContext.Consumer>
 );
-const INITIAL_STATE = { 
-  username: '',
-  email: '',
-  passwordOne: '',
-  passwordTwo: '',
-  error: null,
-};
 
-class SignUpForm extends Component {
-  constructor(props) {
-      super(props);
-      this.state = { ...INITIAL_STATE };
-  }
-  onChange = event => {
-      this.setState({ [event.target.name]: event.target.value });
-  };
 
-  onSubmit = event => {
-    const { username, email, passwordOne } = this.state;
-    console.log(email, passwordOne, 'credentials');
+function SignUpForm(props) {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [passwordOne, setPasswordOne] = useState("");
+  const [passwordTwo, setPasswordTwo] = useState("");
+  const [error, setError] = useState(null);
+
+  const [playMouseClickSound] = useSound(
+    mouseClickSound,
+    {
+      volume: 0.5
+    }
+  )
+
+  const onSubmit = event => {
     event.preventDefault();
-    this.props.firebase
+    playMouseClickSound();
+    console.log(email, passwordOne, 'credentials');
+    props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your Firebase realtime database
-        return this.props.firebase
+        return props.firebase
           .user(authUser.user.uid)
           .set({
             username,
@@ -45,64 +49,95 @@ class SignUpForm extends Component {
           });
       })
       // .then(authUser => {
-      //   this.setState({ ...INITIAL_STATE });
+      //   setState({ ...INITIAL_STATE });
       // })
       .then(response => console.log(response))
       .catch(error => {
-        this.setState({ error });
+        setError(error);
       });
- 
+
     event.preventDefault();
   }
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  return (
+    <>
+      <Page isMain={false}>
+        <h1>Sign Up</h1>
+        <form className="auth-form" onSubmit={onSubmit}>
+          <div className="fill-in-form">
+            <div className="fill-in">
+              <div className="fill-name-container">
+                <h2 className="fill-name">Username</h2>
+              </div>
+              <div className="input-container">
+                <input name="username"
+                  className="input"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  type="text"
+                  placeholder="Username"
+                />
+              </div>
+            </div>
+            <div className="fill-in">
+              <div className="fill-name-container">
+                <h2 className="fill-name">Email</h2>
+              </div>
+              <div className="input-container">
+                <input
+                  className="input"
+                  name="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="Email Address"
+                />
+              </div>
+            </div>
+            <div className="fill-in">
+              <div className="fill-name-container">
+                <h2 className="fill-name">Password</h2>
+              </div>
+              <div className="input-container">
+                <input
+                  className="input"
+                  name="passwordOne"
+                  value={passwordOne}
+                  onChange={e => setPasswordOne(e.target.value)}
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+            <div className="fill-in">
+              <div className="fill-name-container">
+                <h2 className="fill-name">Confirm Password</h2>
+              </div>
+              <div className="input-container">
+                <input
+                  className="input"
+                  name="passwordTwo"
+                  value={passwordTwo}
+                  onChange={e => setPasswordTwo(e.target.value)}
+                  type="password"
+                  placeholder="Confirm Password"
+                />
+              </div>
+            </div>
+            <div className="menu-buttons">
+              {error && <p>{error.message}</p>}
+            </div>
+            <div className="menu-buttons">
+              <button type="submit" className="btn btn-primary">Sign Up</button>
+            </div>
+          </div>
+        </form>
+      </Page>
+      <img className="splat-blue-corner" src={splatBlue} alt="Pink splat of paint" />
+      <img className="paint-corner" src={paint} alt="Paint brush and palette" />
+    </>
+  );
 
-  render() {
-    const {
-      username,
-      email,
-      passwordOne,
-      passwordTwo,
-      error,
-    } = this.state;
-    return (
-    <form onSubmit={this.onSubmit}>
-      <input
-        name="username"
-        value={username}
-        onChange={this.onChange}
-        type="text"
-        placeholder="Username"
-      />
-      <input
-        name="email"
-        value={email}
-        onChange={this.onChange}
-        type="text"
-        placeholder="Email Address"
-      />
-      <input
-        name="passwordOne"
-        value={passwordOne}
-        onChange={this.onChange}
-        type="password"
-        placeholder="Password"
-      />
-      <input
-        name="passwordTwo"
-        value={passwordTwo}
-        onChange={this.onChange}
-        type="password"
-        placeholder="Confirm Password"
-      />
-      <button type="submit">Sign Up</button>
-      
-      {error && <p>{error.message}</p>}
-    </form>
-    );
-  }
 }
 export default SignUpPage;
 export { SignUpPage, SignUpForm };

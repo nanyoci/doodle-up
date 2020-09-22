@@ -43,8 +43,6 @@ function SignInForm(props) {
         setError(error);
       });
 
-
-
   }
 
   return (
@@ -77,11 +75,9 @@ function SignInForm(props) {
           <div className="menu-buttons">
             {error && <p>{error.message}</p>}
           </div>
-          <div className="fill-in menu-buttons">
-            <button type="submit" className="btn btn-primary">Sign In</button>
+          <div className=" menu-buttons">
+            <button type="submit" className="btn btn-primary">Sign Ip</button>
           </div>
-
-
         </div>
         {/* <input
     name="username"
