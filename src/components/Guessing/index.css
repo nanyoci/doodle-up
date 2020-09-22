@@ -1,3 +1,11 @@
+#guessingContainer{
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden !important;
+    /* -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden; */
+}
+
 #guessing{
     position: relative;
     width: 100%;
@@ -6,6 +14,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    
 }
 
 #guessTheName{
@@ -74,4 +83,13 @@
     width: 5%;
     max-height: 10%;
     cursor: pointer;
+}
+
+#rewardContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.rewards{
+    overflow: hidden;
 }

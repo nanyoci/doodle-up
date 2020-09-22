@@ -10,6 +10,7 @@ import Page from '../Page';
 function Draw() {
 
   const [lines, setLines] = useState([])
+  const [showOutline, setShowOutline] = useState(true)
 
   const color = {
     LIGHTBLUE: '#00D7DF',
@@ -36,13 +37,34 @@ function Draw() {
     document.body.appendChild(img)
   }
 
+  const handleToggle = () => {
+    setShowOutline(!showOutline)
+  }
+
 
   return (
 
     <div id="draw">
-      <Page >
+      <Page id="drawPage" >
+        <div id='outlineToggleButton'>
+          <input
+            checked={showOutline}
+            onChange={handleToggle}
+            className="react-switch-checkbox"
+            id={`react-switch-new`}
+            type="checkbox"
+          />
+          <label
+            style={{ background: showOutline && '#ff8300' }}
+            className="react-switch-label"
+            htmlFor={`react-switch-new`}
+          >
+            <span className={`react-switch-button`} />
+          </label>
+        </div>
+
         <div id="outline">
-          <Outline />
+          {showOutline && <Outline />}
         </div>
         <div id="canvas">
           <Canvas currentColor={currentColor} lines={lines} setLines={setLines} displayImage={displayImage} />
