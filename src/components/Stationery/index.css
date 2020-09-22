@@ -7,8 +7,9 @@
 
 .tool{
     /* height: 100%; */
-    width: 5vw;
+    width: 8%;
     cursor: pointer;
-    
+    height: 100%;   
+    margin: auto 0.5% 0;
 }
 

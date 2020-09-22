@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 
 import './index.css';
 
@@ -14,7 +14,7 @@ import BlackPencil from './../../assets/pencilblack.svg'
 import BrownPencil from './../../assets/pencilbrown.svg'
 import GrayPencil from './../../assets/pencilgray.svg'
 import DarkGreenPencil from './../../assets/pencildarkgreen.svg'
-import Eraser from './../../assets/eraser.png'
+import Eraser from './../../assets/eraser.svg'
 
 function Stationery(props) {
 

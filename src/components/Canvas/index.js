@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 import './index.css'
-import outline from './../../assets/outlineSample4.jpg';
-// import cursorLightBlue from './../assets/cursorlightblue.png';
 
 function Canvas(props) {
 
@@ -10,43 +8,29 @@ function Canvas(props) {
   const contextRef = useRef(null)
   const [isDrawing, setIsDrawing] = useState(false)
   const ERASER_RADIUS = 10;
-  var image = new Image()
-  var savedDrawing
 
   useEffect(() => {
-    handleResize()
-    window.addEventListener('resize', () => {
-      handleResize()
-    })
+    const handleResize = () => {
+      const canvas = canvasRef.current
+      const context = canvas.getContext("2d")
+      const savedDrawing = canvasRef.current.toDataURL('img/svg')
+      canvas.width = canvas.offsetHeight * 5;
+      canvas.height = canvas.offsetHeight * 5;
+      context.scale(5, 5);
+      context.lineCap = "round"
+      context.strokeStyle = "black"
+      context.lineWidth = 3
+      contextRef.current = context;
+      var image = new Image();
+      image.src = savedDrawing
+      image.onload = function () {
+        canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvas.offsetWidth, canvas.offsetHeight)
+      }
+    }
+
+    handleResize();
+    window.addEventListener('resize', () => handleResize());
   }, [])
-
-
-  const handleResize = () => {
-    const canvas = canvasRef.current
-    const context = canvas.getContext("2d")
-    savedDrawing = canvasRef.current.toDataURL('img/svg')
-    var canvasSize = 0
-    if (window.innerHeight < window.innerWidth) {
-      canvasSize = window.innerHeight * 0.68
-    }
-    else {
-      canvasSize = window.innerWidth * 0.68
-    }
-    canvas.style.width = `${canvasSize}px`
-    canvas.style.height = `${canvasSize}px`
-    canvas.style.border = "2px solid black"
-    canvas.width = canvasSize * 5
-    canvas.height = canvasSize * 5
-    context.scale(5, 5)
-    context.lineCap = "round"
-    context.strokeStyle = "black"
-    context.lineWidth = 3
-    contextRef.current = context
-    image.src = savedDrawing
-    image.onload = function () {
-      canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvasSize, canvasSize)
-    }
-  }
 
   const startDrawing = ({ nativeEvent, type }) => {
     setIsDrawing(true);
@@ -55,14 +39,14 @@ function Canvas(props) {
     if (type === "touchstart") {
       var rect = nativeEvent.target.getBoundingClientRect();
       var touch = nativeEvent.touches[0] || nativeEvent.changedTouches[0];
-      offsetX = touch.pageX - rect.left;
-      offsetY = touch.pageY - rect.top;
+      offsetX = touch.pageX - (rect.left + window.scrollX);
+      offsetY = touch.pageY - (rect.top + window.scrollY);
     } else {
       offsetX = nativeEvent.offsetX;
       offsetY = nativeEvent.offsetY;
     }
 
-    if (props.currentColor == "#FFFFFF") {
+    if (props.currentColor === "#FFFFFF") {
       erase(offsetX, offsetY);
     } else {
       contextRef.current.beginPath();
@@ -73,7 +57,7 @@ function Canvas(props) {
   const endDrawing = () => {
     setIsDrawing(false);
 
-    if (props.currentColor != "#FFFFFF")
+    if (props.currentColor !== "#FFFFFF")
       contextRef.current.closePath();
   }
 
@@ -85,14 +69,14 @@ function Canvas(props) {
     if (type === "touchmove") {
       var rect = nativeEvent.target.getBoundingClientRect();
       var touch = nativeEvent.touches[0] || nativeEvent.changedTouches[0];
-      offsetX = touch.pageX - rect.left;
-      offsetY = touch.pageY - rect.top;
+      offsetX = touch.pageX - (rect.left + window.scrollX);
+      offsetY = touch.pageY - (rect.top + window.scrollY);
     } else {
       offsetX = nativeEvent.offsetX;
       offsetY = nativeEvent.offsetY;
     }
 
-    if (props.currentColor == "#FFFFFF") {
+    if (props.currentColor === "#FFFFFF") {
       erase(offsetX, offsetY);
 
     } else {
@@ -112,28 +96,23 @@ function Canvas(props) {
     contextRef.current.restore();
   }
 
-  const handleClick = () => {
-    const canvas = canvasRef.current
-    const image = canvas.toDataURL("image/svg")
-    props.displayImage(image)
-  }
+  // const handleClick = () => {
+  //   const canvas = canvasRef.current
+  //   const image = canvas.toDataURL("image/svg")
+  //   props.displayImage(image)
+  // }
 
   return (
-    <div>
-      <canvas id="canvas"
-        ref={canvasRef}
-        onMouseDown={startDrawing}
-        onMouseUp={endDrawing}
-        onMouseMove={draw}
-        onTouchStart={startDrawing}
-        onTouchEnd={endDrawing}
-        onTouchMove={draw}
-        style={{
-          touchAction: "none",
-        }} />
-      {/* <button onClick={handleClick}>Download</button> */}
-
-    </div>
+    <canvas
+      className="drawing-canvas"
+      ref={canvasRef}
+      onMouseDown={startDrawing}
+      onMouseUp={endDrawing}
+      onMouseMove={draw}
+      onTouchStart={startDrawing}
+      onTouchEnd={endDrawing}
+      onTouchMove={draw}
+    />
   );
 }
 
