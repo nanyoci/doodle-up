@@ -8,31 +8,29 @@ function Canvas(props) {
   const contextRef = useRef(null)
   const [isDrawing, setIsDrawing] = useState(false)
   const ERASER_RADIUS = 10;
-  var image = new Image()
-  var savedDrawing
 
   useEffect(() => {
-    handleResize()
+    const handleResize = () => {
+      const canvas = canvasRef.current
+      const context = canvas.getContext("2d")
+      const savedDrawing = canvasRef.current.toDataURL('img/svg')
+      canvas.width = canvas.offsetHeight * 5;
+      canvas.height = canvas.offsetHeight * 5;
+      context.scale(5, 5);
+      context.lineCap = "round"
+      context.strokeStyle = "black"
+      context.lineWidth = 3
+      contextRef.current = context;
+      var image = new Image();
+      image.src = savedDrawing
+      image.onload = function () {
+        canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvas.offsetWidth, canvas.offsetHeight)
+      }
+    }
+
+    handleResize();
     window.addEventListener('resize', () => handleResize());
   }, [])
-
-
-  const handleResize = () => {
-    const canvas = canvasRef.current
-    const context = canvas.getContext("2d")
-    savedDrawing = canvasRef.current.toDataURL('img/svg')
-    canvas.width = canvas.offsetHeight * 5;
-    canvas.height = canvas.offsetHeight * 5;
-    context.scale(5, 5);
-    context.lineCap = "round"
-    context.strokeStyle = "black"
-    context.lineWidth = 3
-    contextRef.current = context
-    image.src = savedDrawing
-    image.onload = function () {
-      canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvas.offsetWidth, canvas.offsetHeight)
-    }
-  }
 
   const startDrawing = ({ nativeEvent, type }) => {
     setIsDrawing(true);
@@ -48,7 +46,7 @@ function Canvas(props) {
       offsetY = nativeEvent.offsetY;
     }
 
-    if (props.currentColor == "#FFFFFF") {
+    if (props.currentColor === "#FFFFFF") {
       erase(offsetX, offsetY);
     } else {
       contextRef.current.beginPath();
@@ -59,7 +57,7 @@ function Canvas(props) {
   const endDrawing = () => {
     setIsDrawing(false);
 
-    if (props.currentColor != "#FFFFFF")
+    if (props.currentColor !== "#FFFFFF")
       contextRef.current.closePath();
   }
 
@@ -78,7 +76,7 @@ function Canvas(props) {
       offsetY = nativeEvent.offsetY;
     }
 
-    if (props.currentColor == "#FFFFFF") {
+    if (props.currentColor === "#FFFFFF") {
       erase(offsetX, offsetY);
 
     } else {
@@ -98,11 +96,11 @@ function Canvas(props) {
     contextRef.current.restore();
   }
 
-  const handleClick = () => {
-    const canvas = canvasRef.current
-    const image = canvas.toDataURL("image/svg")
-    props.displayImage(image)
-  }
+  // const handleClick = () => {
+  //   const canvas = canvasRef.current
+  //   const image = canvas.toDataURL("image/svg")
+  //   props.displayImage(image)
+  // }
 
   return (
     <canvas

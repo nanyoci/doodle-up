@@ -11,8 +11,8 @@ import GuestMenuPage from './components/GuestMenuPage';
 import SignUpPage from './components/SignUp';
 import SignInPage from './components/SignIn';
 import ForgetPasswordPage from './components/ForgetPassword';
-import ChangePasswordPage from './components/ChangePassword';
-import SignOutButton from './components/SignOut';
+// import ChangePasswordPage from './components/ChangePassword';
+// import SignOutButton from './components/SignOut';
 
 function App() {
 	// The links below are for testing
