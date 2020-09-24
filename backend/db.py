@@ -42,7 +42,7 @@ class FirebaseHelper:
         app = pyrebase.initialize_app(config)
         self.db = app.database()
         self.storage = app.storage()
-        self.storage = app.auth()
+        self.auth = app.auth()
 
     def get_all_users(self):
         return self.db.child('Users').get()
