@@ -3,29 +3,6 @@ from temp import stories
 import uuid
 
 
-progress = {
-    "stories": {
-        "story_id": 1,
-        "stages": {
-            "image_url": "www.bestdog.com",
-            "stage_id": 1.1,
-            "status": "incomplete"
-        }
-    }
-}
-
-progress = {
-    "stories": {
-        "1": {
-            "asd": 1
-        },
-        "2": {
-            "asd": 2
-        }
-    }
-}
-
-
 class FirebaseHelper:
 
     def __init__(self):
@@ -35,7 +12,10 @@ class FirebaseHelper:
             "databaseURL": "https://doodleup-f1847.firebaseio.com/",
             "storageBucket": "doodleup-f1847.appspot.com"
         }
-        self.db = pyrebase.initialize_app(config).database()
+        app = pyrebase.initialize_app(config)
+        self.db = app.database()
+        self.storage = app.storage()
+        self.storage = app.auth()
 
     def get_all_users(self):
         return self.db.child('Users').get()
@@ -60,10 +40,26 @@ class FirebaseHelper:
             'username').equal_to(username).get()
         try:
             for v in progress.val().values():
-                print(v)
-                return v["stories"]
+                print(v['stories'][storyid])
+                return v['stories'][storyid]
         except:
             return None
+
+    def update_story_progress(self, username, storyid, content):
+        try:
+            progress = self.db.child('progress').order_by_child(
+                'username').equal_to(username).get().val()
+        except:
+            print("No value found")
+            return None
+        for v in progress.values():
+            for stage in v['stories'][storyid]["stages"]:
+                if stage["stage_id"] == content["stage_id"]:
+                    stage["image_url"] = content["image_url"]
+                    stage["status"] = content["status"]
+                    self.db.child('progress').update(progress)
+        # did not find existing stage, create new stage instead
+        self.start_new_stage(username, storyid, content["stage_id"])
 
     def start_new_story(self, username, storyid):
         # Start story
@@ -77,7 +73,6 @@ class FirebaseHelper:
         }
         log = self.db.child('progress').order_by_child(
             'username').equal_to(username).get().val()
-        # log["stories"] = new_stage
         for k, v in log.items():
             if "stories" not in v:
                 v["stories"] = {storyid: new_stage}
@@ -85,10 +80,41 @@ class FirebaseHelper:
                 stories = v["stories"]
                 stories[storyid] = new_stage
         self.db.child('progress').update(log)
-        return v
+        return v["stories"][storyid]
 
-# print(fb.get_user_progress(1).val())
-# print(users.val())
+    def start_new_stage(self, username, storyid, stageid):
+        new_stage = {
+            "image_url": "",
+            "stage_id": stageid,
+            "status": "incomplete"
+        }
+        try:
+            progress = self.db.child('progress').order_by_child(
+                'username').equal_to(username).get().val()
+        except:
+            return None
+        for v in progress.values():
+            stages = v['stories'][storyid]["stages"]
+            stages.append(new_stage)
+            self.db.child('progress').update(progress)
+
+    def create_content(self, content):
+        storyid = content['id']
+        self.db.child('content').push(content)
+
+    def get_content(self, storyid):
+        log = self.db.child('content').order_by_child(
+            "id").equal_to(storyid).get()
+        try:
+            for v in log.val().values():
+                return v
+        except:
+            return None
+
+    def upload_file(self, path, file):
+        self.storage.child(path).put(file)
+        return self.storage.child(path+"/"+file).get_url()
+
 
 # pyrebase has some compatability issues with url, this is a workaround
 

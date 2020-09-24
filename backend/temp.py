@@ -25,3 +25,13 @@ stories = [
         ]
     }
 ]
+
+# {
+#     "username": "popo",
+#     "new_image": file,
+#     "content": {
+#         "image_url": "www.google.com",
+#         "stage_id": 1.1,
+#         "status": "completed"
+#     }
+# }
