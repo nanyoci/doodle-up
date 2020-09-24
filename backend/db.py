@@ -2,6 +2,33 @@ import pyrebase
 from temp import stories
 import uuid
 
+try:
+    from urllib.parse import urlencode, quote
+except:
+    from urllib import urlencode, quote
+
+progress = {
+    "stories": {
+        "story_id": 1,
+        "stages": {
+            "image_url": "www.bestdog.com",
+            "stage_id": 1.1,
+            "status": "incomplete"
+        }
+    }
+}
+
+progress = {
+    "stories": {
+        "1": {
+            "asd": 1
+        },
+        "2": {
+            "asd": 2
+        }
+    }
+}
+
 
 class FirebaseHelper:
 
@@ -20,11 +47,19 @@ class FirebaseHelper:
     def get_all_users(self):
         return self.db.child('Users').get()
 
-    def create_new_user(self, username, password):
-        user = {"username": username, "password": password}
+    def create_new_user(self, username, email, password):
+        user = {"username": username, "email": email, "password": password}
         story = {"username": username, "story": []}
+        self.auth.create_user_with_email_and_password(email, password)
         self.db.child('Users').push(user)
         self.db.child('progress').push(story)
+
+    def sign_in_with_email_and_password(self, email, password):
+        return self.auth.sign_in_with_email_and_password(email, password)
+    def send_password_reset_email(self, email):
+        return self.auth.send_password_reset_email(email)
+    def get_account_info(self, idToken):
+        return self.auth.get_account_info(idToken)
 
     def get_user(self, username):
         data = self.db.child('Users').order_by_child(
@@ -111,10 +146,8 @@ class FirebaseHelper:
         except:
             return None
 
-    def upload_file(self, path, file):
-        self.storage.child(path).put(file)
-        return self.storage.child(path+"/"+file).get_url()
-
+# print(fb.get_user_progress(1).val())
+# print(users.val())
 
 # pyrebase has some compatability issues with url, this is a workaround
 
