@@ -27,7 +27,7 @@ class Page extends React.Component {
 
 	componentDidMount() {
 		const audio = document.querySelector('audio')
-		audio.volume = 0.3
+		audio.volume = 0.2
 		const playing = localStorage.getItem('IsPlaying')
 		if (playing == "false") {
 			audio.pause()
