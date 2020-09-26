@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 import './index.css';
 
 import Page from '../Page';
-import mouseClickSound from '../../assets/soundFX/mouseClick.mp3';
+import buttonClickSound from '../../assets/soundFX/buttonClick.mp3';
 import splatBlue from '../../assets/splat-blue.png';
 import paint from '../../assets/paint.svg';
 
@@ -24,7 +24,7 @@ function SignUpForm(props) {
   const [error, setError] = useState(null);
 
   const [playMouseClickSound] = useSound(
-    mouseClickSound,
+    buttonClickSound,
     {
       volume: 0.5
     }

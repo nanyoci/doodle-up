@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react'
 
 import doodleUp from '../../assets/doodle-up.svg';
 import book from '../../assets/book.svg';
@@ -7,28 +8,82 @@ import splatPink from '../../assets/splat-pink.png';
 import splatBlue from '../../assets/splat-blue.png';
 import './index.css';
 
-export default function Page(props) {
-	const {
-		isMain,
-		children,
-	} = props;
+class Page extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			isPlaying: true
+		}
+	}
 
-	return (
-		<div className="main-content">
-			<div className="wrapper">
-				{
-					isMain
-						? <>
-							<img className="logo-center" src={doodleUp} alt="DoodleUp" />
-							<img className="book-corner" src={book} alt="Open book" />
-							<img className="splat-blue-corner" src={splatBlue} alt="Blue splat of paint" />
-							<img className="splat-pink-corner" src={splatPink} alt="Pink splat of paint" />
-							<img className="paint-corner" src={paint} alt="Paint brush and palette" />
-						</>
-						: <img className="logo-corner" src={doodleUp} alt="DoodleUp" />
-				}
-				{children}
+
+	toggleIsPlaying = () => {
+		this.setState((state) => {
+			console.log("state", state.isPlaying)
+			return { isPlaying: !state.isPlaying }
+		});
+
+	}
+
+	componentDidMount() {
+		const audio = document.querySelector('audio')
+		audio.volume = 0.3
+		const playing = localStorage.getItem('IsPlaying')
+		if (playing == "false") {
+			audio.pause()
+			this.toggleIsPlaying()
+		}
+		else {
+			audio.play()
+		}
+	}
+
+	togglePlayBgMusic = () => {
+		if (this.state.isPlaying) {
+			this.toggleIsPlaying()
+			localStorage.setItem('IsPlaying', false)
+			document.querySelector('audio').pause()
+		}
+		else {
+			this.toggleIsPlaying()
+			localStorage.setItem('IsPlaying', true)
+			document.querySelector('audio').play()
+		}
+	}
+
+
+	render() {
+		const {
+			isMain,
+			children,
+			buttons
+		} = this.props;
+
+		console.log(this.isPlaying)
+		return (
+			<div className="main-content">
+
+				<div className="wrapper">
+					{
+						isMain
+							? <>
+								<img className="logo-center" src={doodleUp} alt="DoodleUp" />
+								<img className="book-corner" src={book} alt="Open book" />
+								<img className="splat-blue-corner" src={splatBlue} alt="Blue splat of paint" />
+								<img className="splat-pink-corner" src={splatPink} alt="Pink splat of paint" />
+								<img className="paint-corner" src={paint} alt="Paint brush and palette" />
+							</>
+							: <img className="logo-corner" src={doodleUp} alt="DoodleUp" />
+					}
+					{children}
+				</div>
+				<div className="control-buttons">
+					<Button id="musicControlBtn" circular icon={this.state.isPlaying ? 'music' : 'mute'} size='massive' color='yellow' onClick={this.togglePlayBgMusic} />
+					{buttons}
+				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
+
+export default Page;

@@ -9,4 +9,5 @@
 Sound effect sources:
 https://youtu.be/i75GQG7YMu8
 https://youtu.be/hckIjL7z5z4
-https://www.fesliyanstudios.com/royalty-free-sound-effects-download/mouse-click-2
+https://youtu.be/TCF5cZJ_D0o
+https://youtu.be/HzXs4_tvaBI
