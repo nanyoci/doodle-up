@@ -97,3 +97,12 @@
 		width: 150px;
 	}
 }
+
+.control-buttons{
+	position: absolute;
+	top: 60px;
+	right: 90px;
+	display: grid;
+	grid-row-gap: 10px;
+
+}

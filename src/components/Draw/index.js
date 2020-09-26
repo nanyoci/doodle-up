@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'semantic-ui-react'
 
 import './index.css'
 
@@ -41,27 +42,15 @@ function Draw() {
     setShowOutline(!showOutline)
   }
 
+  const getToggleBtn = () => {
+    return (<Button circular icon={showOutline ? 'eye' : 'eye slash'} size='massive' color='yellow' onClick={handleToggle} />)
+  }
+
 
   return (
 
     <div>
-      <Page className="draw-page" >
-        <div id='outlineToggleButton'>
-          <input
-            checked={showOutline}
-            onChange={handleToggle}
-            className="react-switch-checkbox"
-            id="react-switch-new"
-            type="checkbox"
-          />
-          <label
-            style={{ background: showOutline && '#ff8300' }}
-            className="react-switch-label"
-            htmlFor="react-switch-new"
-          >
-            <span className="react-switch-button" />
-          </label>
-        </div>
+      <Page className="draw-page" buttons={getToggleBtn()} >
         <div className="drawing-box">
           <div className="drawing-box-ratio"></div>
           {showOutline && <Outline />}

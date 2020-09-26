@@ -5,7 +5,7 @@ import './index.css';
 
 import { FirebaseContext } from '../Firebase';
 import Page from '../Page';
-import mouseClickSound from '../../assets/soundFX/mouseClick.mp3';
+import buttonClickSound from '../../assets/soundFX/buttonClick.mp3';
 
 const SignInPage = () => (
   <FirebaseContext.Consumer>
@@ -19,7 +19,7 @@ function SignInForm(props) {
   const [error, setError] = useState(null);
 
   const [playMouseClickSound] = useSound(
-    mouseClickSound,
+    buttonClickSound,
     {
       volume: 0.5
     }
@@ -76,7 +76,7 @@ function SignInForm(props) {
             {error && <p>{error.message}</p>}
           </div>
           <div className=" menu-buttons">
-            <button type="submit" className="btn btn-primary">Sign Ip</button>
+            <button type="submit" className="btn btn-primary">Sign Up</button>
           </div>
         </div>
         {/* <input

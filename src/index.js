@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'semantic-ui-css/semantic.min.css'
 import './index.css';
 import App from './components/App';
+import AppWithBgMusic from './components/AppWithBgMusic'
 import * as serviceWorker from './serviceWorker';
 import Firebase, { FirebaseContext } from './components/Firebase';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<FirebaseContext.Provider value={new Firebase()}>
-			<App />
+			<AppWithBgMusic />
 		</FirebaseContext.Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
