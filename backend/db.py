@@ -1,6 +1,7 @@
 import pyrebase
 from temp import stories
 import uuid
+import os
 
 try:
     from urllib.parse import urlencode, quote
@@ -37,12 +38,22 @@ class FirebaseHelper:
             "apiKey": "AIzaSyDOXwnuSlP36o_tB3xiYELds0XOohJaxA4",
             "authDomain": "doodleup-f1847.firebaseapp.com",
             "databaseURL": "https://doodleup-f1847.firebaseio.com/",
-            "storageBucket": "doodleup-f1847.appspot.com"
+            "storageBucket": "doodleup-f1847.appspot.com",
+            "serviceAccount": './doodleup-f1847-firebase-adminsdk-x4yoc-66b445712b.json'
         }
         app = pyrebase.initialize_app(config)
         self.db = app.database()
         self.storage = app.storage()
         self.auth = app.auth()
+
+    def upload_file(self, filepath, upload_to):
+        filename = os.path.basename(filepath)
+        self.storage.child(upload_to+filename).put(filepath)
+        print(upload_to+filename)
+        return self.storage.child(upload_to+filename).get_url(None)
+
+    def get_file(self, filepath):
+        return
 
     def get_all_users(self):
         return self.db.child('Users').get()
@@ -56,8 +67,10 @@ class FirebaseHelper:
 
     def sign_in_with_email_and_password(self, email, password):
         return self.auth.sign_in_with_email_and_password(email, password)
+
     def send_password_reset_email(self, email):
         return self.auth.send_password_reset_email(email)
+
     def get_account_info(self, idToken):
         return self.auth.get_account_info(idToken)
 
@@ -152,8 +165,23 @@ class FirebaseHelper:
 # pyrebase has some compatability issues with url, this is a workaround
 
 
-def noquote(s):
-    return s
+pyrebase.pyrebase.quote = lambda s, safe=None: s
+
+# Monkey patch pyrebase: replace quote function in pyrebase to workaround a bug.
+# See https://github.com/thisbejim/Pyrebase/issues/294.
+
+# Monkey patch pyrebase: the Storage.get_url method does need quoting :|
 
 
-pyrebase.pyrebase.quote = noquote
+def get_url(self, token=None):
+    path = self.path
+    self.path = None
+    if path.startswith('/'):
+        path = path[1:]
+    if token:
+        return "{0}/o/{1}?alt=media&token={2}".format(self.storage_bucket, quote(path, safe=''), token)
+    return "{0}/o/{1}?alt=media".format(self.storage_bucket, quote(path, safe=''))
+
+
+pyrebase.pyrebase.Storage.get_url = lambda self, token=None: \
+    get_url(self, token)

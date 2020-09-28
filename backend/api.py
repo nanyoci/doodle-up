@@ -1,3 +1,4 @@
+from flask import Flask, flash, redirect, url_for
 import flask
 from flask import jsonify, request, Response
 from temp import stories
@@ -13,33 +14,26 @@ app.config['UPLOAD_FOLDER'] = './images'
 helper = FirebaseHelper()
 
 # upload from react js to flask
-import os
-from flask import Flask, flash, redirect, url_for
-from werkzeug.utils import secure_filename
-UPLOAD_FOLDER = '/uploads'
+UPLOAD_FOLDER = './images'
 ALLOWED_EXTENSIONS = {'png'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-# upload progress(BLOB OR FILE?) to storage 
+
+
+# upload progress(BLOB OR FILE?) to storage
 # TODO: append storage link within realtime database w/ id
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    # if 'file' not in request.files:
-    #     flash('No file part')
-    #     return redirect(request.url)
     file = request.files['file']
-    # # if user does not select file, browser also
-    # # submit an empty part without filename
-    # if file.filename == '':
-    #     flash('No selected file')
-    #     return redirect(request.url)
-    if file and allowed_file(file.filename):
+    if file:
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('uploaded_file',
-                                filename=filename))
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        return helper.upload_file(filepath, 'assets/')
 
 # access storage for assets
 # e.g. localhost:88888/asseturl?file_location=assets/car.png&token=123
@@ -49,7 +43,7 @@ def asset_url():
     token = request.args.get("token")
     return helper.get_asset_url(file_location, token)
 
-# creates user in firebase authentication 
+# creates user in firebase authentication
 # creates entry in realtime database
 # requires form
 @app.route('/signup', methods=['POST'])
@@ -127,6 +121,7 @@ def get_user_progress():
     if not progress:
         progress = helper.start_new_story(username, storyid)
     return progress
+
 
 @app.route('/user/<username>', methods=['GET'])
 def get_user(username):
