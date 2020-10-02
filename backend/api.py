@@ -35,38 +35,28 @@ def upload_file():
         file.save(filepath)
         return helper.upload_file(filepath, 'assets/')
 
-# access storage for assets
-# e.g. localhost:88888/asseturl?file_location=assets/car.png&token=123
-@app.route('/asseturl', methods=['GET'])
-def asset_url():
-    file_location = request.args.get("file_location")
-    token = request.args.get("token")
-    return helper.get_asset_url(file_location, token)
-
 # creates user in firebase authentication
-# creates entry in realtime database
+# add username as displayName in userInfo
+# creates entry in realtime database 
 # requires form
 @app.route('/signup', methods=['POST'])
 def sign_up():
-    username = request.form['username']
     email = request.form['email']
     password = request.form['password']
-    if helper.get_user(username):
-        return "The username has been taken.", 400
-    helper.create_new_user(username, email, password)
-    return "User created.", 200
+    username = request.form['username']
+    return helper.create_new_user(email, password, username)
 
 # able to return a string:token that expires in 60minutes - potentially good for prototyping secure access
+# returns username
 # requires form
 @app.route('/signin', methods=['POST'])
 def sign_in():
-    username = request.form['username']
     email = request.form['email']
     password = request.form['password']
-    if not helper.get_user(username):
-        return "Does not exist, please create an account.", 400
-    # return helper.sign_in_with_email_and_password(email, password)["idToken"]
-    return "Account successfully logged in", 200
+    result = helper.sign_in_with_email_and_password(email, password)
+    if result['registered']:
+        return result["displayName"], 200
+    return "Does not exist, please create an account.", 400
 
 # resets password by sending an email with a link
 # e.g. /resetpassword?email=tsr@gmail.com

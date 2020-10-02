@@ -2,6 +2,9 @@ import pyrebase
 from temp import stories
 import uuid
 import os
+import json 
+import requests
+from requests.exceptions import HTTPError
 
 try:
     from urllib.parse import urlencode, quote
@@ -55,15 +58,34 @@ class FirebaseHelper:
     def get_file(self, filepath):
         return
 
-    def get_all_users(self):
-        return self.db.child('Users').get()
+    # def get_all_users(self):
+    #     return self.db.child('Users').get()
 
-    def create_new_user(self, username, email, password):
-        user = {"username": username, "email": email, "password": password}
+    def create_new_user(self, email, password, username):
+        # user = {"username": username, "email": email, "password": password}
         story = {"username": username, "story": []}
-        self.auth.create_user_with_email_and_password(email, password)
-        self.db.child('Users').push(user)
+        # self.db.child('Users').push(user)
         self.db.child('progress').push(story)
+        try:
+            self.auth.create_user_with_email_and_password(email, password)
+            idToken = self.sign_in_with_email_and_password(email, password)['idToken']
+            self.set_display_name(username, idToken, email, password)
+            return "User created.", 200
+        except:
+            return "The email is already in use", 400
+    def set_display_name(self, displayName, idToken, email, password):
+        api_key = "AIzaSyDOXwnuSlP36o_tB3xiYELds0XOohJaxA4"
+        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key={0}".format(api_key)
+        headers = {"content-type": "application/json; charset=UTF-8"}
+        data = json.dumps({"idToken": idToken, "displayName": displayName, "email": email, "password": password})
+        try:
+            request_object = requests.post(request_ref, headers=headers, data=data)
+            return request_object.json()
+        except: 
+            try:
+                request_object.raise_for_status()
+            except HTTPError as e:
+                raise HTTPError(e, request_object.text)
 
     def sign_in_with_email_and_password(self, email, password):
         return self.auth.sign_in_with_email_and_password(email, password)
@@ -74,14 +96,14 @@ class FirebaseHelper:
     def get_account_info(self, idToken):
         return self.auth.get_account_info(idToken)
 
-    def get_user(self, username):
-        data = self.db.child('Users').order_by_child(
-            "username").equal_to(username).get()
-        try:
-            for v in data.val().values():
-                return v
-        except:
-            return None
+    # def get_user(self, username):
+    #     data = self.db.child('Users').order_by_child(
+    #         "username").equal_to(username).get()
+    #     try:
+    #         for v in data.val().values():
+    #             return v
+    #     except:
+    #         return None
 
     def get_story_progress(self, username, storyid):
         progress = self.db.child('progress').order_by_child(
