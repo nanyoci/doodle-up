@@ -24,7 +24,7 @@ Progress saving of drawn photo
   - `password`
 - Returns:
   - `200, "User created"`
-  - `200, "The username has been taken"`
+  - `200, "The email is already in use"`
 ---
 `/signin`
 
@@ -33,7 +33,7 @@ Progress saving of drawn photo
   - `email`
   - `password`
 - Returns:
-  - `200, "Account successfully logged in"`
+  - `200, username`
   - `400, "Does not exist, please create an account"`
 ---
 `/accountinfo/:idToken`
@@ -112,13 +112,7 @@ else `400, "Story content not found"`
 ---
 ### Testing and Other Endpoints
 
-
-
-`https://tanshengrong.pythonanywhere.com/asseturl?file_location=assets/<string:filename>`
-
-`https://tanshengrong.pythonanywhere.com/asseturl?file_location=assets/soundFX/<string:filename>`
-
-- **GET**: Get the url of the asset on Firebase Storage
+- N.A
 
 
 ## Tools used
