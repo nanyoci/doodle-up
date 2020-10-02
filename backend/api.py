@@ -121,14 +121,6 @@ def get_user_progress():
         progress = helper.start_new_story(username, storyid)
     return progress
 
-
-@app.route('/user/<username>', methods=['GET'])
-def get_user(username):
-    result = helper.get_user(username)
-    if not result:
-        result = "User not found.", 400
-    return result
-
 # STORY CONTENT ENDPOINTS
 # /content?storyid=001
 @app.route('/content', methods=['GET'])
