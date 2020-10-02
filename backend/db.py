@@ -14,18 +14,7 @@ progress = {
         "stages": {
             "image_url": "www.bestdog.com",
             "stage_id": 1.1,
-            "status": "incomplete"
-        }
-    }
-}
-
-progress = {
-    "stories": {
-        "1": {
-            "asd": 1
-        },
-        "2": {
-            "asd": 2
+            "completed": False
         }
     }
 }
@@ -93,21 +82,43 @@ class FirebaseHelper:
         except:
             return None
 
-    def update_story_progress(self, username, storyid, content):
+    def update_story_progress(self, username, storyid, stageid, url, completed):
         try:
             progress = self.db.child('progress').order_by_child(
                 'username').equal_to(username).get().val()
-        except:
+            for v in progress.values():
+                print(v)
+                for stage in v['stories'][storyid]["stages"]:
+                    if stage['stage_id'] == stageid:
+                        stage['image_url'] == url
+                        stage['completed'] = True
+                        self.db.child('progress').update(progress)
+                        return "Updated stage "+stageid, 200
+                # did not find existing stage, add as new save
+                new_stage = {
+                    "image_url": url,
+                    "stage_id": stageid,
+                    "completed": completed
+                }
+                v['stories'][storyid]["stages"].append(new_stage)
+
+            self.db.child('progress').update(progress)
+            return "Added new stage " + stageid + " to story " + storyid, 200
+
+        except KeyError:
             print("No value found")
-            return None
-        for v in progress.values():
-            for stage in v['stories'][storyid]["stages"]:
-                if stage["stage_id"] == content["stage_id"]:
-                    stage["image_url"] = content["image_url"]
-                    stage["status"] = content["status"]
-                    self.db.child('progress').update(progress)
-        # did not find existing stage, create new stage instead
-        self.start_new_stage(username, storyid, content["stage_id"])
+            return "User does not exist", 400
+        except:
+            return "Something went wrong", 400
+
+# =     for v in progress.values():
+#             for stage in v['stories'][storyid]["stages"]:
+#                 if stage["stage_id"] == content["stage_id"]:
+#                     stage["image_url"] = content["image_url"]
+#                     stage["status"] = content["status"]
+#                     self.db.child('progress').update(progress)
+#         # did not find existing stage, create new stage instead
+#         self.start_new_stage(username, storyid, content["stage_id"])
 
     def start_new_story(self, username, storyid):
         # Start story
@@ -130,21 +141,21 @@ class FirebaseHelper:
         self.db.child('progress').update(log)
         return v["stories"][storyid]
 
-    def start_new_stage(self, username, storyid, stageid):
-        new_stage = {
-            "image_url": "",
-            "stage_id": stageid,
-            "status": "incomplete"
-        }
-        try:
-            progress = self.db.child('progress').order_by_child(
-                'username').equal_to(username).get().val()
-        except:
-            return None
-        for v in progress.values():
-            stages = v['stories'][storyid]["stages"]
-            stages.append(new_stage)
-            self.db.child('progress').update(progress)
+    # def start_new_stage(self, username, storyid, stageid):
+    #     new_stage = {
+    #         "image_url": "",
+    #         "stage_id": stageid,
+    #         "completed": True
+    #     }
+    #     try:
+    #         progress = self.db.child('progress').order_by_child(
+    #             'username').equal_to(username).get().val()
+    #     except:
+    #         return None
+    #     for v in progress.values():
+    #         stages = v['stories'][storyid]["stages"]
+    #         stages.append(new_stage)
+    #         self.db.child('progress').update(progress)
 
     def create_content(self, content):
         storyid = content['id']
@@ -159,8 +170,6 @@ class FirebaseHelper:
         except:
             return None
 
-# print(fb.get_user_progress(1).val())
-# print(users.val())
 
 # pyrebase has some compatability issues with url, this is a workaround
 
