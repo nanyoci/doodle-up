@@ -35,6 +35,7 @@ def upload_file():
         file.save(filepath)
         return helper.upload_file(filepath, 'assets/')
 
+# USER ENDPOINTS
 # creates user in firebase authentication
 # add username as displayName in userInfo
 # creates entry in realtime database 
@@ -79,10 +80,19 @@ def account_info(idToken):
 # GAME PROGRESSION ENDPOINTS
 
 # Save progress
+# {
+#     "story_id": myid,
+#     "username": "popo",
+#     "new_image": file,
+#     "stage_id": 1.1,
+#     "completed": True
+# }
 @app.route('/progress', methods=['POST'])
-def save():
-    username = request.args.get('username')
-    storyid = request.args.get('storyid')
+def save_user_progress():
+    username = request.form['username']
+    storyid = request.form['story_id']
+    stage_id = request.form['stage_id']
+    completed = request.form['completed']
     json = request.get_json()
     # TODO: Saving file needs testing
     # file = json["new_image"]
@@ -92,17 +102,16 @@ def save():
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
-        path = 'Progress/' + username
-        url = helper.upload_file(path, filepath)
-        json["content"]["image_url"] = url
+        url = helper.upload_file(filepath, 'Progress/')
         os.remove(filepath)
-    helper.update_story_progress(username, storyid, json["content"])
-    return "Progress saved", 200
+    result = helper.update_story_progress(
+        username, storyid, stage_id, url, completed)
+    return result
 
 # Get user's progress for the selected story, else initialize
 # Important to note, storyid cannot me an integer string i.e. "1", "23"
 # Firebase is sensitive and convert the data structure into an array
-# /progress?username=xyz&story=1
+# /progress?username=xyz&storyid=1
 @app.route('/progress', methods=['GET'])
 def get_user_progress():
     username = request.args.get('username')
@@ -117,8 +126,7 @@ def get_user_progress():
 def get_user(username):
     result = helper.get_user(username)
     if not result:
-        result = Response({"error": "User not found."},
-                          status=404, mimetype='application/json')
+        result = "User not found.", 400
     return result
 
 # STORY CONTENT ENDPOINTS
@@ -128,8 +136,7 @@ def get_content():
     storyid = request.args.get('storyid')
     content = helper.get_content(storyid)
     if not content:
-        content = Response({"error": "Story not found."},
-                           status=404, mimetype='application/json')
+        content = "Story content not found.", 400
     return content
 
 

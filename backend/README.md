@@ -65,14 +65,19 @@ stages: [
 ]}
 ```
 
-`/progress` [WIP: File saving management]
+`/progress` [WIP: More testing needed]
 
-- **POST**: Saves story progress. Take note storyid is sensitive and shouldn't be an integer (e.g. 001 not 1). Integers will fk it up.
+- **POST**: Saves stage progress. Take note storyid is sensitive and shouldn't be an integer (e.g. 001 not 1). Integers will fk it up.
 - Parameters:
-  - `username`
-  - `storyid`
+  - `username`: popo
+  - `story_id`: 008
+  - `stage_id`: 1.1
+  - `completed`: False
 - Returns:
-  - `200, "Progress Saved"`
+  - `200, "Updated stage 1.1"`
+  - `200, "Added new stage 1.1 to story 008"`
+  - `400, "User does not exist"`
+
 ---
 ### Story Content Endpoints
 `/content?storyid=001`
@@ -104,6 +109,7 @@ stages: [
 ]}
 ```
 else `400, "Story content not found"`
+
 ---
 `/content`
 - **POST**: For internal use.
