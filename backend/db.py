@@ -58,15 +58,14 @@ class FirebaseHelper:
         try:
             self.auth.create_user_with_email_and_password(email, password)
             idToken = self.sign_in_with_email_and_password(email, password)['idToken']
-            self.set_display_name(username, idToken, email, password)
+            self.set_display_name(username, idToken)
             return "User created.", 200
         except:
             return "The email is already in use", 400
-    def set_display_name(self, displayName, idToken, email, password):
-        api_key = "AIzaSyDOXwnuSlP36o_tB3xiYELds0XOohJaxA4"
-        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key={0}".format(api_key)
+    def set_display_name(self, displayName, idToken):
+        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key={0}".format(self.auth.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
-        data = json.dumps({"idToken": idToken, "displayName": displayName, "email": email, "password": password})
+        data = json.dumps({"idToken": idToken, "displayName": displayName})
         try:
             request_object = requests.post(request_ref, headers=headers, data=data)
             return request_object.json()
