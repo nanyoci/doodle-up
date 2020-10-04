@@ -19,16 +19,15 @@ function SignInPage({ authenticateLogin, error }) {
       volume: 0.5
     }
   )
-  const onSubmit = event => {
-    event.preventDefault();
+  const onSubmit = e => {
+    e.preventDefault();
     playMouseClickSound()
     authenticateLogin({ email, password })
+    console.log("OnSubmit")
   }
 
   return (
-
-
-    <Page isMain={true}>
+    <Page isMain={true} isNotLoggedIn={true}>
       <div className="auth-container">
         <h1>Sign In</h1>
         <form className="auth-form" onSubmit={onSubmit}>

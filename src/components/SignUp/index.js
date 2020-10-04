@@ -34,7 +34,7 @@ function SignUpPage({ authenticateSignUp, error }) {
 
   return (
     <>
-      <Page isMain={false}>
+      <Page isMain={false} isNotLoggedIn={true}>
         <div className="auth-container">
           <h1>Sign Up</h1>
           <form className="auth-form" onSubmit={onSubmit}>

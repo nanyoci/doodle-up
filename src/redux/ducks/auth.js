@@ -31,7 +31,7 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				// user: {},
-				username: ''
+				username: null
 			}
 
 		case ERROR:
@@ -129,20 +129,10 @@ export const authenticateSignUp = userData => dispatch => {
 };
 
 
-export const logout = () => (dispatch, getState) => {
+export const authLogout = () => (dispatch) => {
 	// No endpoints for logout
 	dispatch(logoutAction());
-	// axios
-	//     .delete(
-	//         `${API_URL}/oauth/revoke`,
-	//         getTokenConfig(getState)
-	//     )
-	//     .then(() => {
-	//         dispatch(logoutAction());
-	//     })
-	//     .catch(err => {
-	//         displayError("Unable to logout")(dispatch);
-	//     });
+
 };
 
 // export const refreshTokenLogin = () => (dispatch, getState) => {
