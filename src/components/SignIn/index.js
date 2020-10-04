@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useSound from 'use-sound';
 import { connect } from 'react-redux';
-import { authenticateLogin } from './../../redux/ducks/auth';
+import { authenticateLogin, selectError } from './../../redux/ducks/auth';
 import { Link } from 'react-router-dom';
 
 import './index.css';
@@ -9,10 +9,9 @@ import './index.css';
 import Page from '../Page';
 import buttonClickSound from '../../assets/soundFX/buttonClick.mp3';
 
-function SignInPage({ authenticateLogin }) {
+function SignInPage({ authenticateLogin, error }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
 
   const [playMouseClickSound] = useSound(
     buttonClickSound,
@@ -23,26 +22,12 @@ function SignInPage({ authenticateLogin }) {
   const onSubmit = event => {
     event.preventDefault();
     playMouseClickSound()
-    // console.log(email, 'credentials');
     authenticateLogin({ email, password })
-    console.log("here")
-    // props.firebase
-    //   .doSignInWithEmailAndPassword(email, password)
-    //   .then(res => {
-    //     alert("Account successfully logged in.");
-    //     // this.props.history.push('/components/signup');
-    //   })
-    //   // .then(authUser => {
-    //   //   this.setState({ ...INITIAL_STATE });
-    //   // })
-    //   .then(response => console.log(response))
-    //   .catch(error => {
-    //     setError(error);
-    //   });
-
   }
 
   return (
+
+
     <Page isMain={true}>
       <div className="auth-container">
         <h1>Sign In</h1>
@@ -71,7 +56,11 @@ function SignInPage({ authenticateLogin }) {
               />
             </div>
             <div className="menu-buttons">
-              {error && <p>{error.message}</p>}
+              {error &&
+                <div>
+                  <p className="auth-error">{error}</p>
+                  <br />
+                </div>}
             </div>
             <div className=" menu-buttons">
               <button type="submit" className="btn btn-primary">Sign In</button>
@@ -85,16 +74,20 @@ function SignInPage({ authenticateLogin }) {
         placeholder="Username"
       /> */}
         </form>
-        <br></br>
-        <Link id="auth-link" to="/signup">Create an account? Sign up</Link>
+        <br />
+        <Link className="auth-link" to="/signup">Create an account? Sign up</Link>
       </div>
     </Page>
   );
 
 }
 
+const mapStateToProps = state => ({
+  error: selectError(state),
+});
+
 const dispatchers = {
   authenticateLogin,
 };
 
-export default connect(() => ({}), dispatchers)(SignInPage);
+export default connect(mapStateToProps, dispatchers)(SignInPage);

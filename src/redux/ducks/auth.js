@@ -9,35 +9,36 @@ import { API_URL } from '../../utils/constants';
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const ERROR = "ERROR";
 
 const initialState = {
-	// userLoading: true,
-	// userFailed: null,
-	// user: {},
+	error: "",
 	username: localStorage.getItem("username")
 };
 export default function (state = initialState, action) {
 	switch (action.type) {
 		case LOGIN:
-
-			// const currentTime = getCurrentTime()
-
 			localStorage.setItem("username", action.payload);
-
 			return {
 				...state,
-				username: action.payload
+				username: action.payload,
+				error: ""
 			}
 
 		case LOGOUT:
 			localStorage.removeItem("username");
-
 			return {
 				...state,
 				// user: {},
 				username: ''
 			}
+		case REGISTER:
 
+		case ERROR:
+			return {
+				...state,
+				error: action.payload
+			}
 		default:
 			return state;
 	}
@@ -64,6 +65,13 @@ export function logoutAction() {
 	}
 }
 
+export function errorAction(payload) {
+	return {
+		type: ERROR,
+		payload: payload
+	}
+}
+
 // OPERATIONS
 export const authenticateLogin = userData => dispatch => {
 	var formdata = new FormData();
@@ -84,7 +92,7 @@ export const authenticateLogin = userData => dispatch => {
 			dispatch(loginAction(res.data));
 		})
 		.catch(err => {
-			alert("Failed to login")
+			dispatch(errorAction("Email and password do not match"))
 			// displayError("Unable to login")(dispatch);
 			// dispatch(fetchMeFailureAction());
 		});
@@ -117,7 +125,7 @@ export const register = userData => dispatch => {
 			}
 		})
 		.catch(err => {
-			alert("Failed to login")
+			console.log(err)
 			// displayError("Unable to login")(dispatch);
 			// dispatch(fetchMeFailureAction());
 		});
@@ -167,3 +175,4 @@ export const logout = () => (dispatch, getState) => {
 
 // SELECTOR
 export const selectUsername = state => state.authReducer.username;
+export const selectError = state => state.authReducer.error;
