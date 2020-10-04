@@ -1,4 +1,5 @@
 from flask import Flask, flash, redirect, url_for
+from flask_cors import CORS
 import flask
 from flask import jsonify, request, Response
 from temp import stories
@@ -8,6 +9,7 @@ import os
 
 
 app = flask.Flask(__name__)
+CORS(app)
 app.config["DEBUG"] = True
 app.config['UPLOAD_FOLDER'] = './images'
 
@@ -54,10 +56,7 @@ def sign_up():
 def sign_in():
     email = request.form['email']
     password = request.form['password']
-    result = helper.sign_in_with_email_and_password(email, password)
-    if result['registered']:
-        return result["displayName"], 200
-    return "Does not exist, please create an account.", 400
+    return helper.sign_in_with_email_and_password(email, password)
 
 # resets password by sending an email with a link
 # e.g. /resetpassword?email=tsr@gmail.com

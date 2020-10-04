@@ -76,7 +76,11 @@ class FirebaseHelper:
                 raise HTTPError(e, request_object.text)
 
     def sign_in_with_email_and_password(self, email, password):
-        return self.auth.sign_in_with_email_and_password(email, password)
+        try: 
+            user_json = self.auth.sign_in_with_email_and_password(email, password)
+            return user_json["displayName"], 200
+        except:
+            return "Account does not exist or wrong credentials.", 400
 
     def send_password_reset_email(self, email):
         return self.auth.send_password_reset_email(email)
