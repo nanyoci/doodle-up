@@ -46,7 +46,8 @@ class AppRouter extends Component {
             <Route path="/guessing" component={Guessing} />,
             <Route path="/story-page" component={StoryPage} />,
             <Route path="/forgetpassword" component={ForgetPasswordPage} />,
-            <Redirect key="HomeRedirect" from="/signin" exact to="/" />
+            <Redirect key="SignInRedirect" from="/signin" exact to="/" />,
+            <Redirect key="SignUpRedirect" from="/signup" exact to="/" />
         ];
 
         if (username == null) {
@@ -55,7 +56,6 @@ class AppRouter extends Component {
                 <Route path="/signup" component={SignUpPage} />,
                 <Redirect key="LoginRedirect" from="/" exact to="/signin" />
             ]
-            console.log("no user")
         }
 
         return (

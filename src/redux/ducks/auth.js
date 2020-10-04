@@ -17,6 +17,7 @@ const initialState = {
 };
 export default function (state = initialState, action) {
 	switch (action.type) {
+		case REGISTER:
 		case LOGIN:
 			localStorage.setItem("username", action.payload);
 			return {
@@ -32,13 +33,13 @@ export default function (state = initialState, action) {
 				// user: {},
 				username: ''
 			}
-		case REGISTER:
 
 		case ERROR:
 			return {
 				...state,
 				error: action.payload
 			}
+
 		default:
 			return state;
 	}
@@ -82,10 +83,6 @@ export const authenticateLogin = userData => dispatch => {
 		.post(
 			`${API_URL}/signin`,
 			formdata,
-			{
-				'Content-Type': 'application/x-www-form-urlencoded',
-				"Access-Control-Allow-Origin": "*",
-			},
 		)
 		.then(res => {
 			console.log(res.data)
@@ -98,34 +95,34 @@ export const authenticateLogin = userData => dispatch => {
 		});
 };
 
-export const register = userData => dispatch => {
+export const authenticateSignUp = userData => dispatch => {
+	if (userData.passwordOne != userData.passwordTwo) {
+		dispatch(errorAction("Passwords do not match"))
+		return
+	}
+	console.log("here")
 	var formdata = new FormData();
+	console.log(userData)
 	formdata.append("email", userData.email);
 	formdata.append("username", userData.username);
-	formdata.append("password", userData.password);
+	formdata.append("password", userData.passwordOne);
 
 	axios
 		.post(
 			`${API_URL}/signup`,
-			// `${API_URL}/register`,
 			formdata,
 		)
 		.then(res => {
-			if (res.data == "User created") {
+			if (res.data == "User created.") {
 				dispatch(registerAction(userData.username))
 			}
-			else {
-				if (res.data == "The email is already in use") {
-					alert("The email is already taken. Please try to sign in")
-				}
-				else {
-					alert("200")
-				}
-
-			}
+			// else {
+			// 	if (res.data == "The email is already in use") {
+			// 	}
+			// }
 		})
 		.catch(err => {
-			console.log(err)
+			dispatch(errorAction("Oops! There is a problem with registration."))
 			// displayError("Unable to login")(dispatch);
 			// dispatch(fetchMeFailureAction());
 		});
