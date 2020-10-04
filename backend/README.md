@@ -34,7 +34,7 @@ Progress saving of drawn photo
   - `password`
 - Returns:
   - `200, username`
-  - `400, "Does not exist, please create an account"`
+  - `400, "Account does not exist or wrong credentials."`
 ---
 `/accountinfo/:idToken`
 
