@@ -1,87 +1,41 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
-import { AUTH_URL } from '../../utils/constants';
-import { getActionTypes, createAction } from './helpers';
-import { displayError } from './errors';
+import { API_URL } from '../../utils/constants';
+// import { getActionTypes, createAction } from './helpers';
+// import { displayError } from './errors';
 
 // ACTION TYPES
-export const LOGIN_ACTIONS = getActionTypes('LOGIN');
-export const SIGNUP_ACTIONS = getActionTypes('SIGNUP');
-export const LOGOUT_ACTION = 'LOGOUT';
+export const REGISTER = 'REGISTER';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 
-// REDUCER
 const initialState = {
-	accessToken: null,
-	refreshToken: Cookies.get("refreshToken"),
-	loginLoading: false,
-	loginError: null,
-	signupLoading: false,
-	signupError: null,
+	// userLoading: true,
+	// userFailed: null,
+	// user: {},
+	username: localStorage.getItem("username")
 };
-
-export default function authReducer(state = initialState, action) {
+export default function (state = initialState, action) {
 	switch (action.type) {
-		case LOGIN_ACTIONS.REQUEST:
+		case LOGIN:
+
+			// const currentTime = getCurrentTime()
+
+			localStorage.setItem("username", action.payload);
+
 			return {
 				...state,
-				loginLoading: true,
-				loginError: null,
+				username: action.payload
 			}
 
-		case LOGIN_ACTIONS.SUCCESS:
-			const {
-				access: accessToken,
-				refresh: refreshToken,
-			} = action.payload;
-
-			Cookies.set("refreshToken", refreshToken);
+		case LOGOUT:
+			localStorage.removeItem("username");
 
 			return {
 				...state,
-				accessToken: accessToken,
-				refreshToken: refreshToken,
-				loginLoading: false,
-			}
-
-		case LOGIN_ACTIONS.FAILURE:
-			Cookies.remove("refreshToken");
-
-			return {
-				...state,
-				accessToken: null,
-				refreshToken: null,
-				loginLoading: false,
-				loginError: action.payload,
-			}
-
-		case SIGNUP_ACTIONS.REQUEST:
-			return {
-				...state,
-				signupLoading: true,
-				signupError: null,
-			}
-
-		case SIGNUP_ACTIONS.SUCCESS:
-			return {
-				...state,
-				signupLoading: false,
-			}
-
-		case SIGNUP_ACTIONS.FAILURE:
-			return {
-				...state,
-				signupLoading: false,
-				signupError: action.payload,
-			}
-
-		case LOGOUT_ACTION:
-			Cookies.remove("refreshToken");
-
-			return {
-				...state,
-				accessToken: null,
-				refreshToken: null,
+				// user: {},
+				username: ''
 			}
 
 		default:
@@ -90,76 +44,126 @@ export default function authReducer(state = initialState, action) {
 
 }
 
+// ACTION CREATORS
+export function registerAction(payload) {
+	return {
+		type: REGISTER,
+		payload: payload,
+	}
+}
+export function loginAction(payload) {
+	return {
+		type: LOGIN,
+		payload: payload,
+	}
+}
+
+export function logoutAction() {
+	return {
+		type: LOGOUT,
+	}
+}
+
 // OPERATIONS
-export const authLogin = ({ username, password }) => dispatch => {
-	dispatch(createAction(LOGIN_ACTIONS.REQUEST));
-
-	return axios.post(
-		`${AUTH_URL}/jwt/create/`,
-		{
-			username,
-			password,
-		}
-	)
+export const authenticateLogin = userData => dispatch => {
+	var formdata = new FormData();
+	formdata.append("email", userData.email);
+	formdata.append("password", userData.password);
+	console.log("authenticating login: ", userData)
+	axios
+		.post(
+			`${API_URL}/signin`,
+			formdata,
+			{
+				'Content-Type': 'application/x-www-form-urlencoded',
+				"Access-Control-Allow-Origin": "*",
+			},
+		)
 		.then(res => {
-			dispatch(createAction(LOGIN_ACTIONS.SUCCESS, res.data));
+			console.log(res.data)
+			dispatch(loginAction(res.data));
 		})
 		.catch(err => {
-			displayError("Unable to log in.")(dispatch);
-			dispatch(createAction(LOGIN_ACTIONS.FAILURE, err));
+			alert("Failed to login")
+			// displayError("Unable to login")(dispatch);
+			// dispatch(fetchMeFailureAction());
 		});
 };
 
-export const refreshTokenLogin = () => (dispatch, getState) => {
-	dispatch(createAction(LOGIN_ACTIONS.REQUEST));
-	const refreshToken = getState().authReducer.refreshToken;
+export const register = userData => dispatch => {
+	var formdata = new FormData();
+	formdata.append("email", userData.email);
+	formdata.append("username", userData.username);
+	formdata.append("password", userData.password);
 
-	return axios.post(
-		`${AUTH_URL}/jwt/refresh/`,
-		{
-			refresh: refreshToken,
-		}
-	)
+	axios
+		.post(
+			`${API_URL}/signup`,
+			// `${API_URL}/register`,
+			formdata,
+		)
 		.then(res => {
-			dispatch(createAction(LOGIN_ACTIONS.SUCCESS, {
-				...res.data,
-				refresh: refreshToken,
-			}));
+			if (res.data == "User created") {
+				dispatch(registerAction(userData.username))
+			}
+			else {
+				if (res.data == "The email is already in use") {
+					alert("The email is already taken. Please try to sign in")
+				}
+				else {
+					alert("200")
+				}
+
+			}
 		})
 		.catch(err => {
-			displayError("Unable to log in.")(dispatch);
-			dispatch(createAction(LOGIN_ACTIONS.FAILURE, err));
+			alert("Failed to login")
+			// displayError("Unable to login")(dispatch);
+			// dispatch(fetchMeFailureAction());
 		});
 };
 
-export const signup = ({ email, username, password }) => dispatch => {
-	dispatch(createAction(SIGNUP_ACTIONS.REQUEST));
 
-	return axios.post(
-		`${AUTH_URL}/users/`,
-		{
-			email,
-			username,
-			password,
-		}
-	)
-		.then(res => {
-			dispatch(createAction(SIGNUP_ACTIONS.SUCCESS, res.data));
-			authLogin({ username, password })(dispatch);
-		})
-		.catch(err => {
-			displayError("Unable to sign up.")(dispatch);
-			dispatch(createAction(SIGNUP_ACTIONS.FAILURE, err));
-		});
+export const logout = () => (dispatch, getState) => {
+	// No endpoints for logout
+	dispatch(logoutAction());
+	// axios
+	//     .delete(
+	//         `${API_URL}/oauth/revoke`,
+	//         getTokenConfig(getState)
+	//     )
+	//     .then(() => {
+	//         dispatch(logoutAction());
+	//     })
+	//     .catch(err => {
+	//         displayError("Unable to logout")(dispatch);
+	//     });
 };
 
-export const logout = () => dispatch => {
-	dispatch(createAction(LOGOUT_ACTION));
-};
+// export const refreshTokenLogin = () => (dispatch, getState) => {
+//     var formdata = new FormData();
+//     formdata.append("refresh_token", getState().authReducer.refresh_token);
+//     formdata.append("grant_type", "refresh_token");
 
-// SELECTORS
-export const selectRefreshToken = state => state.authReducer.refreshToken;
-export const selectAccessToken = state => state.authReducer.accessToken;
+//     axios
+//         .post(
+//             `${API_URL}/oauth/token`,
+//             formdata,
+//             {
+//                 headers: {
+//                     'Authorization': `Basic ${btoa('my-client:my-secret')}`
+//                 }
+//             },
+//         )
+//         .then(res => {
+//             fetchMe(res.data.access_token)(dispatch);
+//             dispatch(loginAction(res.data));
+//         })
+//         .catch(err => {
+//             displayError("Unable to login")(dispatch);
+//             dispatch(fetchMeFailureAction());
+//         });
+// };
 
-export const selectLoginLoading = state => state.authReducer.loginLoading;
-export const selectLoginError = state => state.authReducer.loginError;
+// SELECTOR
+export const selectUsername = state => state.authReducer.username;

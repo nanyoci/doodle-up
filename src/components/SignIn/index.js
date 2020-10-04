@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import useSound from 'use-sound';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { FirebaseContext } from '../Firebase';
+import { authenticateLogin } from './../../redux/ducks/auth'
 
 import './index.css';
 
-import { FirebaseContext } from '../Firebase';
 import Page from '../Page';
 import buttonClickSound from '../../assets/soundFX/buttonClick.mp3';
 
-const SignInPage = () => (
-  <FirebaseContext.Consumer>
-    {firebase => <SignInForm firebase={firebase} />}
-  </FirebaseContext.Consumer>
-);
+// const SignInPage = () => (
+// <FirebaseContext.Consumer>
+//   {firebase => <SignInForm firebase={firebase} />}
+// </FirebaseContext.Consumer>
+// );
 
-function SignInForm(props) {
+function SignInPage({ authenticateLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -27,21 +30,22 @@ function SignInForm(props) {
   const onSubmit = event => {
     event.preventDefault();
     playMouseClickSound()
-    console.log(email, 'credentials');
-    event.preventDefault();
-    props.firebase
-      .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        alert("Account successfully logged in.");
-        // this.props.history.push('/components/signup');
-      })
-      // .then(authUser => {
-      //   this.setState({ ...INITIAL_STATE });
-      // })
-      .then(response => console.log(response))
-      .catch(error => {
-        setError(error);
-      });
+    // console.log(email, 'credentials');
+    authenticateLogin({ email, password })
+    console.log("here")
+    // props.firebase
+    //   .doSignInWithEmailAndPassword(email, password)
+    //   .then(res => {
+    //     alert("Account successfully logged in.");
+    //     // this.props.history.push('/components/signup');
+    //   })
+    //   // .then(authUser => {
+    //   //   this.setState({ ...INITIAL_STATE });
+    //   // })
+    //   .then(response => console.log(response))
+    //   .catch(error => {
+    //     setError(error);
+    //   });
 
   }
 
@@ -91,5 +95,9 @@ function SignInForm(props) {
   );
 
 }
-export default SignInPage;
-export { SignInPage, SignInForm };
+
+const dispatchers = {
+  authenticateLogin,
+};
+
+export default connect(() => ({}), dispatchers)(SignInPage);

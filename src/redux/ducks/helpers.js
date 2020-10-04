@@ -17,19 +17,19 @@ export const METHODS = {
 
 export function getActionTypes(actionName) {
     const actionNameUpper = actionName.toUpperCase()
-	
+
     return {
         REQUEST: `${actionNameUpper}_${STATUSES.REQUEST}`,
-		SUCCESS: `${actionNameUpper}_${STATUSES.SUCCESS}`,
-		FAILURE: `${actionNameUpper}_${STATUSES.FAILURE}`,
+        SUCCESS: `${actionNameUpper}_${STATUSES.SUCCESS}`,
+        FAILURE: `${actionNameUpper}_${STATUSES.FAILURE}`,
     }
 };
 
 export function createAction(type, payload = null) {
-	return {
-		type,
-		payload,
-	}
+    return {
+        type,
+        payload,
+    }
 };
 
 export function createApiAction(entityName, status, method, payload) {
@@ -40,7 +40,7 @@ export function createApiAction(entityName, status, method, payload) {
 }
 
 // REDUCER
-export function createApiReducer(entityName, id="id") {
+export function createApiReducer(entityName, id = "id") {
     const initialState = {
         loading: {
             [METHODS.CREATE]: false,
@@ -49,13 +49,13 @@ export function createApiReducer(entityName, id="id") {
             [METHODS.DELETE]: false,
             [METHODS.LIST]: true,
         },
-		error: {
-			[METHODS.CREATE]: null,
+        error: {
+            [METHODS.CREATE]: null,
             [METHODS.RETRIEVE]: null,
             [METHODS.UPDATE]: null,
             [METHODS.DELETE]: null,
             [METHODS.LIST]: null,
-		},
+        },
         items: [],
         item: null,
         itemId: null,
@@ -111,7 +111,7 @@ export function createApiReducer(entityName, id="id") {
                             },
                             item: action.payload,
                         }
-                        
+
                     case METHODS.UPDATE:
                         return {
                             ...state,
@@ -150,7 +150,7 @@ export function createApiReducer(entityName, id="id") {
                     default:
                         return state;
                 }
-            
+
             case STATUSES.FAILURE:
                 return {
                     ...state,

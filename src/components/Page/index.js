@@ -19,7 +19,7 @@ class Page extends React.Component {
 
 	toggleIsPlaying = () => {
 		this.setState((state) => {
-			console.log("state", state.isPlaying)
+			// console.log("state", state.isPlaying)
 			return { isPlaying: !state.isPlaying }
 		});
 
@@ -59,7 +59,7 @@ class Page extends React.Component {
 			buttons
 		} = this.props;
 
-		console.log(this.isPlaying)
+		// console.log(this.isPlaying)
 		return (
 			<div className="main-content">
 
