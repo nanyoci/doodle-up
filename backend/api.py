@@ -56,7 +56,12 @@ def sign_up():
 def sign_in():
     email = request.form['email']
     password = request.form['password']
-    return helper.sign_in_with_email_and_password(email, password)
+    try: 
+        user_json = helper.sign_in_with_email_and_password(email, password)
+        return user_json["displayName"], 200
+    except:
+        return "Account does not exist or wrong credentials.", 400
+
 
 # resets password by sending an email with a link
 # e.g. /resetpassword?email=tsr@gmail.com
