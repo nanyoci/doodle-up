@@ -2,7 +2,7 @@ import pyrebase
 from temp import stories
 import uuid
 import os
-import json 
+import json
 import requests
 from requests.exceptions import HTTPError
 
@@ -44,8 +44,8 @@ class FirebaseHelper:
         print(upload_to+filename)
         return self.storage.child(upload_to+filename).get_url(None)
 
-    def get_file(self, filepath):
-        return
+    def get_url(self, filepath):
+        return self.storage.child(filepath).get_url(None)
 
     # def get_all_users(self):
     #     return self.db.child('Users').get()
@@ -57,19 +57,23 @@ class FirebaseHelper:
         self.db.child('progress').push(story)
         try:
             self.auth.create_user_with_email_and_password(email, password)
-            idToken = self.sign_in_with_email_and_password(email, password)['idToken']
+            idToken = self.sign_in_with_email_and_password(email, password)[
+                'idToken']
             self.set_display_name(username, idToken)
             return "User created.", 200
         except:
             return "The email is already in use", 400
+
     def set_display_name(self, displayName, idToken):
-        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key={0}".format(self.auth.api_key)
+        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key={0}".format(
+            self.auth.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"idToken": idToken, "displayName": displayName})
         try:
-            request_object = requests.post(request_ref, headers=headers, data=data)
+            request_object = requests.post(
+                request_ref, headers=headers, data=data)
             return request_object.json()
-        except: 
+        except:
             try:
                 request_object.raise_for_status()
             except HTTPError as e:
@@ -179,7 +183,6 @@ class FirebaseHelper:
     #         self.db.child('progress').update(progress)
 
     def create_content(self, content):
-        storyid = content['id']
         self.db.child('content').push(content)
 
     def get_content(self, storyid):
@@ -190,6 +193,21 @@ class FirebaseHelper:
                 return v
         except:
             return None
+
+    def get_all_content(self):
+        result = []
+        log = self.db.child('content').get()
+        try:
+            for v in log.val().values():
+                story = {
+                    "cover_image": v["cover_image"],
+                    "story_title": v["story_title"],
+                    "id": v["id"]
+                }
+                result.append(story)
+            return result
+        except:
+            return []
 
 
 # pyrebase has some compatability issues with url, this is a workaround

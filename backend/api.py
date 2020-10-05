@@ -40,7 +40,7 @@ def upload_file():
 # USER ENDPOINTS
 # creates user in firebase authentication
 # add username as displayName in userInfo
-# creates entry in realtime database 
+# creates entry in realtime database
 # requires form
 @app.route('/signup', methods=['POST'])
 def sign_up():
@@ -56,7 +56,7 @@ def sign_up():
 def sign_in():
     email = request.form['email']
     password = request.form['password']
-    try: 
+    try:
         user_json = helper.sign_in_with_email_and_password(email, password)
         return user_json["displayName"], 200
     except:
@@ -142,6 +142,15 @@ def create_content():
     content = request.get_json()
     helper.create_content(content)
     return "Content created.", 200
+
+
+@app.route('/content/all', methods=['GET'])
+def get_all():
+    contents = helper.get_all_content()
+    if contents:
+        return {"results": contents}
+    else:
+        return "Error", 400
 
 
 if __name__ == "__main__":
