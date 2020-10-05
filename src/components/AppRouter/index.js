@@ -21,16 +21,11 @@ import { selectUsername } from './../../redux/ducks/auth';
 
 /** This component handles the routing for the app */
 class AppRouter extends Component {
-    componentDidMount() {
-        const {
-            username
-            // refresh_token,
-            // refreshTokenLogin
-        } = this.props;
-
-        // if (refresh_token)
-        //     refreshTokenLogin(refresh_token);
-    }
+    // componentDidMount() {
+    //     const {
+    //         username
+    //     } = this.props;
+    // }
 
     render() {
         const {
@@ -38,14 +33,13 @@ class AppRouter extends Component {
         } = this.props;
 
         let routes = [
-            <Route path="/guest" exact component={GuestMenuPage} />,
             <Route path="/" exact component={MenuPage} />,
-            <Route path="/stories" exact component={StorySelection} />,
-            <Route path="/my-story-books" component={MyStoryBooksPage} />,
-            <Route path="/drawing" component={Draw} />,
-            <Route path="/guessing" component={Guessing} />,
-            <Route path="/story-page" component={StoryPage} />,
-            <Route path="/forgetpassword" component={ForgetPasswordPage} />,
+            <Route path="/:username/stories" exact component={StorySelection} />,
+            <Route path="/:username/my-story-books" component={MyStoryBooksPage} />,
+            <Route path="/:username/drawing" component={Draw} />,
+            <Route path="/:username/guessing" component={Guessing} />,
+            <Route path="/:username/story-page" component={StoryPage} />,
+            <Route path="/:username/forgetpassword" component={ForgetPasswordPage} />,
             <Redirect key="SignInRedirect" from="/signin" exact to="/" />,
             <Redirect key="SignUpRedirect" from="/signup" exact to="/" />
         ];
@@ -54,7 +48,8 @@ class AppRouter extends Component {
             routes = [
                 <Route path="/signin" component={SignInPage} />,
                 <Route path="/signup" component={SignUpPage} />,
-                <Redirect key="LoginRedirect" from="/" exact to="/signin" />
+                <Route path="/guest" exact component={GuestMenuPage} />,
+                <Redirect key="LoginRedirect" from="/" exact to="/guest" />,
             ]
         }
 

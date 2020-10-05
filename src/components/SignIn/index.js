@@ -23,7 +23,6 @@ function SignInPage({ authenticateLogin, error }) {
     e.preventDefault();
     playMouseClickSound()
     authenticateLogin({ email, password })
-    console.log("OnSubmit")
   }
 
   return (
@@ -65,16 +64,9 @@ function SignInPage({ authenticateLogin, error }) {
               <button type="submit" className="btn btn-primary">Sign In</button>
             </div>
           </div>
-          {/* <input
-    name="username"
-    value={username}
-        onChange={this.onChange}
-        type="text"
-        placeholder="Username"
-      /> */}
         </form>
         <br />
-        <Link className="auth-link" to="/signup">Create an account? Sign up</Link>
+        <Link className="auth-link" to="signup">Create an account? Sign up</Link>
       </div>
     </Page>
   );
