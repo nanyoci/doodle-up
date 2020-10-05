@@ -2,7 +2,6 @@ from flask import Flask, flash, redirect, url_for
 from flask_cors import CORS
 import flask
 from flask import jsonify, request, Response
-from temp import stories
 from db import FirebaseHelper
 from werkzeug.utils import secure_filename
 import os
@@ -47,7 +46,14 @@ def sign_up():
     email = request.form['email']
     password = request.form['password']
     username = request.form['username']
-    return helper.create_new_user(email, password, username)
+    success = helper.create_new_user(email, password, username)
+    if success:
+        # initialize stories for user
+        results = helper.get_all_content()
+
+        for result in results:
+            helper.start_new_story(username, result["id"])
+    return success
 
 # able to return a string:token that expires in 60minutes - potentially good for prototyping secure access
 # returns username
@@ -145,7 +151,7 @@ def create_content():
 
 
 @app.route('/content/all', methods=['GET'])
-def get_all():
+def get_all_content():
     contents = helper.get_all_content()
     if contents:
         return {"results": contents}
