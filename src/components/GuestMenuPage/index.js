@@ -8,8 +8,8 @@ export default function GuestMenuPage() {
 		<Page isMain={true}>
 			<h1>Welcome to DoodleUp!</h1>
 			<div className="menu-buttons">
-			<Link to="/log-in" className="btn btn-primary">Log In</Link>
-				<Link to="/sign-up" className="btn btn-light">Sign Up</Link>
+				<Link to="/signin" className="btn btn-primary">Sign In</Link>
+				<Link to="/signup" className="btn btn-light">Sign Up</Link>
 			</div>
 		</Page>
 	)
