@@ -11,6 +11,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const ERROR = "ERROR";
 export const LOADING = "LOADING";
+export const INIT = "INIT";
 
 const initialState = {
 	error: "",
@@ -49,6 +50,12 @@ export default function (state = initialState, action) {
 				...state,
 				isLoading: true
 			}
+		case INIT:
+			return {
+				...state,
+				error: ""
+			}
+
 		default:
 			return state;
 	}
@@ -82,13 +89,22 @@ export function errorAction(payload) {
 	}
 }
 
-function authLoading() {
+export function initAuth() {
+	return {
+		type: INIT,
+	}
+}
+export function authLoading() {
 	return {
 		type: LOADING,
 	}
 }
 
 // OPERATIONS
+export const authInit = () => dispatch => {
+	dispatch(initAuth())
+}
+
 export const authenticateLogin = userData => dispatch => {
 	dispatch(authLoading())
 

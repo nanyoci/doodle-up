@@ -90,9 +90,9 @@ class Page extends React.Component {
 							<div>
 								<img className="loader" src={loader} alt="Loader" />
 							</div> :
-							children
+							<></>
 					}
-
+					{children}
 				</div>
 				<div className="control-buttons">
 					{
