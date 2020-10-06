@@ -95,7 +95,7 @@ export const listStories = () => (dispatch, getState) => {
 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.LIST));
 
 	return axios.get(
-		`${API_URL}/${ENTITY_NAME}/`,
+		`${API_URL}/content/all`,
 		getTokenConfig(getState),
 	)
 		.then(res => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { selectUsername } from './../../redux/ducks/auth';
+import { selectAuthUser } from './../../redux/ducks/auth';
 
 import "./index.css";
 import Page from '../Page';
@@ -22,7 +22,7 @@ function MenuPage({ username }) {
 }
 
 const mapStateToProps = state => ({
-	username: selectUsername(state),
+	username: selectAuthUser(state),
 });
 
 export default connect(mapStateToProps,)(MenuPage);

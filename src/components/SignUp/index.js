@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useSound from 'use-sound';
 import { connect } from 'react-redux';
-import { authenticateSignUp, selectError } from './../../redux/ducks/auth';
+import { authenticateSignUp, selectAuthError } from './../../redux/ducks/auth';
 import { Link } from 'react-router-dom';
 
 import './index.css';
@@ -122,7 +122,7 @@ function SignUpPage({ authenticateSignUp, error }) {
 }
 
 const mapStateToProps = state => ({
-  error: selectError(state),
+  error: selectAuthError(state),
 });
 
 const dispatchers = {
