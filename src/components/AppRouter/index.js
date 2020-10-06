@@ -16,7 +16,7 @@ import ForgetPasswordPage from '../ForgetPassword';
 // import ChangePasswordPage from '../ChangePassword';
 // import SignOutButton from '../SignOut';
 
-import { selectUsername } from './../../redux/ducks/auth';
+import { selectAuthUser } from './../../redux/ducks/auth';
 
 
 /** This component handles the routing for the app */
@@ -89,7 +89,7 @@ const mapStateToProps = state => ({
     // userLoading: selectUserLoading(state),
     // userFailed: selectUserFailed(state),
     // user: selectUser(state),
-    username: selectUsername(state),
+    username: selectAuthUser(state),
 });
 
 const dispatchers = {

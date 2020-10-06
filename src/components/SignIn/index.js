@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useSound from 'use-sound';
 import { connect } from 'react-redux';
-import { authenticateLogin, selectError } from './../../redux/ducks/auth';
+import { authenticateLogin, selectAuthError } from './../../redux/ducks/auth';
 import { Link } from 'react-router-dom';
 
 import './index.css';
@@ -32,7 +32,7 @@ function SignInPage({ authenticateLogin, error }) {
         <form className="auth-form" onSubmit={onSubmit}>
           <div className="fill-in-form">
             <div className="fill-in">
-              <h2 className="fill-name">Username</h2>
+              <h2 className="fill-name">Email</h2>
               <input
                 className="input"
                 name="email"
@@ -74,7 +74,7 @@ function SignInPage({ authenticateLogin, error }) {
 }
 
 const mapStateToProps = state => ({
-  error: selectError(state),
+  error: selectAuthError(state),
 });
 
 const dispatchers = {
