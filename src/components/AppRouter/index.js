@@ -34,12 +34,12 @@ class AppRouter extends Component {
 
         let routes = [
             <Route path="/" exact component={MenuPage} />,
-            <Route path="/:username/stories" exact component={StorySelection} />,
-            <Route path="/:username/my-story-books" component={MyStoryBooksPage} />,
-            <Route path="/:username/drawing" component={Draw} />,
-            <Route path="/:username/guessing" component={Guessing} />,
-            <Route path="/:username/story-page" component={StoryPage} />,
-            <Route path="/:username/forgetpassword" component={ForgetPasswordPage} />,
+            <Route path="/stories" exact component={StorySelection} />,
+            <Route path="/my-story-books" component={MyStoryBooksPage} />,
+            <Route path="/drawing" component={Draw} />,
+            <Route path="/guessing" component={Guessing} />,
+            <Route path="/story-page" component={StoryPage} />,
+            <Route path="/forgetpassword" component={ForgetPasswordPage} />,
             <Redirect key="SignInRedirect" from="/signin" exact to="/" />,
             <Redirect key="SignUpRedirect" from="/signup" exact to="/" />
         ];
@@ -49,7 +49,7 @@ class AppRouter extends Component {
                 <Route path="/signin" component={SignInPage} />,
                 <Route path="/signup" component={SignUpPage} />,
                 <Route path="/guest" exact component={GuestMenuPage} />,
-                <Redirect key="LoginRedirect" from="/" exact to="/guest" />,
+                <Redirect key="LoginRedirect" from="/" to="/guest" />,
             ]
         }
 
