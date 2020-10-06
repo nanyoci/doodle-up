@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import useSound from 'use-sound';
 import { connect } from 'react-redux';
-import { authenticateLogin, selectAuthError } from './../../redux/ducks/auth';
 import { Link } from 'react-router-dom';
+import { authenticateLogin, selectAuthError } from './../../redux/ducks/auth';
+
 
 import './index.css';
 

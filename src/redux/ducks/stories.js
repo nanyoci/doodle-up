@@ -96,10 +96,11 @@ export const listStories = () => (dispatch, getState) => {
 
 	return axios.get(
 		`${API_URL}/content/all`,
-		getTokenConfig(getState),
+		// getTokenConfig(getState),
 	)
 		.then(res => {
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, res.data));
+			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, res.data.results));
+			console.log(res.data.results)
 		})
 		.catch(err => {
 			displayErrorMsgOrUnauth(err, dispatch, "Unable to fetch stories.");
