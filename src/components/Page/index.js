@@ -10,6 +10,7 @@ import book from '../../assets/book.svg';
 import paint from '../../assets/paint.svg';
 import splatPink from '../../assets/splat-pink.png';
 import splatBlue from '../../assets/splat-blue.png';
+import loader from '../../assets/loader.gif';
 import './index.css';
 
 class Page extends React.Component {
@@ -61,8 +62,10 @@ class Page extends React.Component {
 			isMain,
 			children,
 			buttons,
-			isNotLoggedIn
+			isNotLoggedIn,
+			isLoading
 		} = this.props;
+
 
 		// console.log(this.isPlaying)
 		return (
@@ -80,7 +83,16 @@ class Page extends React.Component {
 							</>
 							: <img className="logo-corner" src={doodleUp} alt="DoodleUp" />
 					}
-					{children}
+
+					{
+						isLoading
+							?
+							<div>
+								<img className="loader" src={loader} alt="Loader" />
+							</div> :
+							children
+					}
+
 				</div>
 				<div className="control-buttons">
 					{
@@ -93,6 +105,7 @@ class Page extends React.Component {
 					{buttons}
 				</div>
 			</div>
+
 		)
 	}
 }

@@ -7,16 +7,16 @@ import rabbit from '../../assets/rabbit.png';
 import dinosaur from '../../assets/dinosaur.png';
 import car from '../../assets/car.png';
 import Page from '../Page';
-import { selectStories, listStories } from '../../redux/ducks/stories';
+import { selectStories, listStories, selectStoriesLoading } from '../../redux/ducks/stories';
 
-function StorySelection({ stories, listStories }) {
+function StorySelection({ stories, listStories, isLoading }) {
 	useEffect(() => {
 		listStories()
 	}, []);
 
 	return (
 
-		<Page>
+		<Page isLoading={isLoading}>
 			<h1>My Story Books</h1>
 			<div className="story-boxes">
 				{
@@ -38,9 +38,11 @@ function StorySelection({ stories, listStories }) {
 
 StorySelection.propTypes = {
 	stories: PropTypes.array.isRequired,
+	isLoading: PropTypes.bool
 };
 const mapStateToProps = state => ({
 	stories: selectStories(state),
+	isLoading: selectStoriesLoading(state)
 });
 
 const dispatchers = {
