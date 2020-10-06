@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useSound from 'use-sound';
 import { connect } from 'react-redux';
-import { authenticateLogin, selectAuthError } from './../../redux/ducks/auth';
 import { Link } from 'react-router-dom';
+import { authenticateLogin, selectAuthError, selectAuthLoading, authInit } from './../../redux/ducks/auth';
+
 
 import './index.css';
 
 import Page from '../Page';
 import buttonClickSound from '../../assets/soundFX/buttonClick.mp3';
 
-function SignInPage({ authenticateLogin, error }) {
+function SignInPage({ authenticateLogin, error, isLoading, authInit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    authInit()
+  }, []);
 
   const [playMouseClickSound] = useSound(
     buttonClickSound,
@@ -26,7 +31,7 @@ function SignInPage({ authenticateLogin, error }) {
   }
 
   return (
-    <Page isMain={true} isNotLoggedIn={true}>
+    <Page isMain={true} isNotLoggedIn={true} isLoading={isLoading} >
       <div className="auth-container">
         <h1>Sign In</h1>
         <form className="auth-form" onSubmit={onSubmit}>
@@ -75,10 +80,12 @@ function SignInPage({ authenticateLogin, error }) {
 
 const mapStateToProps = state => ({
   error: selectAuthError(state),
+  isLoading: selectAuthLoading(state),
 });
 
 const dispatchers = {
   authenticateLogin,
+  authInit
 };
 
 export default connect(mapStateToProps, dispatchers)(SignInPage);

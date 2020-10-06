@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useSound from 'use-sound';
 import { connect } from 'react-redux';
-import { authenticateSignUp, selectAuthError } from './../../redux/ducks/auth';
+import { authenticateSignUp, selectAuthError, authInit } from './../../redux/ducks/auth';
 import { Link } from 'react-router-dom';
 
 import './index.css';
@@ -13,11 +13,15 @@ import paint from '../../assets/paint.svg';
 
 
 
-function SignUpPage({ authenticateSignUp, error }) {
+function SignUpPage({ authenticateSignUp, error, authInit }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
+
+  useEffect(() => {
+    authInit()
+  }, [])
 
   const [playMouseClickSound] = useSound(
     buttonClickSound,
@@ -127,6 +131,7 @@ const mapStateToProps = state => ({
 
 const dispatchers = {
   authenticateSignUp,
+  authInit
 };
 
 export default connect(mapStateToProps, dispatchers)(SignUpPage);

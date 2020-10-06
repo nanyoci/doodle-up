@@ -36,14 +36,20 @@ export const createStory = ({ title, description, frequency, color }) => (dispat
 	;
 };
 
-export const retrieveStory = storyId => (dispatch, getState) => {
+export const retrieveStory = (username, storyId) => (dispatch, getState) => {
 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.RETRIEVE, storyId));
 
 	return axios.get(
-		`${API_URL}/${ENTITY_NAME}/${storyId}/`,
-		getTokenConfig(getState)
+		`${API_URL}/${ENTITY_NAME}/${storyId}/`, {
+		params: {
+			username: username,
+			storyid: storyId
+		}
+	}
+		// getTokenConfig(getState)
 	)
 		.then(res => {
+			console.log(res.data)
 			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.RETRIEVE, res.data));
 		})
 		.catch(err => {
@@ -96,10 +102,11 @@ export const listStories = () => (dispatch, getState) => {
 
 	return axios.get(
 		`${API_URL}/content/all`,
-		getTokenConfig(getState),
+		// getTokenConfig(getState),
 	)
 		.then(res => {
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, res.data));
+			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, res.data.results));
+			console.log(res.data.results)
 		})
 		.catch(err => {
 			displayErrorMsgOrUnauth(err, dispatch, "Unable to fetch stories.");

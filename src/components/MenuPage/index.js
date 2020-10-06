@@ -14,8 +14,8 @@ function MenuPage({ username }) {
 		<Page isMain={true}>
 			<h1>Hello {username}!</h1>
 			<div className="menu-buttons">
-				<Link to={`/${username}/stories`} className="btn btn-primary">Start</Link>
-				<Link to={`/${username}/my-story-books`} className="btn btn-light">My Story Books</Link>
+				<Link to='/stories' className="btn btn-primary">Start</Link>
+				<Link to='/my-story-books' className="btn btn-light">My Story Books</Link>
 			</div>
 		</Page>
 	)
