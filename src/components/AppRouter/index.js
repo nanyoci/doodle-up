@@ -12,9 +12,6 @@ import StoryPage from '../StoryPage';
 import GuestMenuPage from '../GuestMenuPage';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
-import ForgetPasswordPage from '../ForgetPassword';
-// import ChangePasswordPage from '../ChangePassword';
-// import SignOutButton from '../SignOut';
 
 import { selectAuthUser } from './../../redux/ducks/auth';
 

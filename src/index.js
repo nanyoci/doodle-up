@@ -5,7 +5,6 @@ import './index.css';
 import App from './components/App';
 import AppWithBgMusic from './components/AppWithBgMusic'
 import * as serviceWorker from './serviceWorker';
-import Firebase, { FirebaseContext } from './components/Firebase';
 
 ReactDOM.render(
 	<React.StrictMode>
