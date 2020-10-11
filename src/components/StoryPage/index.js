@@ -46,7 +46,7 @@ export function StoryPage(props) {
 				left,
 			} = drawings[i];
 			console.log(drawings[i]);
-			let stageProgress = progress.stages.find(stage => stage.stage_id === `${stage_id}`);//stage.stage_id === stage_id);
+			let stageProgress = progress.stages.find(stage => stage.stage_id === stage_id);
 			console.log(progress.stages);
 			if (stageProgress && stageProgress.image_url && stageProgress.image_url !== "") {
 				drawingsWithUrls.push(
