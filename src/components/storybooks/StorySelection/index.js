@@ -21,20 +21,12 @@ function StorySelection({ stories, listStories, isLoading }) {
 					!isLoading && (
 						stories.length !== 0
 							? stories.map(story =>
-								<>
-									<div className="story-box">
-										<Link to={`/stories/${story.id}`} className="story-box-link">
-											<img src={`${story.cover_image}`} alt="Dinosaur story" />
-										</Link>
-										<h2>{story.story_title}</h2>
-									</div>
-									<div className="story-box">
-										<Link to={`/stories/${story.id}`} className="story-box-link">
-											<img src={`${story.cover_image}`} alt="Dinosaur story" />
-										</Link>
-										<h2>{story.story_title}</h2>
-									</div>
-								</>
+								<div className="story-box">
+									<Link to={`/stories/${story.id}`} className="story-box-link">
+										<img src={`${story.cover_image}`} alt="Dinosaur story" />
+									</Link>
+									<h2>{story.story_title}</h2>
+								</div>
 							)
 							: <p>No stories available.</p>
 					)
