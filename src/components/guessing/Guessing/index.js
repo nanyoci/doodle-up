@@ -9,7 +9,7 @@ import confettiSound from '../../../assets/soundFX/confetti.mp3';
 import tryAgainSound from '../../../assets/soundFX/tryAgain.mp3';
 import './index.css';
 
-
+// TODO: Fix button size on ipad
 function Guessing(props) {
     const {
         stage: {

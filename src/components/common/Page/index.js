@@ -35,12 +35,14 @@ class Page extends React.Component {
 		const audio = document.querySelector('audio')
 		audio.volume = 0.2
 		const playing = localStorage.getItem('IsPlaying')
+
+		// TODO: Fix ipad error for audio play
 		if (playing === "false") {
 			audio.pause()
 			this.toggleIsPlaying()
 		}
 		else {
-			// audio.play()
+			audio.play()
 		}
 	}
 
