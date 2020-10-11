@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { API_URL } from '../../utils/constants';
-import { STATUSES, METHODS, createApiAction, createApiReducer, getTokenConfig, displayErrorMsgOrUnauth } from './helpers';
+import { STATUSES, METHODS, createApiAction, createApiReducer, displayErrorMsgOrUnauth } from './helpers';
 
 export const ENTITY_NAME = 'stories';
 

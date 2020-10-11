@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css'
 import './index.css';
-import AppWithBgMusic from './components/AppWithBgMusic'
+import AppWithBgMusic from './components/common/AppWithBgMusic'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

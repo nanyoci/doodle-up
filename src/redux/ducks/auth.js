@@ -2,8 +2,6 @@ import axios from 'axios';
 // import Cookies from 'js-cookie';
 
 import { API_URL } from '../../utils/constants';
-import { getActionTypes, createAction } from './helpers';
-import { displayError } from './errors';
 
 // ACTION TYPES
 export const REGISTER = 'REGISTER';
@@ -128,7 +126,7 @@ export const authenticateLogin = userData => dispatch => {
 };
 
 export const authenticateSignUp = userData => dispatch => {
-	if (userData.passwordOne != userData.passwordTwo) {
+	if (userData.passwordOne !== userData.passwordTwo) {
 		dispatch(errorAction("Passwords do not match"))
 		return
 	}
@@ -146,11 +144,11 @@ export const authenticateSignUp = userData => dispatch => {
 			formdata,
 		)
 		.then(res => {
-			if (res.data == "User created.") {
+			if (res.data === "User created.") {
 				dispatch(registerAction(userData.username))
 			}
 			// else {
-			// 	if (res.data == "The email is already in use") {
+			// 	if (res.data === "The email is already in use") {
 			// 	}
 			// }
 		})
@@ -213,7 +211,7 @@ export const selectAuthLoading = state => state.authReducer.isLoading;
 // // OPERATIONS
 
 // export const authenticateSignUp = userData => dispatch => {
-// 	if (userData.passwordOne != userData.passwordTwo) {
+// 	if (userData.passwordOne !== userData.passwordTwo) {
 // 		dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.UPDATE, "Passwords do not match"));
 // 		return
 // 	}
@@ -231,7 +229,7 @@ export const selectAuthLoading = state => state.authReducer.isLoading;
 // 		// getTokenConfig(getState),
 // 	)
 // 		.then(res => {
-// 			if (res.data == "User created.") {
+// 			if (res.data === "User created.") {
 // 				dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.UPDATE, res.data));
 // 				localStorage.setItem("username", res.data);
 // 			}

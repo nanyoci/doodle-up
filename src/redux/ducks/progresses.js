@@ -9,7 +9,7 @@ export const ENTITY_NAME = 'progresses';
 const progressesReducer = createApiReducer(ENTITY_NAME);
 export default progressesReducer;
 
-function dataURIToBlob(dataURI, ) {
+function dataURIToFile(dataURI, ) {
     var byteString = atob(dataURI.split(',')[1]);
     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
@@ -19,7 +19,8 @@ function dataURIToBlob(dataURI, ) {
         ia[i] = byteString.charCodeAt(i);
     
     var blob = new Blob([ab], { type: mimeString });
-    return blob;
+    var file = new File([blob], "drawing");
+    return file;
 
 }
 
@@ -34,7 +35,7 @@ export const createProgress = (storyId, stageId, drawing=null) => (dispatch, get
     formdata.append("completed", true);
 
     if (drawing !== null) {
-        formdata.append("new_image", dataURIToBlob(drawing));
+        formdata.append("new_image", dataURIToFile(drawing));
     }
 
     return axios.post(
