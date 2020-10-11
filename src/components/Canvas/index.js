@@ -13,6 +13,10 @@ function Canvas(props, ref) {
     const handleResize = () => {
       const canvas = canvasRef.current;
       ref.current = canvas;
+
+      if (!canvas)
+        return;
+
       const context = canvas.getContext("2d")
       const savedDrawing = canvasRef.current.toDataURL('img/svg')
       canvas.width = canvas.offsetHeight * 5;

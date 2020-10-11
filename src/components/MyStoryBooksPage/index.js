@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import rabbit from '../../assets/rabbit.png';
-import dinosaur from '../../assets/dinosaur.png';
-import car from '../../assets/car.png';
 import Page from '../Page';
 import { selectStories, listStories, selectStoriesLoading } from '../../redux/ducks/stories';
+import './index.css';
 
-function MyStoryBooksPage({ stories, listStories, isLoading }) {
-
+function StorySelection({ stories, listStories, isLoading }) {
 	useEffect(() => {
 		listStories()
 	}, []);
@@ -24,14 +21,22 @@ function MyStoryBooksPage({ stories, listStories, isLoading }) {
 					!isLoading && (
 						stories.length !== 0
 							? stories.map(story =>
-								<div>
-									<a className="story-box" href="/">
-										<img src={`${story.cover_image}`} alt="Dinosaur story" />
-									</a>
-									<p>{story.story_title}</p>
-								</div>
+								<>
+									<div className="story-box">
+										<Link to={`/stories/${story.id}`} className="story-box-link">
+											<img src={`${story.cover_image}`} alt="Dinosaur story" />
+										</Link>
+										<h2>{story.story_title}</h2>
+									</div>
+									<div className="story-box">
+										<Link to={`/stories/${story.id}`} className="story-box-link">
+											<img src={`${story.cover_image}`} alt="Dinosaur story" />
+										</Link>
+										<h2>{story.story_title}</h2>
+									</div>
+								</>
 							)
-							: <p>No Stories completed.</p>
+							: <p>No stories available.</p>
 					)
 				}
 			</div>
@@ -39,10 +44,9 @@ function MyStoryBooksPage({ stories, listStories, isLoading }) {
 	)
 }
 
-
-MyStoryBooksPage.propTypes = {
+StorySelection.propTypes = {
 	stories: PropTypes.array.isRequired,
-	isLoading: PropTypes.bool,
+	isLoading: PropTypes.bool
 };
 const mapStateToProps = state => ({
 	stories: selectStories(state),
@@ -53,4 +57,5 @@ const dispatchers = {
 	listStories,
 };
 
-export default connect(mapStateToProps, dispatchers)(MyStoryBooksPage);
+export default connect(mapStateToProps, dispatchers)(StorySelection);
+

@@ -6,8 +6,9 @@ import Page from '../Page';
 import Guessing from '../Guessing';
 import Draw from '../Draw';
 import StoryPage from '../StoryPage';
+import StoryCompletionPage from '../StoryCompletionPage';
 import { retrieveStory, selectStory, selectStoryLoading } from '../../redux/ducks/stories';
-import { createStoryProgress } from '../../redux/ducks/storyProgresses';
+import { createProgress } from '../../redux/ducks/progresses';
 
 const MODES = {
 	GUESSING: "guessing",
@@ -15,10 +16,10 @@ const MODES = {
 	STORY: "storypage",
 }
 
-// TODO: Create for completed books
-function StoryManager({ story, storyLoading, match, retrieveStory, createStoryProgress }) {
+
+function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, createProgress }) {
 	const storyId = match.params.id;
-	const [currentStage, setCurrentStage] = useState(7);
+	const [currentStage, setCurrentStage] = useState(5);
 	
 	useEffect(() => {
 		retrieveStory(storyId);
@@ -26,20 +27,39 @@ function StoryManager({ story, storyLoading, match, retrieveStory, createStoryPr
 
 	if (storyLoading)
 		return <Page isLoading={true} />
+	
+	const goToNextStage = () => {
+		let nextStage = currentStage + 1;
+		
+		if (isReadOnly) {
+			while (nextStage < story.stages.length) {
+				if (story.stages[nextStage].type !== MODES.STORY)
+					nextStage++;
+				else
+					break;
+			}
+		}
+
+		setCurrentStage(nextStage);
+	}
 
 	const handleComplete = () => {
 		const stageId = story.stages[currentStage].stage_id;
-		createStoryProgress(storyId, stageId);
-		setCurrentStage(currentStage + 1);
+		createProgress(storyId, stageId);
+		goToNextStage();
 	}
 	
 	const handleCompleteDrawing = drawing => {
 		const stageId = story.stages[currentStage].stage_id;
-		createStoryProgress(storyId, stageId);
-		setCurrentStage(currentStage + 1);
+		createProgress(storyId, stageId, drawing);
+		goToNextStage();
 	}
 
 	const stage = story.stages[currentStage];
+
+	if (currentStage >= story.stages.length)
+		return <StoryCompletionPage story={story} />;
+
 	let mode = stage.type;
 
 	switch (mode) {
@@ -62,6 +82,7 @@ function StoryManager({ story, storyLoading, match, retrieveStory, createStoryPr
 		case MODES.STORY:
 			return (
 				<StoryPage
+					storyId={storyId}
 					stage={stage}
 					onComplete={handleComplete}
 				/>
@@ -83,7 +104,7 @@ const mapStateToProps = state => ({
 
 const dispatchers = {
 	retrieveStory,
-	createStoryProgress,
+	createProgress,
 };
 
 export default connect(mapStateToProps, dispatchers)(StoryManager);

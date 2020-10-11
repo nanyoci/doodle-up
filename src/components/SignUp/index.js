@@ -85,6 +85,7 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
                     type="password"
                     placeholder="Password"
                     autocomplete="new-password"
+                    minlength="6"
                   />
                 </div>
               </div>
@@ -101,6 +102,7 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
                     type="password"
                     placeholder="Confirm Password"
                     autocomplete="new-password"
+                    minlength="6"
                   />
                 </div>
               </div>

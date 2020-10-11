@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import useSound from 'use-sound';
-import drawingSample from '../../assets/drawing-sample.png';
 import audioImage from './../../assets/audio.svg';
 import Page from '../Page';
 import './index.css';
 import NextButton from '../NextButton';
+import { retrieveProgress, selectProgress, selectProgressLoading } from '../../redux/ducks/progresses';
 
 // TODO: Import drawings
-export default function StoryPage(props) {
+export function StoryPage(props) {
 	const {
+		storyId,
 		stage: {
 			audio,
 			description,
@@ -17,9 +20,53 @@ export default function StoryPage(props) {
 			drawings,
 		},
 		onComplete,
+		progress,
+		progressLoading,
+		retrieveProgress,
 	} = props;
 
+	useEffect(() => {
+		retrieveProgress(storyId);
+	}, []);
+
 	const [playNarration] = useSound(audio);
+
+	if (progressLoading)
+		return <Page isLoading={true} />;
+
+
+	let drawingsWithUrls = [];
+
+	if (drawings) {
+		for (let i = 0; i < drawings.length; i++) {
+			const {
+				stage_id,
+				width,
+				top,
+				left,
+			} = drawings[i];
+			console.log(drawings[i]);
+			let stageProgress = progress.stages.find(stage => stage.stage_id === `${stage_id}`);//stage.stage_id === stage_id);
+			console.log(progress.stages);
+			if (stageProgress && stageProgress.image_url && stageProgress.image_url !== "") {
+				drawingsWithUrls.push(
+					<img
+						key={stage_id}
+						src={stageProgress.image_url}
+						className="story-object"
+						style={{
+							width: `${width / 16}%`,
+							top: `${top / 9}%`,
+							left: `${left / 16}%`,
+						}}
+						alt="Child's drawing of the story object"
+					/>
+				)
+			}
+		}
+	}
+
+	console.log(drawingsWithUrls);
 
 	return (
 		<Page>
@@ -27,22 +74,7 @@ export default function StoryPage(props) {
 				<div className="story-scene-container">
 					<div className="story-scene">
 						<img src={image} className="story-bg" alt="Story background" />
-						{
-							drawings
-							&& drawings.map(drawing => (
-								<img
-									key={drawing.stage_id}
-									src={drawingSample}
-									className="story-object"
-									style={{
-										width: `${drawing.width / 16}%`,
-										top: `${drawing.top / 9}%`,
-										left: `${drawing.left / 16}%`,
-									}}
-									alt="Child's drawing of the story object"
-								/>
-							))
-						}
+						{drawingsWithUrls}
 					</div>
 				</div>
 				<img src={audioImage} className="audio-icon" alt="Play audio" onClick={playNarration} />
@@ -52,3 +84,18 @@ export default function StoryPage(props) {
 		</Page>
 	)
 }
+
+StoryPage.propTypes = {
+	progress: PropTypes.object,
+	progressLoading: PropTypes.bool,
+};
+const mapStateToProps = state => ({
+	progress: selectProgress(state),
+	progressLoading: selectProgressLoading(state),
+});
+
+const dispatchers = {
+	retrieveProgress,
+};
+
+export default connect(mapStateToProps, dispatchers)(StoryPage);

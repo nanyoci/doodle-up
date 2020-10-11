@@ -12,6 +12,7 @@ import splatPink from '../../assets/splat-pink.png';
 import splatBlue from '../../assets/splat-blue.png';
 import loader from '../../assets/loader.gif';
 import './index.css';
+import { Link } from 'react-router-dom';
 
 class Page extends React.Component {
 	constructor() {
@@ -81,7 +82,9 @@ class Page extends React.Component {
 								<img className="splat-pink-corner" src={splatPink} alt="Pink splat of paint" />
 								<img className="paint-corner" src={paint} alt="Paint brush and palette" />
 							</>
-							: <img className="logo-corner" src={doodleUp} alt="DoodleUp" />
+							: <Link to="/">
+								<img className="logo-corner" src={doodleUp} alt="DoodleUp" />
+							</Link>
 					}
 
 					{

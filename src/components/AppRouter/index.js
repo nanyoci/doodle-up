@@ -23,8 +23,9 @@ const AppRouter = props => {
     let routes = [
         <Route key="menu" path="/" exact component={MenuPage} />,
         <Route key="story-selection" path="/stories" exact component={StorySelection} />,
-        <Route key="my-story-books" path="/my-story-books" component={MyStoryBooksPage} />,
-        <Route key="story-manager" path="/stories/:id" component={StoryManager} />,
+        <Route key="my-story-books" path="/my-story-books" exact component={MyStoryBooksPage} />,
+        <Route key="story-manager" path="/stories/:id" component={props => <StoryManager isReadOnly={false} {...props} />} />,
+        <Route key="completed-story-manager" path="/my-story-books/:id" component={props => <StoryManager isReadOnly={true} {...props} />} />,
         // <Route path="/drawing" component={Draw} />,
         // <Route path="/guessing" component={Guessing} />,
         // <Route path="/story-page" component={StoryPage} />,
