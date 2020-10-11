@@ -3,78 +3,66 @@ import PropTypes from 'prop-types';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Draw from '../Draw';
-import Guessing from '../Guessing';
 import StorySelection from '../StorySelection';
 import MenuPage from '../MenuPage';
 import MyStoryBooksPage from '../MyStoryBooksPage';
-import StoryPage from '../StoryPage';
 import GuestMenuPage from '../GuestMenuPage';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
+import StoryManager from '../StoryManager';
 
 import { selectAuthUser } from './../../redux/ducks/auth';
 
 
 /** This component handles the routing for the app */
-class AppRouter extends Component {
-    // componentDidMount() {
-    //     const {
-    //         username
-    //     } = this.props;
-    // }
-
-    render() {
-        const {
+const AppRouter = props => {
+     const {
             username
-        } = this.props;
+        } = props;
 
-        let routes = [
-            <Route path="/" exact component={MenuPage} />,
-            <Route path="/stories" exact component={StorySelection} />,
-            <Route path="/my-story-books" component={MyStoryBooksPage} />,
-            <Route path="/drawing" component={Draw} />,
-            <Route path="/guessing" component={Guessing} />,
-            <Route path="/story-page" component={StoryPage} />,
-            <Route path="/forgetpassword" component={ForgetPasswordPage} />,
-            <Redirect key="SignInRedirect" from="/signin" exact to="/" />,
-            <Redirect key="SignUpRedirect" from="/signup" exact to="/" />
-        ];
+    let routes = [
+        <Route key="menu" path="/" exact component={MenuPage} />,
+        <Route key="story-selection" path="/stories" exact component={StorySelection} />,
+        <Route key="my-story-books" path="/my-story-books" component={MyStoryBooksPage} />,
+        <Route key="story-manager" path="/stories/:id" component={StoryManager} />,
+        // <Route path="/drawing" component={Draw} />,
+        // <Route path="/guessing" component={Guessing} />,
+        // <Route path="/story-page" component={StoryPage} />,
+        // <Route path="/forgetpassword" component={ForgetPasswordPage} />,
+        <Redirect key="sign-in-redirect" from="/signin" exact to="/" />,
+        <Redirect key="sign-up-redirect" from="/signup" exact to="/" />
+    ];
 
-        if (username == null) {
-            routes = [
-                <Route path="/signin" component={SignInPage} />,
-                <Route path="/signup" component={SignUpPage} />,
-                <Route path="/guest" exact component={GuestMenuPage} />,
-                <Redirect key="LoginRedirect" from="/" to="/guest" />,
-            ]
-        }
-
-        return (
-            <BrowserRouter>
-                {/* <Errors /> */}
-                {/* <Header /> */}
-                <Switch>
-                    {/* <Route
-                        path="/not-found"
-                        exact
-                        component={NotFoundPage}
-                    /> */}
-                    <Route
-                        path="/logout"
-                        exact
-                        component={SignInPage}
-                    />
-                    {routes}
-                    {/* <Redirect
-                        from="/"
-                        to="/not-found"
-                    /> */}
-                </Switch>
-                {/* <Footer /> */}
-            </BrowserRouter>
-        );
+    if (username == null) {
+        routes = [
+            <Route key="sign-in" path="/signin" component={SignInPage} />,
+            <Route key="sign-up" path="/signup" component={SignUpPage} />,
+            <Route key="guest" path="/guest" exact component={GuestMenuPage} />,
+            <Redirect key="sign-in-redirect" from="/" to="/guest" />,
+        ]
     }
+
+    return (
+        <BrowserRouter>
+            <Switch>
+                {/* <Route
+                    path="/not-found"
+                    exact
+                    component={NotFoundPage}
+                /> */}
+                <Route
+                    path="/logout"
+                    exact
+                    component={SignInPage}
+                />
+                {routes}
+                {/* <Redirect
+                    from="/"
+                    to="/not-found"
+                /> */}
+            </Switch>
+        </BrowserRouter>
+    );
 }
 
 AppRouter.propTypes = {

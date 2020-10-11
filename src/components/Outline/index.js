@@ -4,7 +4,7 @@ import './index.css'
 
 import outlineImg from '../../assets/outlineSample4.jpg';
 
-function Outline(props) {
+function Outline({ image }) {
   const backgroundUrl = outlineImg;
 
   const outlineRef = useRef(null)
@@ -13,7 +13,7 @@ function Outline(props) {
       className="drawing-outline"
       ref={outlineRef}
       style={{
-        backgroundImage: `url("${backgroundUrl}")`,
+        backgroundImage: `url("${image}")`,
       }}
     />
   );

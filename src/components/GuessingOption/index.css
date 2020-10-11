@@ -1,0 +1,21 @@
+.option{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1.2vw;
+    width: 70%;
+}
+
+.option-unit{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.audio-icon{
+    width: 10%;
+    max-height: 100%;
+    margin-right: 10px;
+    cursor: pointer;
+}

@@ -10,17 +10,17 @@ const storyProgressesReducer = createApiReducer(ENTITY_NAME);
 export default storyProgressesReducer;
 
 // OPERATIONS
-export const createStoryProgress = (storyId, { event_type, date, description }) => (dispatch, getState) => {
+export const createStoryProgress = (storyId, stageId) => (dispatch, getState) => {
     dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.CREATE));
 
     return axios.post(
-        `${API_URL}/stories/${storyId}/progress/`,
+        `${API_URL}/progress`,
         {
-            event_type,
-            date,
-            description,
-        },
-        getTokenConfig(getState)
+            username: getState().authReducer.username,
+            story_id: storyId,
+            stage_id: stageId,
+            completed: true
+        }
     )
         .then(res => {
             dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.CREATE, res.data));

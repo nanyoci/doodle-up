@@ -17,19 +17,21 @@ function StorySelection({ stories, listStories, isLoading }) {
 	return (
 
 		<Page isLoading={isLoading}>
-			<h1>My Story Books</h1>
+			<h1>Story Books</h1>
 			<div className="story-boxes">
 				{
-					stories.length !== 0
-						? stories.map(story =>
-							<div>
-								<a className="story-box" href="/">
-									<img src={`${story.cover_image}`} alt="Dinosaur story" />
-								</a>
-								<p>{story.story_title}</p>
-							</div>
-						)
-						: <p>No Stories completed.</p>
+					!isLoading && (
+						stories.length !== 0
+							? stories.map(story =>
+								<div>
+									<Link className="story-box" to={`/stories/${story.id}`}>
+										<img src={`${story.cover_image}`} alt="Dinosaur story" />
+									</Link>
+									<p>{story.story_title}</p>
+								</div>
+							)
+							: <p>No stories available.</p>
+					)
 				}
 			</div>
 		</Page>

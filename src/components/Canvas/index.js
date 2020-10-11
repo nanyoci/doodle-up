@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, forwardRef } from 'react';
 
 import './index.css'
 
-function Canvas(props) {
+function Canvas(props, ref) {
 
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
@@ -11,7 +11,8 @@ function Canvas(props) {
 
   useEffect(() => {
     const handleResize = () => {
-      const canvas = canvasRef.current
+      const canvas = canvasRef.current;
+      ref.current = canvas;
       const context = canvas.getContext("2d")
       const savedDrawing = canvasRef.current.toDataURL('img/svg')
       canvas.width = canvas.offsetHeight * 5;
@@ -96,12 +97,6 @@ function Canvas(props) {
     contextRef.current.restore();
   }
 
-  // const handleClick = () => {
-  //   const canvas = canvasRef.current
-  //   const image = canvas.toDataURL("image/svg")
-  //   props.displayImage(image)
-  // }
-
   return (
     <canvas
       className="drawing-canvas"
@@ -116,42 +111,4 @@ function Canvas(props) {
   );
 }
 
-export default Canvas;
-
-
-
-
-// const redraw = () => {
-//   const canvasWidth = window.innerWidth * 0.5
-//   const canvasHeight = window.innerHeight * 0.7
-//   image.src = savedDrawing
-//   var ratio = 1
-//   image.onload = function () {
-//     const widthRatio = image.width / canvasWidth
-//     const heightRatio = image.height / canvasHeight
-//     if (widthRatio > heightRatio) {
-//       ratio = widthRatio
-//     }
-//     else {
-//       ratio = heightRatio
-//     }
-//     const widthDraw = image.width / ratio
-//     const heightDraw = image.height / ratio
-//     console.log(widthRatio, heightRatio)
-//     //postion center
-//     if (widthRatio > heightRatio) {
-//       const yPos = canvasHeight / 2 - heightDraw / 2
-//       canvasRef.current.getContext('2d').drawImage(image, 0, yPos, widthDraw, heightDraw)
-//       canvasRef.current.getContext('2d').strokeRect(0, yPos, widthDraw, heightDraw)
-//       console.log("scale width")
-//     }
-//     else {
-//       const xPos = canvasWidth / 2 - widthDraw / 2
-//       canvasRef.current.getContext('2d').drawImage(image, xPos, 0, widthDraw, heightDraw)
-//       canvasRef.current.getContext('2d').strokeRect(xPos, 0, widthDraw, heightDraw)
-//       console.log("scale height")
-//     }
-//   }
-
-//   resizing = false
-// }
+export default forwardRef(Canvas);

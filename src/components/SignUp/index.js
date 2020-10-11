@@ -67,7 +67,7 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
                     name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    type="text"
+                    type="email"
                     placeholder="Email Address"
                   />
                 </div>
@@ -84,6 +84,7 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
                     onChange={e => setPasswordOne(e.target.value)}
                     type="password"
                     placeholder="Password"
+                    autocomplete="new-password"
                   />
                 </div>
               </div>
@@ -99,6 +100,7 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
                     onChange={e => setPasswordTwo(e.target.value)}
                     type="password"
                     placeholder="Confirm Password"
+                    autocomplete="new-password"
                   />
                 </div>
               </div>

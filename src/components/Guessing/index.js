@@ -1,115 +1,91 @@
-import React, { useState } from 'react';
-import Reward from 'react-rewards';
+import React, { useState, useRef } from 'react';
 import useSound from 'use-sound';
-
-import './index.css'
+import Reward from 'react-rewards';
 
 import Page from '../Page';
-import dino from './../../assets/dino.jpg'
-import audio from './../../assets/audio.svg'
-import next from './../../assets/nextArrow.svg'
+import NextButton from '../NextButton';
+import GuessingOption from '../GuessingOption';
 import confettiSound from '../../assets/soundFX/confetti.mp3';
 import tryAgainSound from '../../assets/soundFX/tryAgain.mp3';
+import './index.css';
 
 
-function Guessing() {
-
-    var rewardLeft, rewardRight
+function Guessing(props) {
+    const {
+        stage: {
+            options,
+            answer: answerText,
+            image,
+        },
+        onComplete,
+    } = props;
 
     const optionState = {
         initial: "btn btn-outline-dark ",
         wrong: "btn btn-danger ",
         correct: "btn btn-primary "
     }
-    const [correctAnswer, toggleCorrectAnswer] = useState(false)
-    const [currentOptionState, setCurrentOptionState] = useState(
-        [
-            {
-                state: optionState.initial
-            },
-            {
-                state: optionState.initial
-            },
-            {
-                state: optionState.initial
-            },
-            {
-                state: optionState.initial
-            }
-        ]
-    )
+
+    const [isComplete, setIsComplete] = useState(false)
+
+    const rewardLeft = useRef(null);
+    const rewardRight = useRef(null);
 
     const [playConfettiSound] = useSound(
         confettiSound,
         { volume: 0.25 }
     )
+
     const [playTryAgainSound] = useSound(
         tryAgainSound,
         { volume: 0.5 }
     )
 
-    const submit = (answer) => {
-        let allOptions = [...currentOptionState];
-        let selectedOption = { ...allOptions[answer] };
-        if (answer !== 3) {
-            selectedOption.state = optionState.wrong;
-            playTryAgainSound()
+    const handleSubmit = isCorrect => {
+        console.log(isCorrect);
+        if (isCorrect) {
+            setIsComplete(true);
+            handleReward();
+            playConfettiSound();
+        } else {
+            playTryAgainSound();
         }
-        else {
-            selectedOption.state = optionState.correct;
-            toggleCorrectAnswer(!correctAnswer)
-            handleReward()
-            playConfettiSound()
-
-        }
-        allOptions[answer] = selectedOption;
-        setCurrentOptionState(allOptions);
-        console.log(allOptions)
     }
 
     const handleReward = () => {
-        rewardLeft.rewardMe()
-        rewardRight.rewardMe()
+        rewardLeft.current.rewardMe()
+        rewardRight.current.rewardMe()
     }
 
     return (
-        <Page id="guessingContainer">
-            <div id="guessing">
+        <Page>
+            <div className="guessing-container">
                 <h1 id="guessTheName">Guess the Name!</h1>
                 <div id="guessingImgDiv" >
-                    <img id="guessingImg" src={dino} alt="For guessing" />
+                    <img id="guessingImg" src={image} alt="For guessing" />
                 </div>
-                <div id="options">
-                    <div className="options-row">
-                        <div className="optionUnit">
-                            <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentOptionState[0].state} option`} disabled={currentOptionState[0].state === optionState.wrong | correctAnswer} onClick={() => submit(0)}>Lady Bug</button>
-
-                        </div>
-                        <div className="optionUnit">
-                            <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentOptionState[1].state} option`} disabled={currentOptionState[1].state === optionState.wrong | correctAnswer} onClick={() => submit(1)}>Scary Cat</button></div>
-
-                    </div>
-                    <div className="options-row">
-                        <div className="optionUnit">
-                            <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentOptionState[2].state} option`} disabled={currentOptionState[2].state === optionState.wrong | correctAnswer} onClick={() => submit(2)}>Angry Bird</button>
-
-                        </div>
-                        <div className="optionUnit">
-                            <img src={audio} className="audioIcon" alt="audio" />
-                            <button type="button" className={`${currentOptionState[3].state} option`} disabled={currentOptionState[3].state === optionState.correct | correctAnswer} onClick={() => submit(3)}>Dinosaur</button>
-
-                        </div>
-                    </div>
+                <div className="options">
+                    {
+                        Object.keys(options).map(text => (
+                            <GuessingOption
+                                text={text}
+                                audio={options[text]}
+                                isCorrect={text === answerText}
+                                isComplete={isComplete}
+                                onSubmit={handleSubmit}
+                            />
+                        ))
+                    }
                 </div>
-                {correctAnswer ? <img src={next} alt="next" id="next" /> : null}
+                {
+                    isComplete &&
+                    <NextButton onClick={onComplete} />
+                }
             </div >
-            <div id='rewardContainer'>
+            <div className='reward-container'>
                 <div className='rewards'>
                     <Reward
-                        ref={(ref) => { rewardLeft = ref }}
+                        ref={rewardLeft}
                         type='confetti'
                         config={
                             { angle: 50, spread: 100, elementCount: 100, elementSize: 15 }
@@ -118,7 +94,7 @@ function Guessing() {
                 </div>
                 <div className='rewards'>
                     <Reward
-                        ref={(ref) => { rewardRight = ref }}
+                        ref={rewardRight}
                         type='confetti'
                         config={
                             { angle: 130, spread: 100, elementCount: 100, elementSize: 15 }
@@ -126,7 +102,6 @@ function Guessing() {
                     ></Reward>
                 </div>
             </div>
-
         </Page>
     );
 }

@@ -1,12 +1,4 @@
-#guessingContainer{
-    width: 100vw;
-    height: 100vh;
-    overflow-y: hidden !important;
-    /* -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden; */
-}
-
-#guessing{
+.guessing-container {
     position: relative;
     width: 100%;
     height: 100%;
@@ -40,52 +32,16 @@
     max-height:100%;
 }
 
-#options{
+.options {
     position: relative;
     width: 70%;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-around;
     text-align: center;
 }
 
-.options-row{
-    display: flex;
-    justify-content: space-between;
-}
-
-.option{
-    font-family: 'Merriweather Sans', sans-serif;
-    font-weight: bold;
-    font-size: 1.2vw;
-    width: 70%;
-}
-
-.optionUnit{
-    padding-top: 30px;
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    height: 100%;
-}
-
-.audioIcon{
-    width: 10%;
-    max-height: 100%;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-#next{
-    position: absolute;
-    bottom: 0%;
-    right: 0%;
-    width: 5%;
-    max-height: 10%;
-    cursor: pointer;
-}
-
-#rewardContainer{
+.reward-container{
     display: flex;
     justify-content: space-between;
 }
