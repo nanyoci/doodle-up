@@ -19,7 +19,7 @@ const MODES = {
 // TODO: Start from last completed stage
 function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, createProgress }) {
 	const storyId = match.params.id;
-	const [currentStage, setCurrentStage] = useState(4);
+	const [currentStage, setCurrentStage] = useState(0);
 	
 	useEffect(() => {
 		retrieveStory(storyId);

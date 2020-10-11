@@ -40,7 +40,7 @@ class Page extends React.Component {
 			this.toggleIsPlaying()
 		}
 		else {
-			audio.play()
+			// audio.play()
 		}
 	}
 
