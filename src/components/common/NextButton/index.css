@@ -1,0 +1,18 @@
+.next {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+	width: 50px;
+	border: 0;
+	background: none;
+	padding: 0;
+	outline: none;
+}
+
+.next:active, .next:focus {
+	outline: none;
+}
+
+.next img {
+	width: 100%;
+}

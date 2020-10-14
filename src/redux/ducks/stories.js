@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { API_URL } from '../../utils/constants';
-import { STATUSES, METHODS, createApiAction, createApiReducer, getTokenConfig, displayErrorMsgOrUnauth } from './helpers';
+import { STATUSES, METHODS, createApiAction, createApiReducer, displayErrorMsgOrUnauth } from './helpers';
 
 export const ENTITY_NAME = 'stories';
 
@@ -10,43 +10,15 @@ const storiesReducer = createApiReducer(ENTITY_NAME);
 export default storiesReducer;
 
 // OPERATIONS
-export const createStory = ({ title, description, frequency, color }) => (dispatch, getState) => {
-	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.CREATE));
-
-	return axios.post(
-		`${API_URL}/${ENTITY_NAME}/`,
-		{
-			title,
-			description,
-			frequency,
-			color,
-		},
-		getTokenConfig(getState)
-	)
-		.then(res => {
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.CREATE, {
-				...res.data,
-				days_since: 0,
-			}));
-		})
-		.catch(err => {
-			displayErrorMsgOrUnauth(err, dispatch, "Unable to create story.");
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.CREATE, err));
-		});
-	;
-};
-
-export const retrieveStory = (username, storyId) => (dispatch, getState) => {
+export const retrieveStory = (storyId) => (dispatch) => {
 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.RETRIEVE, storyId));
 
 	return axios.get(
-		`${API_URL}/${ENTITY_NAME}/${storyId}/`, {
-		params: {
-			username: username,
-			storyid: storyId
+		`${API_URL}/content`, {
+			params: {
+				storyid: storyId
+			}
 		}
-	}
-		// getTokenConfig(getState)
 	)
 		.then(res => {
 			console.log(res.data)
@@ -59,50 +31,11 @@ export const retrieveStory = (username, storyId) => (dispatch, getState) => {
 	;
 };
 
-export const updateStory = ({ id, title, description, frequency, color }) => (dispatch, getState) => {
-	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.UPDATE, id));
-
-	return axios.patch(
-		`${API_URL}/${ENTITY_NAME}/${id}/`,
-		{
-			title,
-			description,
-			frequency,
-			color,
-		},
-		getTokenConfig(getState)
-	)
-		.then(res => {
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.UPDATE, res.data));
-		})
-		.catch(err => {
-			displayErrorMsgOrUnauth(err, dispatch, "Unable to update story.");
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.UPDATE, err));
-		});
-};
-
-export const deleteStory = storyId => (dispatch, getState) => {
-	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.DELETE));
-
-	return axios.delete(
-		`${API_URL}/${ENTITY_NAME}/${storyId}/`,
-		getTokenConfig(getState)
-	)
-		.then(() => {
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.DELETE, storyId));
-		})
-		.catch(err => {
-			displayErrorMsgOrUnauth(err, dispatch, "Unable to delete story.");
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.DELETE, err));
-		});
-};
-
-export const listStories = () => (dispatch, getState) => {
+export const listStories = () => (dispatch) => {
 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.LIST));
 
 	return axios.get(
 		`${API_URL}/content/all`,
-		// getTokenConfig(getState),
 	)
 		.then(res => {
 			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, res.data.results));

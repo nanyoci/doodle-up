@@ -1,9 +1,0 @@
-#splat-blue-corner {
-    position: absolute;
-    display: block;
-    bottom: 0px;
-    right: 0px;
-    width: 500px;
-    transform: rotate(90deg);
-    overflow: hidden;
-}
