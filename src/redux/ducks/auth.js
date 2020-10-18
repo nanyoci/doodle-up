@@ -133,7 +133,7 @@ export const authenticateSignUp = userData => dispatch => {
 
 	dispatch(authLoading())
 	var formdata = new FormData();
-	console.log(userData)
+	
 	formdata.append("email", userData.email);
 	formdata.append("username", userData.username);
 	formdata.append("password", userData.passwordOne);

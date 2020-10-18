@@ -8,7 +8,7 @@ import Draw from '../../drawing/Draw';
 import StoryPage from '../../storypage/StoryPage';
 import StoryCompletionPage from '../StoryCompletionPage';
 import { retrieveStory, selectStory, selectStoryLoading } from '../../../redux/ducks/stories';
-import { createProgress } from '../../../redux/ducks/progresses';
+import { retrieveProgress, updateProgressStage, resetProgress, selectProgress, selectProgressLoading, selectProgressupdateLoading } from '../../../redux/ducks/progresses';
 
 const MODES = {
 	GUESSING: "guessing",
@@ -16,22 +16,23 @@ const MODES = {
 	STORY: "storypage",
 }
 
-// TODO: Start from last completed stage
-function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, createProgress }) {
+export function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, progress, progressLoading, updateProgressStage, retrieveProgress, progressUpdateLoading, resetProgress }) {
 	const storyId = match.params.id;
-	const [currentStage, setCurrentStage] = useState(0);
+	const [currentStage, setCurrentStage] = useState(null);
 	
 	useEffect(() => {
 		retrieveStory(storyId);
-	}, [retrieveStory, storyId])
+		retrieveProgress(storyId);
+	}, [retrieveStory, retrieveProgress, storyId])
 
-	if (storyLoading)
-		return <Page isLoading={true} />
+	if (storyLoading || progressLoading || progressUpdateLoading)
+		return <Page isLoading={true} />;
 	
 	const goToNextStage = () => {
-		let nextStage = currentStage + 1;
+		let nextStage = currentStage === null ? 0 : currentStage + 1;
 		
 		if (isReadOnly) {
+			console.log(nextStage);
 			while (nextStage < story.stages.length) {
 				if (story.stages[nextStage].type !== MODES.STORY)
 					nextStage++;
@@ -44,21 +45,54 @@ function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, c
 	}
 
 	const handleComplete = () => {
-		const stageId = story.stages[currentStage].stage_id;
-		createProgress(storyId, stageId);
+		if (!isReadOnly) {
+			const stageId = story.stages[currentStage].stage_id;
+			updateProgressStage(storyId, stageId);
+		}
+
 		goToNextStage();
 	}
 	
 	const handleCompleteDrawing = drawing => {
-		const stageId = story.stages[currentStage].stage_id;
-		createProgress(storyId, stageId, drawing);
-		setTimeout(goToNextStage, 5000);
+		if (!isReadOnly) {
+			const stageId = story.stages[currentStage].stage_id;
+			updateProgressStage(storyId, stageId, drawing);
+		}
+
+		goToNextStage();
 	}
+
+	const handleReset = () => {
+		resetProgress(storyId)
+			.then(() => setCurrentStage(0));
+	}
+
+	if (currentStage === null) {
+		if (isReadOnly) {
+			goToNextStage();
+		} else if (progress.completed) {
+			setCurrentStage(story.stages.length);
+		} else {
+			let firstStage = 0;
+			while (firstStage < story.stages.length) {
+				let stageId = story.stages[firstStage].stage_id;
+				let progressStage = progress.stages.find(stage => stage.stage_id === stageId);
+				if (progressStage && progressStage.completed)
+					firstStage++;
+				else
+					break;
+			}
+			setCurrentStage(firstStage);
+		}
+	}
+
+	if (currentStage === null)
+		return <Page isLoading={true} />;
 
 	const stage = story.stages[currentStage];
 
 	if (currentStage >= story.stages.length)
-		return <StoryCompletionPage story={story} />;
+		return <StoryCompletionPage story={story} isReadOnly={isReadOnly} onReset={handleReset} />;
 
 	let mode = stage.type;
 
@@ -82,6 +116,7 @@ function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, c
 		case MODES.STORY:
 			return (
 				<StoryPage
+					progress={progress}
 					storyId={storyId}
 					stage={stage}
 					onComplete={handleComplete}
@@ -96,15 +131,23 @@ function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, c
 StoryManager.propTypes = {
 	story: PropTypes.object,
 	storyLoading: PropTypes.bool,
+	progress: PropTypes.object,
+	progressLoading: PropTypes.bool,
 };
+
 const mapStateToProps = state => ({
 	story: selectStory(state),
 	storyLoading: selectStoryLoading(state),
+	progress: selectProgress(state),
+	progressLoading: selectProgressLoading(state),
+	progressUpdateLoading: selectProgressupdateLoading(state),
 });
 
 const dispatchers = {
 	retrieveStory,
-	createProgress,
+	updateProgressStage,
+	retrieveProgress,
+	resetProgress,
 };
 
 export default connect(mapStateToProps, dispatchers)(StoryManager);

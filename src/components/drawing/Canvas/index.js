@@ -29,7 +29,9 @@ function Canvas(props, ref) {
       var image = new Image();
       image.src = savedDrawing
       image.onload = function () {
-        canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvas.offsetWidth, canvas.offsetHeight)
+        if (canvasRef.current) {
+          canvasRef.current.getContext('2d').drawImage(image, 0, 0, canvas.offsetWidth, canvas.offsetHeight)
+        }
       }
     }
 

@@ -21,7 +21,6 @@ export const retrieveStory = (storyId) => (dispatch) => {
 		}
 	)
 		.then(res => {
-			console.log(res.data)
 			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.RETRIEVE, res.data));
 		})
 		.catch(err => {
@@ -39,7 +38,6 @@ export const listStories = () => (dispatch) => {
 	)
 		.then(res => {
 			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, res.data.results));
-			console.log(res.data.results)
 		})
 		.catch(err => {
 			displayErrorMsgOrUnauth(err, dispatch, "Unable to fetch stories.");
