@@ -25,7 +25,6 @@ class Page extends React.Component {
 
 	toggleIsPlaying = () => {
 		this.setState((state) => {
-			// console.log("state", state.isPlaying)
 			return { isPlaying: !state.isPlaying }
 		});
 
@@ -68,9 +67,7 @@ class Page extends React.Component {
 			isNotLoggedIn,
 			isLoading
 		} = this.props;
-
-
-		// console.log(this.isPlaying)
+		
 		return (
 			<div className="main-content">
 

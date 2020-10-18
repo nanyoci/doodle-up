@@ -36,7 +36,6 @@ function Guessing(props) {
     )
 
     const handleSubmit = isCorrect => {
-        console.log(isCorrect);
         if (isCorrect) {
             setIsComplete(true);
             handleReward();
@@ -62,6 +61,7 @@ function Guessing(props) {
                     {
                         Object.keys(options).map(text => (
                             <GuessingOption
+                                key={text}
                                 text={text}
                                 audio={options[text]}
                                 isCorrect={text === answerText}
@@ -84,7 +84,9 @@ function Guessing(props) {
                         config={
                             { angle: 50, spread: 100, elementCount: 100, elementSize: 15 }
                         }
-                    ></Reward>
+                    >
+                        {""}
+                    </Reward>
                 </div>
                 <div className='rewards'>
                     <Reward
@@ -93,7 +95,9 @@ function Guessing(props) {
                         config={
                             { angle: 130, spread: 100, elementCount: 100, elementSize: 15 }
                         }
-                    ></Reward>
+                    >
+                        {""}
+                    </Reward>
                 </div>
             </div>
         </Page>
