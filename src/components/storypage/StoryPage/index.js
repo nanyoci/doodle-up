@@ -1,5 +1,6 @@
 import React from 'react';
 import useSound from 'use-sound';
+import { Button } from 'semantic-ui-react'
 
 import audioImage from '../../../assets/audio.svg';
 import Page from '../../common/Page';
@@ -30,9 +31,9 @@ export function StoryPage(props) {
 				top,
 				left,
 			} = drawings[i];
-			
+
 			let stageProgress = progress.stages.find(stage => stage.stage_id === stage_id);
-			
+
 			if (stageProgress && stageProgress.image_url && stageProgress.image_url !== "") {
 				drawingsWithUrls.push(
 					<img
@@ -60,7 +61,8 @@ export function StoryPage(props) {
 						{drawingsWithUrls}
 					</div>
 				</div>
-				<img src={audioImage} className="audio-icon" alt="Play audio" onClick={playNarration} />
+				<Button className="audio-icon audio-icon-story" alt="Play audio" onClick={playNarration} circular icon='volume up' alt="next" size='massive' color='violet' />
+				{/* <img src={audioImage} className="audio-icon" alt="Play audio" onClick={playNarration} /> */}
 				<p className="story-text">{description}</p>
 				<NextButton onClick={onComplete} />
 			</div>
