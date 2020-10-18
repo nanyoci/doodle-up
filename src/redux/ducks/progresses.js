@@ -84,7 +84,7 @@ function progressesReducer(state = initialState, action) {
                             ...state.loading,
                             [actionMethod]: false,
                         },
-                        items: {
+                        item: {
                             completed: false,
                             stages: [],
                         },
