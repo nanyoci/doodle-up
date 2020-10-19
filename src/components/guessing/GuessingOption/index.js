@@ -33,7 +33,7 @@ export default function GuessingOption(props) {
 
 	return (
 		<div className="option-unit">
-			<Button alt="audio" onClick={playAudio} circular icon='volume up' size='massive' color='violet' />
+			<Button alt="audio" onClick={playAudio} circular icon='volume up' size='large' color='violet' />
 			<button
 				className={className}
 				disabled={isComplete || isClicked}
