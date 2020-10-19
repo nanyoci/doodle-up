@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useSound from 'use-sound';
 import { Button } from 'semantic-ui-react'
 
-import audioIcon from '../../../assets/audio.svg';
 import './index.css';
 
 export default function GuessingOption(props) {
@@ -34,9 +33,7 @@ export default function GuessingOption(props) {
 
 	return (
 		<div className="option-unit">
-			{/* <img src={audioIcon} className="audio-icon" alt="audio" onClick={playAudio} /> */}
-			<Button alt="audio" onClick={playAudio} circular icon='volume up' alt="next" size='massive' color='violet' />
-
+			<Button alt="audio" onClick={playAudio} circular icon='volume up' size='massive' color='violet' />
 			<button
 				className={className}
 				disabled={isComplete || isClicked}

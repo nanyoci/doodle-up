@@ -2,7 +2,6 @@ import React from 'react';
 import useSound from 'use-sound';
 import { Button } from 'semantic-ui-react'
 
-import audioImage from '../../../assets/audio.svg';
 import Page from '../../common/Page';
 import NextButton from '../../common/NextButton';
 import './index.css';
@@ -61,8 +60,7 @@ export function StoryPage(props) {
 						{drawingsWithUrls}
 					</div>
 				</div>
-				<Button className="audio-icon audio-icon-story" alt="Play audio" onClick={playNarration} circular icon='volume up' alt="next" size='massive' color='violet' />
-				{/* <img src={audioImage} className="audio-icon" alt="Play audio" onClick={playNarration} /> */}
+				<Button className="audio-icon audio-icon-story" alt="Play audio" onClick={playNarration} circular icon='volume up' size='massive' color='violet' />
 				<p className="story-text">{description}</p>
 				<NextButton onClick={onComplete} />
 			</div>
