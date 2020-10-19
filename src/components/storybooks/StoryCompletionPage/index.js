@@ -11,7 +11,10 @@ export default function StoryCompletionPage({ story, isReadOnly, onReset }) {
 			{
 				!isReadOnly &&
 				<div className="text-center mt-4">
-					<button className="btn btn-primary" onClick={onReset}>Play again?</button>
+					<div className="menu-buttons mb-2">
+						<button className="btn btn-primary" onClick={onReset}>Play again?</button>
+					</div>
+					<p>Take note that this will delete your progress and previous drawings.</p>
 				</div>
 			}
 		</Page>
