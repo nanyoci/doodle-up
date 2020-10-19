@@ -22,7 +22,7 @@ function StorySelection({ stories, listStories, storiesLoading, progresses, list
 			.map(story =>
 				<div className="story-box" key={story}>
 					<Link to={`/my-story-books/${story.id}`} className="story-box-link">
-						<img src={`${story.cover_image}`} alt="Dinosaur story" />
+						<img src={`${story.cover_image}`} alt={story.story_title} />
 					</Link>
 					<h2>{story.story_title}</h2>
 				</div>
