@@ -18,7 +18,7 @@ class Page extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			isPlaying: true
+			isPlaying: false,
 		}
 	}
 
@@ -33,27 +33,29 @@ class Page extends React.Component {
 	componentDidMount() {
 		const audio = document.querySelector('audio')
 		audio.volume = 0.2
-		const playing = localStorage.getItem('IsPlaying')
+		const playing = localStorage.getItem('IsPlaying') === "true";
 
-		// TODO: Fix ipad error for audio play
-		if (playing === "false") {
-			audio.pause()
-			this.toggleIsPlaying()
-		}
-		else {
-			audio.play()
+		if (!playing) {
+			audio.pause();
+		} else {
+			let promise = audio.play();
+			if (promise !== undefined) {
+				promise
+					.then(() => this.toggleIsPlaying())
+					.catch(err => console.log(err));
+			}
 		}
 	}
 
 	togglePlayBgMusic = () => {
 		if (this.state.isPlaying) {
 			this.toggleIsPlaying()
-			localStorage.setItem('IsPlaying', false)
+			localStorage.setItem('IsPlaying', false);
 			document.querySelector('audio').pause()
 		}
 		else {
 			this.toggleIsPlaying()
-			localStorage.setItem('IsPlaying', true)
+			localStorage.setItem('IsPlaying', true);
 			document.querySelector('audio').play()
 		}
 	}
@@ -67,7 +69,7 @@ class Page extends React.Component {
 			isNotLoggedIn,
 			isLoading
 		} = this.props;
-		
+
 		return (
 			<div className="main-content">
 
