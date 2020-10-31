@@ -41,7 +41,9 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
                 <h2 className="fill-name">Username</h2>
               </div>
               <div className="input-container">
-                <input name="username"
+                <input
+                  data-testid="usernameField"
+                  name="username"
                   className="input"
                   value={username}
                   onChange={e => setUsername(e.target.value)}
@@ -56,6 +58,7 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
               </div>
               <div className="input-container">
                 <input
+                  data-testid="emailField"
                   className="input"
                   name="email"
                   value={email}
@@ -71,14 +74,15 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
               </div>
               <div className="input-container">
                 <input
+                  data-testid="passwordOneField"
                   className="input"
                   name="passwordOne"
                   value={passwordOne}
                   onChange={e => setPasswordOne(e.target.value)}
                   type="password"
                   placeholder="Password"
-                  autocomplete="new-password"
-                  minlength="6"
+                  // autoComplete="new-password"
+                  minLength="6"
                 />
               </div>
             </div>
@@ -88,26 +92,27 @@ function SignUpPage({ authenticateSignUp, error, authInit }) {
               </div>
               <div className="input-container">
                 <input
+                  data-testid="passwordTwoField"
                   className="input"
                   name="passwordTwo"
                   value={passwordTwo}
                   onChange={e => setPasswordTwo(e.target.value)}
                   type="password"
                   placeholder="Confirm Password"
-                  autocomplete="new-password"
-                  minlength="6"
+                  // autoComplete="new-password"
+                  minLength="6"
                 />
               </div>
             </div>
             <div className="menu-buttons">
               {error &&
-                <div>
-                  <p className="auth-error">{error}</p>
+                <div >
+                  <p data-testid="auth-error-signup" className="auth-error">{error}</p>
                   <br />
                 </div>}
             </div>
             <div className="menu-buttons">
-              <button type="submit" className="btn btn-primary">Sign Up</button>
+              <button data-testid="signUpButton" type="submit" className="btn btn-primary">Sign Up</button>
             </div>
           </div>
         </form>
