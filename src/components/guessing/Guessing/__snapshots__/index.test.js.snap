@@ -1,0 +1,332 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays correct ui after correct answer is selected 1`] = `
+<div>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="DoodleUp"
+          class="logo-corner"
+          src="doodle-up.svg"
+        />
+      </a>
+      <div
+        class="guessing-container"
+      >
+        <h1
+          id="guessTheName"
+        >
+          Guess the Name!
+        </h1>
+        <div
+          id="guessingImgDiv"
+        >
+          <img
+            alt="For guessing"
+            id="guessingImg"
+            src="drawing-sample.png"
+          />
+        </div>
+        <div
+          class="options"
+        >
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-outline-dark"
+            >
+              Bear
+            </button>
+          </div>
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-outline-dark"
+            >
+              Bed
+            </button>
+          </div>
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-danger"
+              disabled=""
+            >
+              Chair
+            </button>
+          </div>
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-outline-dark"
+            >
+              Porridge
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="reward-container"
+      >
+        <div
+          class="rewards"
+        >
+          <div />
+          <div
+            style="position: relative;"
+          />
+          <div
+            style="transform: none;"
+          />
+        </div>
+        <div
+          class="rewards"
+        >
+          <div />
+          <div
+            style="position: relative;"
+          />
+          <div
+            style="transform: none;"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="signOutBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="sign-out icon"
+        />
+      </button>
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="DoodleUp"
+          class="logo-corner"
+          src="doodle-up.svg"
+        />
+      </a>
+      <div
+        class="guessing-container"
+      >
+        <h1
+          id="guessTheName"
+        >
+          Guess the Name!
+        </h1>
+        <div
+          id="guessingImgDiv"
+        >
+          <img
+            alt="For guessing"
+            id="guessingImg"
+            src="drawing-sample.png"
+          />
+        </div>
+        <div
+          class="options"
+        >
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-outline-dark"
+            >
+              Bear
+            </button>
+          </div>
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-outline-dark"
+            >
+              Bed
+            </button>
+          </div>
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-outline-dark"
+            >
+              Chair
+            </button>
+          </div>
+          <div
+            class="option-unit"
+          >
+            <button
+              alt="audio"
+              class="ui violet large circular icon button"
+            >
+              <i
+                aria-hidden="true"
+                class="volume up icon"
+              />
+            </button>
+            <button
+              class="option btn btn-outline-dark"
+            >
+              Porridge
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="reward-container"
+      >
+        <div
+          class="rewards"
+        >
+          <div />
+          <div
+            style="position: relative;"
+          />
+          <div
+            style="transform: none;"
+          />
+        </div>
+        <div
+          class="rewards"
+        >
+          <div />
+          <div
+            style="position: relative;"
+          />
+          <div
+            style="transform: none;"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="signOutBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="sign-out icon"
+        />
+      </button>
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

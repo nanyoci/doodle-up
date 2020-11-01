@@ -7,8 +7,6 @@ import { renderWithReduxRouter } from './../../../utils/tests';
 import { errorAction } from './../../../redux/ducks/auth';
 
 jest.mock('axios');
-// console.warn = jest.fn()
-// console.error = jest.fn()
 
 beforeEach(() => {
     window.HTMLMediaElement.prototype.load = () => { /* do nothing */ };
@@ -29,7 +27,6 @@ it('should take a snapshot', async () => {
     expect(asFragment()).toMatchSnapshot();
 })
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
 
 it('allows the user to register successfully', async () => {
     const dummyResponse = "User created."
@@ -65,6 +62,7 @@ it('allows the user to register successfully', async () => {
         fireEvent.click(registerButton);
     });
 
+    expect(axiosMock.post).toHaveBeenCalledTimes(1)
     expect(localStorage.getItem('username')).toEqual(username);
 
 })
@@ -100,6 +98,7 @@ it('reject user register when passwords do not matched', async () => {
 
     // const err = await waitForElement(() => getByTestId("auth-error-signup"));
     // expect(err.textContent).toEqual("Passwords do not matched.")
+    expect(axiosMock.post).toHaveBeenCalledTimes(0)
     expect(localStorage.getItem('username')).toEqual(null)
 })
 
@@ -146,6 +145,7 @@ it('reject user register when email is taken', async () => {
     // expect(err).toEqual("Oops! There is a problem with registration.")
     // expect(errorAction).toHaveBeenCalledTimes(1)
     // expect(errorAction).toHaveBeenCalledWith('Oops! There is a problem with registration.')
+    expect(axiosMock.post).toHaveBeenCalledTimes(1)
     expect(localStorage.getItem('username')).toEqual(null);
 })
 

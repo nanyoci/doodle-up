@@ -26,8 +26,6 @@ it('should take a snapshot', async () => {
     expect(asFragment()).toMatchSnapshot();
 })
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
-
 it('allows the user to login successfully', async () => {
     const dummyResponse = "DoodleUp"
 
