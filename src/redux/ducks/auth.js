@@ -133,7 +133,7 @@ export const authenticateSignUp = userData => dispatch => {
 
 	dispatch(authLoading())
 	var formdata = new FormData();
-	
+
 	formdata.append("email", userData.email);
 	formdata.append("username", userData.username);
 	formdata.append("password", userData.passwordOne);
@@ -144,7 +144,7 @@ export const authenticateSignUp = userData => dispatch => {
 			formdata,
 		)
 		.then(res => {
-			if (res.data === "User created.") {
+			if (res.data == "User created.") {
 				dispatch(registerAction(userData.username))
 			}
 			// else {
@@ -166,115 +166,9 @@ export const authLogout = () => (dispatch) => {
 
 };
 
-// export const refreshTokenLogin = () => (dispatch, getState) => {
-//     var formdata = new FormData();
-//     formdata.append("refresh_token", getState().authReducer.refresh_token);
-//     formdata.append("grant_type", "refresh_token");
-
-//     axios
-//         .post(
-//             `${API_URL}/oauth/token`,
-//             formdata,
-//             {
-//                 headers: {
-//                     'Authorization': `Basic ${btoa('my-client:my-secret')}`
-//                 }
-//             },
-//         )
-//         .then(res => {
-//             fetchMe(res.data.access_token)(dispatch);
-//             dispatch(loginAction(res.data));
-//         })
-//         .catch(err => {
-//             displayError("Unable to login")(dispatch);
-//             dispatch(fetchMeFailureAction());
-//         });
-// };
 
 // SELECTOR
 export const selectAuthUser = state => state.authReducer.username;
 export const selectAuthError = state => state.authReducer.error;
 export const selectAuthLoading = state => state.authReducer.isLoading;
 
-
-// import axios from 'axios';
-
-// import { API_URL } from '../../utils/constants';
-// import { STATUSES, METHODS, createApiAction, createApiReducer, getTokenConfig, displayErrorMsgOrUnauth } from './helpers';
-
-// export const ENTITY_NAME = 'auth';
-
-// // REDUCER
-// const authReducer = createApiReducer(ENTITY_NAME);
-// export default authReducer;
-
-// // OPERATIONS
-
-// export const authenticateSignUp = userData => dispatch => {
-// 	if (userData.passwordOne !== userData.passwordTwo) {
-// 		dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.UPDATE, "Passwords do not match"));
-// 		return
-// 	}
-
-// 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.UPDATE));
-
-// 	var formdata = new FormData();
-// 	formdata.append("email", userData.email);
-// 	formdata.append("username", userData.username);
-// 	formdata.append("password", userData.passwordOne);
-
-// 	return axios.post(
-// 		`${API_URL}/signup`,
-// 		formdata,
-// 		// getTokenConfig(getState),
-// 	)
-// 		.then(res => {
-// 			if (res.data === "User created.") {
-// 				dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.UPDATE, res.data));
-// 				localStorage.setItem("username", res.data);
-// 			}
-// 		})
-// 		.catch(err => {
-// 			// displayErrorMsgOrUnauth(err, dispatch, "Email and password do not match");
-// 			// dispatch(errorAction("Email and password do not match"))
-// 			dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.UPDATE, "Oops! There is a problem with registration."));
-// 			// dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.UPDATE, err));
-// 		});
-
-// };
-
-// export const authenticateLogin = (userData) => (dispatch, getState) => {
-// 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.UPDATE));
-
-// 	var formdata = new FormData();
-// 	formdata.append("email", userData.email);
-// 	formdata.append("password", userData.password);
-// 	console.log("authenticating login: ", userData)
-
-// 	return axios.post(
-// 		`${API_URL}/signin`,
-// 		formdata
-// 		// getTokenConfig(getState),
-// 	)
-// 		.then(res => {
-// 			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.UPDATE, res.data));
-// 			localStorage.setItem("username", res.data);
-// 		})
-// 		.catch(err => {
-// 			// displayErrorMsgOrUnauth(err, dispatch, "Email and password do not match");
-// 			// dispatch(errorAction("Email and password do not match"))
-// 			dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.UPDATE, "Email and password do not match"));
-// 		});
-// };
-
-// export const authLogout = () => (dispatch) => {
-// 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.UPDATE));
-// 	localStorage.removeItem("username")
-// 	dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.UPDATE, null));
-
-// };
-
-// // SELECTORS
-// export const selectAuthLoading = state => state.authReducer.loading[METHODS.UPDATE];
-// export const selectAuthError = state => state.authReducer.error[METHODS.UPDATE];
-// export const selectAuthUser = state => state.authReducer.item;

@@ -39,6 +39,7 @@ function SignInPage({ authenticateLogin, error, isLoading, authInit }) {
             <div className="fill-in">
               <h2 className="fill-name">Email</h2>
               <input
+                data-testid="emailField"
                 className="input"
                 name="email"
                 value={email}
@@ -50,6 +51,7 @@ function SignInPage({ authenticateLogin, error, isLoading, authInit }) {
             <div className="fill-in">
               <h2 className="fill-name">Password</h2>
               <input
+                data-testid="passwordField"
                 className="input"
                 name="password"
                 value={password}
@@ -61,12 +63,12 @@ function SignInPage({ authenticateLogin, error, isLoading, authInit }) {
             <div className="menu-buttons">
               {error &&
                 <div>
-                  <p className="auth-error">{error}</p>
+                  <p data-testid="auth-error-signin" className="auth-error">{error}</p>
                   <br />
                 </div>}
             </div>
             <div className=" menu-buttons">
-              <button type="submit" className="btn btn-primary">Sign In</button>
+              <button data-testid="loginButton" id="loginButton" type="submit" className="btn btn-primary">Sign In</button>
             </div>
           </div>
         </form>

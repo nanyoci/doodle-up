@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="option-unit"
+  >
+    <button
+      alt="audio"
+      class="ui violet large circular icon button"
+    >
+      <i
+        aria-hidden="true"
+        class="volume up icon"
+      />
+    </button>
+    <button
+      class="option btn btn-outline-dark"
+    />
+  </div>
+</DocumentFragment>
+`;

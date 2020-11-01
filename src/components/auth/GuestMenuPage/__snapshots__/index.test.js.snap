@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <img
+        alt="DoodleUp"
+        class="logo-center"
+        src="doodle-up.svg"
+      />
+      <img
+        alt="Open book"
+        class="book-corner"
+        src="book.svg"
+      />
+      <img
+        alt="Blue splat of paint"
+        class="splat-blue-corner"
+        src="splat-blue.png"
+      />
+      <img
+        alt="Pink splat of paint"
+        class="splat-pink-corner"
+        src="splat-pink.png"
+      />
+      <img
+        alt="Paint brush and palette"
+        class="paint-corner"
+        src="paint.svg"
+      />
+      <h1>
+        Welcome to DoodleUp!
+      </h1>
+      <div
+        class="menu-buttons"
+      >
+        <a
+          class="btn btn-primary"
+          href="/signin"
+        >
+          Sign In
+        </a>
+        <a
+          class="btn btn-light"
+          href="/signup"
+        >
+          Sign Up
+        </a>
+      </div>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="signOutBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="sign-out icon"
+        />
+      </button>
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

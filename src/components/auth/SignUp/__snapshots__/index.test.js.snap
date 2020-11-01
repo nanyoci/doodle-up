@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <img
+        alt="DoodleUp"
+        class="logo-center"
+        src="doodle-up.svg"
+      />
+      <img
+        alt="Open book"
+        class="book-corner"
+        src="book.svg"
+      />
+      <img
+        alt="Blue splat of paint"
+        class="splat-blue-corner"
+        src="splat-blue.png"
+      />
+      <img
+        alt="Pink splat of paint"
+        class="splat-pink-corner"
+        src="splat-pink.png"
+      />
+      <img
+        alt="Paint brush and palette"
+        class="paint-corner"
+        src="paint.svg"
+      />
+      <div
+        class="auth-container"
+      >
+        <h1>
+          Sign Up
+        </h1>
+        <form
+          class="auth-form"
+        >
+          <div
+            class="fill-in-form"
+          >
+            <div
+              class="fill-in"
+            >
+              <div
+                class="fill-name-container"
+              >
+                <h2
+                  class="fill-name"
+                >
+                  Username
+                </h2>
+              </div>
+              <div
+                class="input-container"
+              >
+                <input
+                  class="input"
+                  data-testid="usernameField"
+                  name="username"
+                  placeholder="Username"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class="fill-in"
+            >
+              <div
+                class="fill-name-container"
+              >
+                <h2
+                  class="fill-name"
+                >
+                  Email
+                </h2>
+              </div>
+              <div
+                class="input-container"
+              >
+                <input
+                  class="input"
+                  data-testid="emailField"
+                  name="email"
+                  placeholder="Email Address"
+                  type="email"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class="fill-in"
+            >
+              <div
+                class="fill-name-container"
+              >
+                <h2
+                  class="fill-name"
+                >
+                  Password
+                </h2>
+              </div>
+              <div
+                class="input-container"
+              >
+                <input
+                  class="input"
+                  data-testid="passwordOneField"
+                  minlength="6"
+                  name="passwordOne"
+                  placeholder="Password"
+                  type="password"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class="fill-in"
+            >
+              <div
+                class="fill-name-container"
+              >
+                <h2
+                  class="fill-name"
+                >
+                  Confirm Password
+                </h2>
+              </div>
+              <div
+                class="input-container"
+              >
+                <input
+                  class="input"
+                  data-testid="passwordTwoField"
+                  minlength="6"
+                  name="passwordTwo"
+                  placeholder="Confirm Password"
+                  type="password"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class="menu-buttons"
+            />
+            <div
+              class="menu-buttons"
+            >
+              <button
+                class="btn btn-primary"
+                data-testid="signUpButton"
+                type="submit"
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <a
+          class="auth-link"
+          href="/signin"
+        >
+          Already have an account? Sign in
+        </a>
+      </div>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
