@@ -37,7 +37,6 @@ it('should take a snapshot', async () => {
     expect(asFragment()).toMatchSnapshot();
 })
 
-
 // it('displays correct ui after correct answer is selected', async () => {
 //     const { getByText, container } = renderWithReduxRouter(<Guessing stage={stage} onComplete={false} />);
 //     const correctAnswer = await waitForElement(() => getByText("Chair"));
