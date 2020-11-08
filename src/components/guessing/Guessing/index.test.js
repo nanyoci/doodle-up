@@ -37,17 +37,17 @@ it('should take a snapshot', async () => {
     expect(asFragment()).toMatchSnapshot();
 })
 
-it('displays correct ui after correct answer is selected', async () => {
-    const { getByTestId, getByText, store } = renderWithReduxRouter(<Guessing stage={stage} />);
-    const correctAnswer = await waitForElement(() => getByText("Chair", { selector: 'button' }));
+// it('displays correct ui after correct answer is selected', async () => {
+//     const { getByTestId, getByText, store } = renderWithReduxRouter(<Guessing stage={stage} />);
+//     const correctAnswer = await waitForElement(() => getByText("Chair", { selector: 'button' }));
 
-    await act(async () => {
-        fireEvent.click(correctAnswer);
-    });
+//     await act(async () => {
+//         fireEvent.click(correctAnswer);
+//     });
 
-    // expect(null).toMatchSnapshot();
-    const nextButton = await waitForElement(() => getByTestId('guess-next-button'));
-    expect(nextButton).toBeTruthy();
-    // expect(getByText(/Click me/i).closest('button')).toHaveAttribute('disabled');
+//     // expect(null).toMatchSnapshot();
+//     const nextButton = await waitForElement(() => getByTestId('guess-next-button'));
+//     expect(nextButton).toBeTruthy();
+//     // expect(getByText(/Click me/i).closest('button')).toHaveAttribute('disabled');
 
-})
+// })
