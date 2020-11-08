@@ -36,7 +36,7 @@ it('allows the user to register successfully', async () => {
         "data": dummyResponse
     });
 
-    const { getByTestId } = renderWithReduxRouter(<SignUpPage />);
+    const { getByTestId, store } = renderWithReduxRouter(<SignUpPage />);
     const emailField = await waitForElement(() => getByTestId("emailField"));
     const usernameField = await waitForElement(() => getByTestId("usernameField"));
     const passwordOneField = await waitForElement(() => getByTestId("passwordOneField"));
@@ -62,7 +62,12 @@ it('allows the user to register successfully', async () => {
         fireEvent.click(registerButton);
     });
 
+    // post request to backend is made
     expect(axiosMock.post).toHaveBeenCalledTimes(1)
+    // error state is null
+    expect(store.getState().authReducer.error).toEqual('')
+    // no error message displayed
+    expect(() => getByTestId("auth-error-signup")).toThrow('Unable to find an element by: [data-testid="auth-error-signup"]');
     expect(localStorage.getItem('username')).toEqual(username);
 
 })
@@ -70,7 +75,7 @@ it('allows the user to register successfully', async () => {
 it('reject user register when passwords do not matched', async () => {
     const username = "DoodleUp"
 
-    const { getByTestId } = renderWithReduxRouter(<SignUpPage />);
+    const { getByTestId, store } = renderWithReduxRouter(<SignUpPage />);
     const emailField = await waitForElement(() => getByTestId("emailField"));
     const usernameField = await waitForElement(() => getByTestId("usernameField"));
     const passwordOneField = await waitForElement(() => getByTestId("passwordOneField"));
@@ -96,32 +101,33 @@ it('reject user register when passwords do not matched', async () => {
         fireEvent.click(registerButton);
     });
 
-    // const err = await waitForElement(() => getByTestId("auth-error-signup"));
-    // expect(err.textContent).toEqual("Passwords do not matched.")
+    // post request is not called because passwords do not match
     expect(axiosMock.post).toHaveBeenCalledTimes(0)
+    // error state is updated
+    expect(store.getState().authReducer.error).toEqual('Passwords do not match')
+    // error message is displayed on the page
+    const err = await waitForElement(() => getByTestId("auth-error-signup"));
+    expect(err.textContent).toEqual("Passwords do not match")
+
     expect(localStorage.getItem('username')).toEqual(null)
 })
 
 
 it('reject user register when email is taken', async () => {
-    const dummyResponse = "The email is already in use"
+    const expected_error = "The email is already in use"
     const username = "DoodleUp"
 
     axiosMock.post.mockResolvedValueOnce({
-        "data": dummyResponse
+        "data": expected_error
     });
 
-    // errorAction.mockResolvedValueOnce()
-
-    const { getByTestId } = renderWithReduxRouter(<SignUpPage />);
+    const { getByTestId, store } = renderWithReduxRouter(<SignUpPage />);
     const emailField = await waitForElement(() => getByTestId("emailField"));
     const usernameField = await waitForElement(() => getByTestId("usernameField"));
     const passwordOneField = await waitForElement(() => getByTestId("passwordOneField"));
     const passwordTwoField = await waitForElement(() => getByTestId("passwordTwoField"));
     const registerButton = await waitForElement(() => getByTestId("signUpButton"));
     await act(async () => {
-
-
         fireEvent.change(emailField, {
             target: { value: 'doodleup@test.com' },
         })
@@ -139,13 +145,14 @@ it('reject user register when email is taken', async () => {
         fireEvent.click(registerButton)
     });
 
-    // const err = await waitForElement(() => getByTestId("auth-error-signup"));
-    // expect(err).toBeVisible();
-    // console.log(err)
-    // expect(err).toEqual("Oops! There is a problem with registration.")
-    // expect(errorAction).toHaveBeenCalledTimes(1)
-    // expect(errorAction).toHaveBeenCalledWith('Oops! There is a problem with registration.')
+    // post request to backend is made
     expect(axiosMock.post).toHaveBeenCalledTimes(1)
+    // error state is updated
+    expect(store.getState().authReducer.error).toEqual(expected_error)
+    // error message is displayed on the page
+    const err = await waitForElement(() => getByTestId("auth-error-signup"));
+    expect(err.textContent).toEqual(expected_error)
+    // no username stored in localStorage
     expect(localStorage.getItem('username')).toEqual(null);
-})
 
+})

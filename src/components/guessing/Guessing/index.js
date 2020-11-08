@@ -73,7 +73,7 @@ function Guessing(props) {
                 </div>
                 {
                     isComplete &&
-                    <NextButton id="guess-next-button" onClick={onComplete} />
+                    <NextButton data-testid="guess-next-button" onClick={onComplete} />
                 }
             </div >
             <div className='reward-container'>
