@@ -46,8 +46,10 @@ function Guessing(props) {
     }
 
     const handleReward = () => {
-        rewardLeft.current.rewardMe()
-        rewardRight.current.rewardMe()
+        if (!props.test) {
+            rewardLeft.current.rewardMe()
+            rewardRight.current.rewardMe()
+        }
     }
 
     return (
@@ -73,7 +75,7 @@ function Guessing(props) {
                 </div>
                 {
                     isComplete &&
-                    <NextButton data-testid="guess-next-button" onClick={onComplete} />
+                    <NextButton onClick={onComplete} />
                 }
             </div >
             <div className='reward-container'>

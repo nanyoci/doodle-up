@@ -1,7 +1,7 @@
 import React from 'react'
 import { cleanup, act } from '@testing-library/react'
 
-import GuessingOption from './index.js';
+import Stationery from './index.js';
 import { renderWithReduxRouter } from './../../../utils/tests';
 
 jest.mock('axios');
@@ -21,6 +21,6 @@ afterEach(() => {
 
 it('should take a snapshot', async () => {
     let asFragment = {};
-    await act(async () => { ({ asFragment } = renderWithReduxRouter(<GuessingOption />)) });
+    await act(async () => { ({ asFragment } = renderWithReduxRouter(<Stationery />)) });
     expect(asFragment()).toMatchSnapshot();
 })
