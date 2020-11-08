@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="tools"
+  >
+    <img
+      alt="Black Pencil"
+      class="tool"
+      src="pencillightblue.svg"
+    />
+    <img
+      alt="Red Pencil"
+      class="tool"
+      src="pencilred.svg"
+    />
+    <img
+      alt="Orange Pencil"
+      class="tool"
+      src="pencilorange.svg"
+    />
+    <img
+      alt="Dark Green Pencil"
+      class="tool"
+      src="pencildarkgreen.svg"
+    />
+    <img
+      alt="Green Pencil"
+      class="tool"
+      src="pencilgreen.svg"
+    />
+    <img
+      alt="Blue Pencil"
+      class="tool"
+      src="pencilblue.svg"
+    />
+    <img
+      alt="Purple Pencil"
+      class="tool"
+      src="pencilpurple.svg"
+    />
+    <img
+      alt="Pink Pencil"
+      class="tool"
+      src="pencilpink.svg"
+    />
+    <img
+      alt="Yellow Pencil"
+      class="tool"
+      src="pencilyellow.svg"
+    />
+    <img
+      alt="Gray Pencil"
+      class="tool"
+      src="pencilgray.svg"
+    />
+    <img
+      alt="Brown Pencil"
+      class="tool"
+      src="pencilbrown.svg"
+    />
+    <img
+      alt="Black Pencil"
+      class="tool"
+      src="pencilblack.svg"
+    />
+    <img
+      alt="Eraser"
+      class="tool"
+      src="eraser.svg"
+    />
+  </div>
+</DocumentFragment>
+`;
