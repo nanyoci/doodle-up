@@ -144,7 +144,7 @@ export const authenticateSignUp = userData => dispatch => {
 			formdata,
 		)
 		.then(res => {
-			if (res.data == "User created.") {
+			if (res.data === "User created.") {
 				dispatch(registerAction(userData.username))
 			}
 			else {
