@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="DoodleUp"
+          class="logo-corner"
+          src="doodle-up.svg"
+        />
+      </a>
+      <h1>
+        You've reached the end of Three Little Pigs
+      </h1>
+      <img
+        alt="Three Little Pigs"
+        class="story-completion-cover"
+      />
+      <div
+        class="text-center mt-4"
+      >
+        <div
+          class="menu-buttons mb-2"
+        >
+          <button
+            class="btn btn-primary"
+          >
+            Play again?
+          </button>
+        </div>
+        <p>
+          Take note that this will delete your progress and previous drawings.
+        </p>
+      </div>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="signOutBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="sign-out icon"
+        />
+      </button>
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

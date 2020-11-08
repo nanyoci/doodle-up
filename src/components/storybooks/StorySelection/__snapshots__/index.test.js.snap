@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="DoodleUp"
+          class="logo-corner"
+          src="doodle-up.svg"
+        />
+      </a>
+      <h1>
+        Story Books
+      </h1>
+      <div
+        class="story-boxes"
+      >
+        <div
+          class="story-box"
+        >
+          <a
+            class="story-box-link"
+            href="/stories/001"
+          >
+            <img
+              alt="Goldilocks and the Three Bears"
+              src="cover.png"
+            />
+          </a>
+          <h2>
+            Goldilocks and the Three Bears
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="signOutBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="sign-out icon"
+        />
+      </button>
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

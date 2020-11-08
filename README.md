@@ -1,13 +1,19 @@
 # DoodleUp
-- Educational interactive storyboard website for kids
-- This folder contains the frontent for DoodleUp
+- an Educational interactive storyboard website for children
+- This folder contains the frontenD for DoodleUp
 
-## How to Run
+## How to Use
+### How to Setup
 1. Install Node
 2. `npm install`
-3. `npm start` (only need to run this after the first run)
 
-## Sources
+### How to Run
+1. `npm start`
+
+### How to Run Tests
+1. `npm test`
+
+## Resources Used
 ### Sound Effects
 - https://youtu.be/i75GQG7YMu8
 - https://youtu.be/hckIjL7z5z4

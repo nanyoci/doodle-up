@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react'
 import { authLogout } from '../../../redux/ducks/auth';
 
-import bgMusic from '../../../assets/soundFX/bgMusic.mov';
 import doodleUp from '../../../assets/doodle-up.svg';
 import book from '../../../assets/book.svg';
 import paint from '../../../assets/paint.svg';
