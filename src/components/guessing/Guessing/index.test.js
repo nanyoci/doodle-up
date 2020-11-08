@@ -1,5 +1,5 @@
 import React from 'react'
-import { cleanup, fireEvent, waitForElement, act } from '@testing-library/react'
+import { cleanup, fireEvent, waitForElement, act, screen } from '@testing-library/react'
 
 import Guessing from './index.js';
 import fakeImage from './../../../assets/drawing-sample.png';
@@ -28,26 +28,26 @@ const stage = {
         "Porridge": "https://firebasestorage.googleapis.com/v0/b/doodleup-f1847.appspot.com/o/Content%2F001%2Fporridge.mp3?alt=media"
     },
     answerText: "Chair",
-    image: fakeImage
+    image: fakeImage,
 }
 
 it('should take a snapshot', async () => {
     let asFragment = {};
-    await act(async () => { ({ asFragment } = renderWithReduxRouter(<Guessing stage={stage} onComplete={false} />)) });
+    await act(async () => { ({ asFragment } = renderWithReduxRouter(<Guessing stage={stage} />)) });
     expect(asFragment()).toMatchSnapshot();
 })
 
-// it('displays correct ui after correct answer is selected', async () => {
-//     const { getByText, container } = renderWithReduxRouter(<Guessing stage={stage} onComplete={false} />);
-//     const correctAnswer = await waitForElement(() => getByText("Chair"));
+it('displays correct ui after correct answer is selected', async () => {
+    const { getByTestId, getByText, store } = renderWithReduxRouter(<Guessing stage={stage} />);
+    const correctAnswer = await waitForElement(() => getByText("Chair", { selector: 'button' }));
 
-//     await act(async () => {
-//         fireEvent.click(correctAnswer);
-//     });
-//     expect(null).toMatchSnapshot();
-//     const nextButton = await waitForElement(() => container.querySelector('#guess-next-button'));
-//     expect(nextButton).toBeTruthy();
+    await act(async () => {
+        fireEvent.click(correctAnswer);
+    });
 
-//     // expect(getByText(/Click me/i).closest('button')).toHaveAttribute('disabled');
+    // expect(null).toMatchSnapshot();
+    const nextButton = await waitForElement(() => getByTestId('guess-next-button'));
+    expect(nextButton).toBeTruthy();
+    // expect(getByText(/Click me/i).closest('button')).toHaveAttribute('disabled');
 
-// })
+})

@@ -147,10 +147,11 @@ export const authenticateSignUp = userData => dispatch => {
 			if (res.data == "User created.") {
 				dispatch(registerAction(userData.username))
 			}
-			// else {
-			// 	if (res.data === "The email is already in use") {
-			// 	}
-			// }
+			else {
+				if (res.data === "The email is already in use") {
+					dispatch(errorAction("The email is already in use"))
+				}
+			}
 		})
 		.catch(err => {
 			dispatch(errorAction("Oops! There is a problem with registration."))
