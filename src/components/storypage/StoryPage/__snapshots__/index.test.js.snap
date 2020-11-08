@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="DoodleUp"
+          class="logo-corner"
+          src="doodle-up.svg"
+        />
+      </a>
+      <div
+        class="story-page-container"
+      >
+        <div
+          class="story-scene-container"
+        >
+          <div
+            class="story-scene"
+          >
+            <img
+              alt="Story background"
+              class="story-bg"
+              src="background.png"
+            />
+            <img
+              alt="Child's drawing of the story object"
+              class="story-object"
+              src="drawing.png"
+              style="width: 12.5%; top: 50.55555555555556%; left: 56.25%;"
+            />
+          </div>
+        </div>
+        <button
+          alt="Play audio"
+          class="ui violet massive circular icon button audio-icon audio-icon-story"
+        >
+          <i
+            aria-hidden="true"
+            class="volume up icon"
+          />
+        </button>
+        <p
+          class="story-text"
+        >
+          The three little pigs left their mother and home to build their own houses.
+        </p>
+        <button
+          alt="next"
+          class="ui yellow massive circular icon button next"
+          data-testid="next-button"
+        >
+          <i
+            aria-hidden="true"
+            class="arrow right icon"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="signOutBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="sign-out icon"
+        />
+      </button>
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

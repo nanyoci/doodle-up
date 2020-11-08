@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="main-content"
+  >
+    <audio />
+    <div
+      class="wrapper"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="DoodleUp"
+          class="logo-corner"
+          src="doodle-up.svg"
+        />
+      </a>
+      <h1>
+        My Story Books
+      </h1>
+      <h2>
+        No stories completed.
+      </h2>
+    </div>
+    <div
+      class="control-buttons"
+    >
+      <button
+        class="ui yellow massive circular icon button"
+        id="signOutBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="sign-out icon"
+        />
+      </button>
+      <button
+        class="ui yellow massive circular icon button"
+        id="musicControlBtn"
+      >
+        <i
+          aria-hidden="true"
+          class="mute icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
