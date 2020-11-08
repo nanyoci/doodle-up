@@ -24,6 +24,7 @@ exports[`should take a snapshot 1`] = `
       <img
         alt="Three Little Pigs"
         class="story-completion-cover"
+        src="cover.png"
       />
       <div
         class="text-center mt-4"
