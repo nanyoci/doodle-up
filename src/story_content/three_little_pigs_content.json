@@ -1,0 +1,222 @@
+{
+	"cover_image": "/story_files/three_little_pigs/cover.png",
+	"id": "002",
+	"story_title": "The Three Little Pigs",
+	"stages": [
+	    {
+	    	"stage_id": 1,
+	    	"type": "storypage",
+			"description": "Once upon a time, there were three little pigs.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_1.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_1.mp3",
+			"drawings": []
+		},
+		{
+			"stage_id": 2,
+			"type": "guessing",
+			"answer": "Pig",
+			"image": "/story_files/three_little_pigs/pig_guessing.png",
+			"options": {
+				"Cauldron": "/story_files/three_little_pigs/cauldron.mp3",
+				"Brick House": "/story_files/three_little_pigs/brick_house.mp3",
+				"Pig": "/story_files/three_little_pigs/pig.mp3",
+				"Chimney": "/story_files/three_little_pigs/chimney.mp3"
+			}
+		},
+		{
+			"stage_id": 3,
+			"type": "drawing",
+			"image": "/story_files/three_little_pigs/pig_drawing.png"
+	    },
+	    {
+			"stage_id": 4,
+			"type": "storypage",
+			"description": "The three little pigs left their mother and home to build their own houses.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_2.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_2.mp3",
+			"drawings": [
+				{
+					"stage_id": 3,
+					"width": 200,
+					"top": 455,
+					"left": 900
+				}
+			]
+	    },
+	    {
+			"stage_id": 5,
+			"type": "storypage",
+			"description": "The three little pigs gathered materials to build their houses. The first little pig chose to build his house from straw.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_3.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_3.mp3",
+			"drawings": []
+	    },
+	    {
+			"stage_id": 6,
+			"type": "storypage",
+			"description": "The second little pig chose to build his house from sticks.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_4.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_4.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 350,
+					"top": 550,
+					"left": 1183
+				}
+			]
+	    },
+	    {
+			"stage_id": 7,
+			"type": "guessing",
+			"answer": "Brick House",
+			"image": "/story_files/three_little_pigs/brick_house_guessing.png",
+			"options": {
+				"Cauldron": "/story_files/three_little_pigs/cauldron.mp3",
+				"Brick House": "/story_files/three_little_pigs/brick_house.mp3",
+				"Pig": "/story_files/three_little_pigs/pig.mp3",
+				"Chimney": "/story_files/three_little_pigs/chimney.mp3"
+			}
+		},
+		{
+			"stage_id": 8,
+			"type": "drawing",
+			"image": "/story_files/three_little_pigs/brick_house_drawing.png"
+	    },
+	    {
+			"stage_id": 9,
+			"type": "storypage",
+			"description": "The third little pig chose to build his house from bricks.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_5.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_5.mp3",
+			"drawings": [
+				{
+					"stage_id": 8,
+					"width": 600,
+					"top": 103,
+					"left": 522
+				}
+			]
+	    },
+	    {
+			"stage_id": 10,
+			"type": "storypage",
+			"description": "One day, the big bad wolf came to the first pig's house. He knocked on the door. \"Little pig, let me come in! Or I will blow your house down!\" called the wolf. The little pig shouted, \"No!\".",
+			"image": "/story_files/three_little_pigs/three_little_pigs_6.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_6.mp3",
+			"drawings": []
+	    },
+	    {
+			"stage_id": 11,
+			"type": "storypage",
+			"description": "So, the wolf huffed and he puffed and he blew the house down. The little pig escaped and ran to his brother's house made of sticks.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_7.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_7.mp3",
+			"drawings": []
+	    },
+	    {
+			"stage_id": 12,
+			"type": "storypage",
+			"description": "The wolf followed the little pig to the second little pig's house. \"Little pigs, let me come in!\", he called, \"or I will blow your house down!\". \"No!\", the two little pigs shouted back.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_8.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_8.mp3",
+			"drawings": []
+	    },
+	    {
+			"stage_id": 13,
+			"type": "storypage",
+			"description": "So, the wolf huffed and he puffed and he blew the house down. The little pigs escaped and ran to their third brother's house made of bricks.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_9.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_9.mp3",
+			"drawings": []
+	    },
+	    {
+			"stage_id": 14,
+			"type": "storypage",
+			"description": "The wolf followed the little pigs to the third little pig's house. \"Little pigs, let me come in!\", he called, \"or I will blow your house down!\"",
+			"image": "/story_files/three_little_pigs/three_little_pigs_10.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_10.mp3",
+			"drawings": []
+	    },
+	    {
+			"stage_id": 15,
+			"type": "storypage",
+			"description": "\"No!\", the little pigs called back. So the wolf huffed and he puffed but no matter how much he tried, he could not blow the house down.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_11.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_11.mp3",
+			"drawings": []
+		},
+		{
+			"stage_id": 16,
+			"type": "guessing",
+			"answer": "Chimney",
+			"image": "/story_files/three_little_pigs/chimney_guessing.png",
+			"options": {
+				"Cauldron": "/story_files/three_little_pigs/cauldron.mp3",
+				"Chimney": "/story_files/three_little_pigs/chimney.mp3",
+				"Brick House": "/story_files/three_little_pigs/brick_house.mp3",
+				"Pig": "/story_files/three_little_pigs/pig.mp3"
+			}
+		},
+		{
+			"stage_id": 17,
+			"type": "drawing",
+			"image": "/story_files/three_little_pigs/chimney_drawing.png"
+	    },
+	    {
+			"stage_id": 18,
+			"type": "storypage",
+			"description": "The wolf was really hungry and angry that he had not gobbled up any little pigs yet. He decided to climb down the chimney instead of blowing down the house.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_12.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_12.mp3",
+			"drawings": [
+				{
+					"stage_id": 17,
+					"width": 400,
+					"top": 389,
+					"left": 513
+				}
+			]
+		},
+		{
+			"stage_id": 19,
+			"type": "guessing",
+			"answer": "Cauldron",
+			"image": "/story_files/three_little_pigs/cauldron_guessing.png",
+			"options": {
+				"Cauldron": "/story_files/three_little_pigs/cauldron.mp3",
+				"Chimney": "/story_files/three_little_pigs/chimney.mp3",
+				"Brick House": "/story_files/three_little_pigs/brick_house.mp3",
+				"Pig": "/story_files/three_little_pigs/pig.mp3"
+			}
+		},
+		{
+			"stage_id": 20,
+			"type": "drawing",
+			"image": "/story_files/three_little_pigs/cauldron_drawing.png"
+	    },
+	    {
+			"stage_id": 21,
+			"type": "storypage",
+			"description": "SPLASH! The wolf came down the chimney but he fell straight into the pot of boiling water! \"OUCH!\" he shouted as he jumped out and ran straight out of the house and far, far away.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_13.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_13.mp3",
+			"drawings": [
+				{
+					"stage_id": 20,
+					"width": 500,
+					"top": 331,
+					"left": 516
+				}
+			]
+	    },
+	    {
+			"stage_id": 22,
+			"type": "storypage",
+			"description": "The three little pigs never met him again and they all lived happily ever after in the house of bricks.",
+			"image": "/story_files/three_little_pigs/three_little_pigs_14.png",
+			"audio": "/story_files/three_little_pigs/three_little_pigs_14.mp3",
+			"drawings": []
+	    }
+	]
+}

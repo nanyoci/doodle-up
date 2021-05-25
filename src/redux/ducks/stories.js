@@ -1,9 +1,16 @@
-import axios from 'axios';
+import goldilocksContent from "../../story_content/goldilocks_content.json";
+import threeLittlePigsContent from "../../story_content/three_little_pigs_content.json";
+import uglyDucklingsContent from "../../story_content/ugly_duckling_content.json";
 
-import { API_URL } from '../../utils/constants';
-import { STATUSES, METHODS, createApiAction, createApiReducer, displayErrorMsgOrUnauth } from './helpers';
+import { STATUSES, METHODS, createApiAction, createApiReducer } from './helpers';
 
 export const ENTITY_NAME = 'stories';
+
+const STORIES = [
+	goldilocksContent,
+	threeLittlePigsContent,
+	uglyDucklingsContent,
+];
 
 // REDUCER
 const storiesReducer = createApiReducer(ENTITY_NAME);
@@ -12,37 +19,12 @@ export default storiesReducer;
 // OPERATIONS
 export const retrieveStory = (storyId) => (dispatch) => {
 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.RETRIEVE, storyId));
-
-	return axios.get(
-		`${API_URL}/content`, {
-			params: {
-				storyid: storyId
-			}
-		}
-	)
-		.then(res => {
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.RETRIEVE, res.data));
-		})
-		.catch(err => {
-			displayErrorMsgOrUnauth(err, dispatch, "Unable to fetch story.");
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.RETRIEVE, err));
-		});
-	;
+	dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.RETRIEVE, STORIES.find(item => item.id === storyId)));
 };
 
 export const listStories = () => (dispatch) => {
 	dispatch(createApiAction(ENTITY_NAME, STATUSES.REQUEST, METHODS.LIST));
-
-	return axios.get(
-		`${API_URL}/content/all`,
-	)
-		.then(res => {
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, res.data.results));
-		})
-		.catch(err => {
-			displayErrorMsgOrUnauth(err, dispatch, "Unable to fetch stories.");
-			dispatch(createApiAction(ENTITY_NAME, STATUSES.FAILURE, METHODS.LIST, err));
-		});
+	dispatch(createApiAction(ENTITY_NAME, STATUSES.SUCCESS, METHODS.LIST, STORIES));
 };
 
 // SELECTORS

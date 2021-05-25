@@ -26,22 +26,6 @@ exports[`should take a snapshot 1`] = `
         class="story-completion-cover"
         src="cover.png"
       />
-      <div
-        class="text-center mt-4"
-      >
-        <div
-          class="menu-buttons mb-2"
-        >
-          <button
-            class="btn btn-primary"
-          >
-            Play again?
-          </button>
-        </div>
-        <p>
-          Take note that this will delete your progress and previous drawings.
-        </p>
-      </div>
     </div>
     <div
       class="control-buttons"

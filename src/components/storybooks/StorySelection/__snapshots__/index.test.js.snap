@@ -33,11 +33,43 @@ exports[`should take a snapshot 1`] = `
           >
             <img
               alt="Goldilocks and the Three Bears"
-              src="cover.png"
+              src="/story_files/goldilocks/cover.png"
             />
           </a>
           <h2>
             Goldilocks and the Three Bears
+          </h2>
+        </div>
+        <div
+          class="story-box"
+        >
+          <a
+            class="story-box-link"
+            href="/stories/002"
+          >
+            <img
+              alt="The Three Little Pigs"
+              src="/story_files/three_little_pigs/cover.png"
+            />
+          </a>
+          <h2>
+            The Three Little Pigs
+          </h2>
+        </div>
+        <div
+          class="story-box"
+        >
+          <a
+            class="story-box-link"
+            href="/stories/003"
+          >
+            <img
+              alt="The Ugly Duckling"
+              src="/story_files/ugly_duckling/cover.png"
+            />
+          </a>
+          <h2>
+            The Ugly Duckling
           </h2>
         </div>
       </div>

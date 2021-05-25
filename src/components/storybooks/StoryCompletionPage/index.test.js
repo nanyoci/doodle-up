@@ -28,11 +28,7 @@ it('should take a snapshot', async () => {
 	let asFragment = {};
 	await act(async () => {
 		({ asFragment } = renderWithReduxRouter(
-			<StoryCompletionPage
-				story={story}
-				isReadOnly={false}
-				onReset={() => { }}
-			/>
+			<StoryCompletionPage story={story} />
 		))
 	});
 	expect(asFragment()).toMatchSnapshot();

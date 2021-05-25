@@ -8,7 +8,7 @@ import Draw from '../../drawing/Draw';
 import StoryPage from '../../storypage/StoryPage';
 import StoryCompletionPage from '../StoryCompletionPage';
 import { retrieveStory, selectStory, selectStoryLoading } from '../../../redux/ducks/stories';
-import { retrieveProgress, updateProgressStage, resetProgress, selectProgress, selectProgressLoading, selectProgressupdateLoading } from '../../../redux/ducks/progresses';
+import { retrieveProgress, updateProgressStage, selectProgress, selectProgressLoading, selectProgressUpdateLoading } from '../../../redux/ducks/progresses';
 
 const MODES = {
 	GUESSING: "guessing",
@@ -16,7 +16,7 @@ const MODES = {
 	STORY: "storypage",
 }
 
-export function StoryManager({ isReadOnly, story, storyLoading, match, retrieveStory, progress, progressLoading, updateProgressStage, retrieveProgress, progressUpdateLoading, resetProgress }) {
+export function StoryManager({ story, storyLoading, match, retrieveStory, progress, progressLoading, updateProgressStage, retrieveProgress, progressUpdateLoading }) {
 	const storyId = match.params.id;
 	const [currentStage, setCurrentStage] = useState(null);
 	
@@ -30,47 +30,23 @@ export function StoryManager({ isReadOnly, story, storyLoading, match, retrieveS
 	
 	const goToNextStage = () => {
 		let nextStage = currentStage === null ? 0 : currentStage + 1;
-		
-		if (isReadOnly) {
-			console.log(nextStage);
-			while (nextStage < story.stages.length) {
-				if (story.stages[nextStage].type !== MODES.STORY)
-					nextStage++;
-				else
-					break;
-			}
-		}
-
 		setCurrentStage(nextStage);
 	}
 
 	const handleComplete = () => {
-		if (!isReadOnly) {
-			const stageId = story.stages[currentStage].stage_id;
-			updateProgressStage(storyId, stageId);
-		}
-
+		const stageId = story.stages[currentStage].stage_id;
+		updateProgressStage(storyId, stageId);
 		goToNextStage();
 	}
 	
 	const handleCompleteDrawing = drawing => {
-		if (!isReadOnly) {
-			const stageId = story.stages[currentStage].stage_id;
-			updateProgressStage(storyId, stageId, drawing);
-		}
-
+		const stageId = story.stages[currentStage].stage_id;
+		updateProgressStage(storyId, stageId, drawing);
 		goToNextStage();
 	}
 
-	const handleReset = () => {
-		resetProgress(storyId)
-			.then(() => setCurrentStage(0));
-	}
-
 	if (currentStage === null) {
-		if (isReadOnly) {
-			goToNextStage();
-		} else if (progress.completed) {
+		if (progress.completed) {
 			setCurrentStage(story.stages.length);
 		} else {
 			let firstStage = 0;
@@ -92,7 +68,7 @@ export function StoryManager({ isReadOnly, story, storyLoading, match, retrieveS
 	const stage = story.stages[currentStage];
 
 	if (currentStage >= story.stages.length)
-		return <StoryCompletionPage story={story} isReadOnly={isReadOnly} onReset={handleReset} />;
+		return <StoryCompletionPage story={story} />;
 
 	let mode = stage.type;
 
@@ -140,14 +116,13 @@ const mapStateToProps = state => ({
 	storyLoading: selectStoryLoading(state),
 	progress: selectProgress(state),
 	progressLoading: selectProgressLoading(state),
-	progressUpdateLoading: selectProgressupdateLoading(state),
+	progressUpdateLoading: selectProgressUpdateLoading(state),
 });
 
 const dispatchers = {
 	retrieveStory,
 	updateProgressStage,
 	retrieveProgress,
-	resetProgress,
 };
 
 export default connect(mapStateToProps, dispatchers)(StoryManager);

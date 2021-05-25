@@ -1,0 +1,234 @@
+{
+	"cover_image": "ugly_duckling/cover.png",
+	"id": "003",
+	"story_title": "The Ugly Duckling",
+	"stages": [
+		{
+			"stage_id": 1,
+			"type": "guessing",
+			"answer": "Sunny Weather",
+			"image": "ugly_duckling/sunny_weather_guessing.png",
+			"options": {
+				"Barn": "ugly_duckling/barn.mp3",
+				"Duck": "ugly_duckling/duck.mp3",
+				"Sunny Weather": "ugly_duckling/sunny_weather.mp3",
+				"Swan": "ugly_duckling/swan.mp3"
+			}
+		},
+		{
+			"stage_id": 2,
+			"type": "drawing",
+			"image": "ugly_duckling/sunny_weather_drawing.png"
+		},
+	    {
+	    	"stage_id": 3,
+	    	"type": "storypage",
+			"description": "Mummy Duck lived on a farm. In her nest, she had four little eggs and one big egg.",
+			"image": "ugly_duckling/ugly_duckling_1.png",
+			"audio": "ugly_duckling/ugly_duckling_1.mp3",
+			"drawings": [
+				{
+					"stage_id": 2,
+					"width": 300,
+					"top": 29,
+					"left": 1089
+				}
+			]
+		},
+		{
+			"stage_id": 4,
+			"type": "guessing",
+			"answer": "Duck",
+			"image": "ugly_duckling/duck_guessing.png",
+			"options": {
+				"Barn": "ugly_duckling/barn.mp3",
+				"Swan": "ugly_duckling/swan.mp3",
+				"Duck": "ugly_duckling/duck.mp3",
+				"Sunny Weather": "ugly_duckling/sunny_weather.mp3"
+			}
+		},
+		{
+			"stage_id": 5,
+			"type": "drawing",
+			"image": "ugly_duckling/duck_drawing.png"
+		},
+	    {
+			"stage_id": 6,
+			"type": "storypage",
+			"description": "One day, the four little eggs started to crack. Four pretty, yellow baby ducklings came out. Then the big egg started to crack. Bang, bang, bang! One big, ugly duckling came out. \"That’s strange,\" thought Mummy Duck.",
+			"image": "ugly_duckling/ugly_duckling_2.png",
+			"audio": "ugly_duckling/ugly_duckling_2.mp3",
+			"drawings": [
+				{
+					"stage_id": 2,
+					"width": 300,
+					"top": 29,
+					"left": 1089
+				},
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 481,
+					"left": 1049
+				}
+			]
+	    },
+	    {
+			"stage_id": 7,
+			"type": "storypage",
+			"description": "Nobody wanted to play with him. \"Go away,\" said his brothers and sisters. \"You’re ugly!\".",
+			"image": "ugly_duckling/ugly_duckling_3.png",
+			"audio": "ugly_duckling/ugly_duckling_3.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 422,
+					"left": 1049
+				}
+			]
+	    },
+	    {
+			"stage_id": 8,
+			"type": "storypage",
+			"description": "The ugly duckling was sad. So, he went to find some new friends.",
+			"image": "ugly_duckling/ugly_duckling_4.png",
+			"audio": "ugly_duckling/ugly_duckling_4.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 340,
+					"left": 1020
+				}
+			]
+	    },
+	    {
+			"stage_id": 9,
+			"type": "storypage",
+			"description": "\"Go away!\" said the horse.",
+			"image": "ugly_duckling/ugly_duckling_5.png",
+			"audio": "ugly_duckling/ugly_duckling_5.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 340,
+					"left": 1020
+				}
+			]
+	    },
+	    {
+			"stage_id": 10,
+			"type": "storypage",
+			"description": "\"Go away!\" said the sheep.",
+			"image": "ugly_duckling/ugly_duckling_6.png",
+			"audio": "ugly_duckling/ugly_duckling_6.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 340,
+					"left": 1020
+				}
+			]
+		},
+		{
+			"stage_id": 11,
+			"type": "guessing",
+			"answer": "Barn",
+			"image": "ugly_duckling/barn_guessing.png",
+			"options": {
+				"Duck": "ugly_duckling/duck.mp3",
+				"Barn": "ugly_duckling/barn.mp3",
+				"Sunny Weather": "ugly_duckling/sunny_weather.mp3",
+				"Swan": "ugly_duckling/swan.mp3"
+			}
+		},
+		{
+			"stage_id": 12,
+			"type": "drawing",
+			"image": "ugly_duckling/barn_drawing.png"
+		},
+	    {
+			"stage_id": 13,
+			"type": "storypage",
+			"description": "No one wanted to be his friend. The ugly duckling found an empty barn and lived there. He was sad and alone.",
+			"image": "ugly_duckling/ugly_duckling_7.png",
+			"audio": "ugly_duckling/ugly_duckling_7.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 483,
+					"left": 923
+				},
+				{
+					"stage_id": 12,
+					"width": 450,
+					"top": 198,
+					"left": 354
+				}
+			]
+		},
+		{
+			"stage_id": 14,
+			"type": "guessing",
+			"answer": "Swan",
+			"image": "ugly_duckling/swan_guessing.png",
+			"options": {
+				"Duck": "ugly_duckling/duck.mp3",
+				"Barn": "ugly_duckling/barn.mp3",
+				"Swan": "ugly_duckling/swan.mp3",
+				"Sunny Weather": "ugly_duckling/sunny_weather.mp3"
+			}
+		},
+		{
+			"stage_id": 15,
+			"type": "drawing",
+			"image": "ugly_duckling/swan_drawing.png"
+		},
+	    {
+			"stage_id": 16,
+			"type": "storypage",
+			"description": "Then, spring came. The ugly duckling left the barn and went back to the pond. He was very thirsty and put his beak into the water. He saw a beautiful, white bird! \"Wow!\" he said. \"Who’s that?\".",
+			"image": "ugly_duckling/ugly_duckling_8.png",
+			"audio": "ugly_duckling/ugly_duckling_8.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 340,
+					"left": 1020
+				},
+				{
+					"stage_id": 15,
+					"width": 300,
+					"top": 347,
+					"left": 325
+				}
+			]
+	    },
+	    {
+			"stage_id": 17,
+			"type": "storypage",
+			"description": "\"It’s you,\" said another beautiful, white bird.\n\"Me? But I’m an ugly duckling.\"\n\"Not any more. You’re a beautiful swan, like me. Do you want to be my friend?\".\n\"Yes,\" he smiled.",
+			"image": "ugly_duckling/ugly_duckling_9.png",
+			"audio": "ugly_duckling/ugly_duckling_9.mp3",
+			"drawings": [
+				{
+					"stage_id": 5,
+					"width": 300,
+					"top": 340,
+					"left": 1020
+				},
+				{
+					"stage_id": 15,
+					"width": 300,
+					"top": 347,
+					"left": 325
+				}
+			]
+	    }
+	]
+}

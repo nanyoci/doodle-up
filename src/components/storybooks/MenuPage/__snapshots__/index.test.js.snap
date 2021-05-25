@@ -35,7 +35,7 @@ exports[`should take a snapshot 1`] = `
         src="paint.svg"
       />
       <h1>
-        Hello !
+        Welcome!
       </h1>
       <div
         class="menu-buttons"
@@ -44,13 +44,7 @@ exports[`should take a snapshot 1`] = `
           class="btn btn-primary"
           href="/stories"
         >
-          Start
-        </a>
-        <a
-          class="btn btn-light"
-          href="/my-story-books"
-        >
-          My Story Books
+          Start Reading
         </a>
       </div>
     </div>

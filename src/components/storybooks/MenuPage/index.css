@@ -12,7 +12,3 @@
 	padding-left: 40px;
 	padding-right: 40px;
 }
-
-.menu-buttons .btn:not(:last-of-type) {
-	margin-bottom: 20px;
-}
