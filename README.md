@@ -1,6 +1,7 @@
 # DoodleUp
-- an Educational interactive storyboard website for children
-- This folder contains the frontenD for DoodleUp
+- An educational interactive story book web app to help children learn English
+- This project was created for CZ3002 Advanced Software Engineering
+- This folder contains the frontend for DoodleUp
 
 ## How to Use
 ### How to Setup
@@ -22,3 +23,6 @@
 
 ### Loader
 - https://assets1.lottiefiles.com/packages/lf20_IaX52r.json
+
+### Storybook Graphics
+- https://www.flaticon.com/
