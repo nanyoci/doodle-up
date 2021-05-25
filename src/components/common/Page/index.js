@@ -1,8 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react'
-import { authLogout } from '../../../redux/ducks/auth';
 
 import doodleUp from '../../../assets/doodle-up.svg';
 import book from '../../../assets/book.svg';
@@ -65,7 +62,6 @@ class Page extends React.Component {
 			isMain,
 			children,
 			buttons,
-			isNotLoggedIn,
 			isLoading
 		} = this.props;
 
@@ -98,12 +94,6 @@ class Page extends React.Component {
 					{children}
 				</div>
 				<div className="control-buttons">
-					{
-						!isNotLoggedIn
-						&&
-						<Button id="signOutBtn" circular icon="sign-out" size='massive' color='yellow' onClick={this.props.authLogout} />
-
-					}
 					<Button id="musicControlBtn" circular icon={this.state.isPlaying ? 'music' : 'mute'} size='massive' color='yellow' onClick={this.togglePlayBgMusic} />
 					{buttons}
 				</div>
@@ -113,12 +103,4 @@ class Page extends React.Component {
 	}
 }
 
-Page.propTypes = {
-	authLogout: PropTypes.func.isRequired,
-};
-
-const dispatchers = {
-	authLogout
-};
-
-export default connect(() => ({}), dispatchers)(Page);
+export default Page;
